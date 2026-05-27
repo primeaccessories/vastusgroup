@@ -126,7 +126,7 @@ export default function HomePage() {
           <div className="mt-auto flex items-end justify-end pt-16">
             <div className="flex max-w-md items-end gap-6">
               <p className="text-pretty text-base text-paper/70 sm:text-lg">
-                Offering affordable &amp; seamless transactions with superior results.
+                Lower rates, faster settlements, and support you can actually reach.
               </p>
               <span
                 aria-hidden="true"
