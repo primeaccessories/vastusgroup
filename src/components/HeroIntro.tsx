@@ -7,6 +7,8 @@ const HOLD_MS = 2200
 export default function HeroIntro() {
   const [show, setShow] = useState(() => {
     if (typeof window === 'undefined') return false
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('intro') === 'force') return true
     return !sessionStorage.getItem(STORAGE_KEY)
   })
 
@@ -44,10 +46,10 @@ export default function HeroIntro() {
           <motion.img
             src="/a2b-mask.svg"
             alt=""
-            initial={{ scale: 1.55 }}
-            animate={{ scale: 1.05 }}
-            exit={{ scale: 1.25, opacity: 0 }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ scale: 2.1, opacity: 0.6 }}
+            animate={{ scale: 1.88, opacity: 1 }}
+            exit={{ scale: 1.6, opacity: 0 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 h-full w-full select-none object-cover"
             draggable={false}
           />
