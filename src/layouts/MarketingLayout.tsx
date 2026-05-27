@@ -30,21 +30,20 @@ export default function MarketingLayout() {
   }, [])
 
   const isHome = location.pathname === '/'
-  const overlay = isHome && !scrolled
+  const darkMode = isHome
+  const headerBg = isHome
+    ? scrolled
+      ? 'bg-ink/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.06)]'
+      : 'bg-transparent'
+    : scrolled
+      ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
+      : 'bg-paper'
 
   return (
     <div className="flex min-h-[100dvh] flex-col bg-paper">
-      <header
-        className={`sticky top-0 z-40 transition-colors duration-300 ${
-          overlay
-            ? 'bg-transparent'
-            : scrolled
-              ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
-              : 'bg-paper'
-        }`}
-      >
+      <header className={`sticky top-0 z-40 transition-colors duration-300 ${headerBg}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          <BrandLogo variant={overlay ? 'dark' : 'light'} />
+          <BrandLogo variant={darkMode ? 'dark' : 'light'} />
 
           <nav className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) => (
@@ -54,10 +53,10 @@ export default function MarketingLayout() {
                 className={({ isActive }) =>
                   `rounded-full px-4 py-2 text-sm font-medium transition ${
                     isActive
-                      ? overlay
+                      ? darkMode
                         ? 'bg-paper text-ink'
                         : 'bg-ink text-paper'
-                      : overlay
+                      : darkMode
                         ? 'text-paper/80 hover:bg-white/10 hover:text-paper'
                         : 'text-ink-fade hover:bg-ink/5 hover:text-ink'
                   }`
@@ -73,7 +72,7 @@ export default function MarketingLayout() {
               to="/sign-in"
               variant="ghost"
               size="sm"
-              className={overlay ? 'text-paper hover:bg-white/10' : ''}
+              className={darkMode ? 'text-paper hover:bg-white/10' : ''}
             >
               Sign in
             </LinkButton>
@@ -88,7 +87,7 @@ export default function MarketingLayout() {
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
             className={`inline-flex h-11 w-11 items-center justify-center rounded-full border lg:hidden ${
-              overlay
+              darkMode
                 ? 'border-white/20 bg-white/5 text-paper backdrop-blur'
                 : 'border-ink/10 bg-paper text-ink'
             }`}

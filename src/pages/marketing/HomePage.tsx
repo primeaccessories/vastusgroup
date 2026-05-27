@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Phone, ShieldCheck, Zap, HeartHandshake, Quote } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, ShieldCheck, Star, Zap, HeartHandshake, Quote } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -50,29 +50,37 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto max-w-7xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40 sm:pb-32 lg:pt-48 lg:pb-40"
+          className="relative z-20 mx-auto flex min-h-[88svh] max-w-7xl flex-col px-5 pt-32 pb-12 sm:px-8 sm:pt-40 sm:pb-16 lg:pt-44"
         >
-          <div className="max-w-3xl">
-            <h1 className="font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.05] tracking-tight text-paper">
-              Business payment solutions.
+          <div className="max-w-4xl">
+            <TrustpilotBadge />
+
+            <h1 className="mt-6 font-display text-balance text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.95] tracking-tight text-paper">
+              Business
+              <br />
+              Payment
+              <br />
+              Solutions
             </h1>
 
-            <p className="mt-6 max-w-xl text-pretty text-lg text-paper/70 sm:text-xl">
-              Card payments, online checkout, e-POS and finance for UK businesses. Supported by people who pick up the phone.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10">
               <LinkButton to="/contact" variant="primary" size="lg">
                 Let's get started
-                <ArrowUpRight className="h-5 w-5" />
               </LinkButton>
-              <a
-                href="tel:03334432645"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 bg-ink/40 px-8 text-base font-semibold text-paper backdrop-blur transition hover:border-mint hover:text-mint"
+            </div>
+          </div>
+
+          <div className="mt-auto flex items-end justify-end pt-16">
+            <div className="flex max-w-md items-end gap-6">
+              <p className="text-pretty text-base text-paper/70 sm:text-lg">
+                Offering affordable &amp; seamless transactions with superior results.
+              </p>
+              <span
+                aria-hidden="true"
+                className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center text-paper/60"
               >
-                <Phone className="h-5 w-5" />
-                0333 443 2645
-              </a>
+                <ArrowDown className="h-6 w-6" strokeWidth={1.5} />
+              </span>
             </div>
           </div>
         </motion.div>
@@ -230,6 +238,32 @@ export default function HomePage() {
         </div>
       </section>
     </>
+  )
+}
+
+function TrustpilotBadge() {
+  return (
+    <a
+      href="https://uk.trustpilot.com/review/a2bpayments.co.uk"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2.5 text-paper"
+    >
+      <span className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-tight">
+        <Star className="h-4 w-4 fill-mint text-mint" />
+        Trustpilot
+      </span>
+      <span className="flex items-center gap-0.5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span
+            key={i}
+            className="inline-flex h-6 w-6 items-center justify-center bg-mint"
+          >
+            <Star className="h-4 w-4 fill-paper text-paper" strokeWidth={0} />
+          </span>
+        ))}
+      </span>
+    </a>
   )
 }
 
