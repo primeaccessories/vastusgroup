@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Quote } from 'lucide-react'
 import BrandLogo from '../../components/BrandLogo'
 import GlassIcon from '../../components/GlassIcon'
+import { TESTIMONIALS } from '../../lib/testimonials'
 
 interface Props {
   title: string
@@ -10,7 +12,20 @@ interface Props {
   footer?: React.ReactNode
 }
 
+const ROTATE_MS = 6500
+
 export default function AuthShell({ title, subtitle, children, footer }: Props) {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % TESTIMONIALS.length)
+    }, ROTATE_MS)
+    return () => window.clearInterval(id)
+  }, [])
+
+  const current = TESTIMONIALS[index]
+
   return (
     <div className="flex min-h-[100dvh] bg-paper">
       <div className="flex w-full flex-col lg:w-[58%]">
@@ -49,13 +64,32 @@ export default function AuthShell({ title, subtitle, children, footer }: Props) 
           style={{ background: 'radial-gradient(closest-side, #2f9d92, transparent 70%)' }}
         />
 
-        <div className="relative z-10 flex h-full flex-col justify-end p-14 text-paper">
-          <div className="rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-8 ring-1 ring-white/10 backdrop-blur-xl">
-            <GlassIcon Icon={Quote} tone="mint" size="md" />
-            <blockquote className="mt-6 font-display text-2xl leading-[1.2] tracking-tight text-balance text-paper sm:text-3xl">
-              "Switching to A2B saved us nearly £400 a month versus our last provider. The team actually picks up the phone when something goes wrong."
-            </blockquote>
-            <p className="mt-6 text-sm text-paper/60">Sarah W. — Independent café, Blackpool</p>
+        <div className="relative z-10 flex h-full flex-col items-center justify-center p-14 text-center text-paper">
+          <div className="w-full max-w-lg rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-8 ring-1 ring-white/10 backdrop-blur-xl">
+            <div className="flex justify-center">
+              <GlassIcon Icon={Quote} tone="mint" size="md" />
+            </div>
+            <div key={index} className="auth-rotator">
+              <blockquote className="mt-6 font-display text-2xl leading-[1.2] tracking-tight text-balance text-paper sm:text-3xl">
+                "{current.quote}"
+              </blockquote>
+              <p className="mt-6 text-sm text-paper/60">
+                {current.name} — {current.business}
+              </p>
+            </div>
+            <div className="mt-8 flex justify-center gap-1.5">
+              {TESTIMONIALS.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show testimonial ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === index ? 'w-6 bg-paper/80' : 'w-1.5 bg-paper/25 hover:bg-paper/40'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </aside>

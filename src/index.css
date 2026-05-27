@@ -88,3 +88,12 @@
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
 }
+
+@keyframes auth-rotate-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.auth-rotator {
+  animation: auth-rotate-in 600ms ease-out both;
+}
