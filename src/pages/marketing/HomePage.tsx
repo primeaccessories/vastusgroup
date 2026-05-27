@@ -8,7 +8,15 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 1700
+const MASK_DURATION_MS = 2900
+
+const SUBLINES = [
+  'Lower rates, faster settlements, and support you can actually reach.',
+  'Honest pricing, quick settlements, and human support when you need it.',
+  'Card processing built for UK businesses tired of opaque fees.',
+  'Switch in days, save from week one — no long contracts.',
+]
+const SUBLINE_ROTATE_MS = 3000
 
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
@@ -61,6 +69,12 @@ export default function HomePage() {
     return () => clearTimeout(t)
   }, [])
 
+  const [sublineIdx, setSublineIdx] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setSublineIdx((i) => (i + 1) % SUBLINES.length), SUBLINE_ROTATE_MS)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <>
       {/* HERO */}
@@ -84,12 +98,12 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 1.0, 2.6],
+                scale: [1.0, 1.0, 2.0],
                 opacity: [1, 1, 0],
                 transition: {
-                  duration: 1.6,
-                  ease: [0.55, 0, 0.3, 1],
-                  times: [0, 0.62, 1],
+                  duration: 2.8,
+                  ease: [0.55, 0, 0.4, 1],
+                  times: [0, 0.5, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
@@ -125,9 +139,20 @@ export default function HomePage() {
 
           <div className="mt-auto flex items-end justify-end pt-16">
             <div className="flex max-w-md items-end gap-6">
-              <p className="text-pretty text-base text-paper/70 sm:text-lg">
-                Lower rates, faster settlements, and support you can actually reach.
-              </p>
+              <div className="relative min-h-[3.5rem] flex-1 sm:min-h-[4rem]">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={sublineIdx}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-pretty text-base text-paper/70 sm:text-lg"
+                  >
+                    {SUBLINES[sublineIdx]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
               <span
                 aria-hidden="true"
                 className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center text-paper/60"
