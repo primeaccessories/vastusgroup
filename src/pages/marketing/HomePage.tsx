@@ -8,15 +8,14 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-ink" />
-        <div className="absolute inset-0 -z-10 bg-grid opacity-30" />
+      <section className="relative overflow-hidden bg-ink text-paper">
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
         <div
-          className="absolute -top-40 left-1/2 -z-10 h-[720px] w-[720px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+          className="pointer-events-none absolute -top-40 left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
           style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
         />
 
-        <div className="mx-auto max-w-7xl px-5 pt-12 pb-24 sm:px-8 sm:pt-20 sm:pb-32 lg:pt-28 lg:pb-40">
+        <div className="relative mx-auto max-w-7xl px-5 pt-12 pb-24 sm:px-8 sm:pt-20 sm:pb-32 lg:pt-28 lg:pb-40">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-paper/80 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-mint" />

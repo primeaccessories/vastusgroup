@@ -38,12 +38,12 @@ export default function AuthShell({ title, subtitle, children, footer }: Props) 
       </div>
 
       <aside className="relative hidden flex-1 overflow-hidden bg-ink lg:block">
-        <div className="absolute inset-0 bg-grid opacity-30" />
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
         <div
-          className="absolute -top-32 -left-32 h-[640px] w-[640px] rounded-full opacity-25 blur-3xl"
+          className="pointer-events-none absolute -top-32 -left-32 h-[640px] w-[640px] rounded-full opacity-25 blur-3xl"
           style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
         />
-        <div className="relative flex h-full flex-col justify-end p-14 text-paper">
+        <div className="relative z-10 flex h-full flex-col justify-end p-14 text-paper">
           <blockquote className="font-display text-3xl leading-[1.15] tracking-tight text-balance">
             "Switching to A2B saved us nearly £400 a month versus our last provider. The team actually picks up the phone when something goes wrong."
           </blockquote>

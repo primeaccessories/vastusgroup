@@ -13,12 +13,12 @@ export default function ProductDetailPage() {
   return (
     <>
       <section className="relative overflow-hidden bg-ink text-paper">
-        <div className="absolute inset-0 -z-10 bg-grid opacity-30" />
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
         <div
-          className="absolute -top-32 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+          className="pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
           style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
         />
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
           <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/60 hover:text-mint">
             <ArrowLeft className="h-4 w-4" />
             All products
