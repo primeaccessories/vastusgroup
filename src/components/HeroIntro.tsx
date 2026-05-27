@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'a2b-intro-shown'
-const HOLD_MS = 1400
+const HOLD_MS = 2200
 
 export default function HeroIntro() {
   const [show, setShow] = useState(() => {
@@ -13,12 +13,12 @@ export default function HeroIntro() {
   useEffect(() => {
     if (!show) return
     sessionStorage.setItem(STORAGE_KEY, '1')
-    const original = document.body.style.overflow
+    const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const t = setTimeout(() => setShow(false), HOLD_MS)
     return () => {
       clearTimeout(t)
-      document.body.style.overflow = original
+      document.body.style.overflow = previousOverflow
     }
   }, [show])
 
@@ -28,18 +28,28 @@ export default function HeroIntro() {
         <motion.div
           key="a2b-intro"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: '-100%' }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink"
+          className="fixed inset-0 z-[100] overflow-hidden bg-ink"
           aria-hidden="true"
         >
+          <video
+            src="/a2b-intro.webm"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <motion.img
-            src="/a2b-logo.webp"
+            src="/a2b-mask.svg"
             alt=""
-            initial={{ opacity: 0, scale: 0.92, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="h-16 w-auto sm:h-24"
+            initial={{ scale: 1.55 }}
+            animate={{ scale: 1.05 }}
+            exit={{ scale: 1.25, opacity: 0 }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 h-full w-full select-none object-cover"
+            draggable={false}
           />
         </motion.div>
       )}
