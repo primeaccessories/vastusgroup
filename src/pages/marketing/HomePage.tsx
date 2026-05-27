@@ -1,37 +1,24 @@
-import { ArrowUpRight, Check, Phone, ShieldCheck, Sparkles, Zap, HeartHandshake, Quote } from 'lucide-react'
+import { ArrowUpRight, Check, Phone, ShieldCheck, Zap, HeartHandshake, Quote } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LinkButton } from '../../components/Button'
+import HeroIntro from '../../components/HeroIntro'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
 export default function HomePage() {
   return (
     <>
+      <HeroIntro />
       {/* HERO */}
       <section className="relative overflow-hidden bg-ink text-paper">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-        <div
-          className="pointer-events-none absolute -top-40 left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
-        />
-
-        <div className="relative mx-auto max-w-7xl px-5 pt-12 pb-24 sm:px-8 sm:pt-20 sm:pb-32 lg:pt-28 lg:pb-40">
+        <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-paper/80 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-mint" />
-              Trusted by 1,200+ UK businesses
-            </div>
-
-            <h1 className="mt-6 font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-paper">
-              Business payments,{' '}
-              <span className="relative inline-block">
-                <span className="relative z-10">done properly.</span>
-                <span className="absolute inset-x-0 bottom-1 -z-0 h-3 bg-mint/40 sm:h-4" />
-              </span>
+            <h1 className="font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.05] tracking-tight text-paper">
+              Business payment solutions.
             </h1>
 
             <p className="mt-6 max-w-xl text-pretty text-lg text-paper/70 sm:text-xl">
-              Card terminals, online checkouts, e-POS systems and business finance — built around your business, supported by people who actually answer the phone.
+              Card payments, online checkout, e-POS and finance for UK businesses. Supported by people who pick up the phone.
             </p>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -39,16 +26,13 @@ export default function HomePage() {
                 Let's get started
                 <ArrowUpRight className="h-5 w-5" />
               </LinkButton>
-              <LinkButton to="/products" variant="inverse" size="lg">
-                See what we do
-              </LinkButton>
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-paper/60">
-              <span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> No setup fees</span>
-              <span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> PCI-DSS compliant</span>
-              <span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> UK-based support</span>
-              <span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> Next-day terminals</span>
+              <a
+                href="tel:03334432645"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint hover:text-mint"
+              >
+                <Phone className="h-5 w-5" />
+                0333 443 2645
+              </a>
             </div>
           </div>
         </div>
