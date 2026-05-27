@@ -1,17 +1,57 @@
 import { ArrowUpRight, Check, Phone, ShieldCheck, Zap, HeartHandshake, Quote } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { LinkButton } from '../../components/Button'
-import HeroIntro from '../../components/HeroIntro'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
+const MASK_DURATION_MS = 1800
+
 export default function HomePage() {
+  const [maskGone, setMaskGone] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
     <>
-      <HeroIntro />
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40">
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <video
+          src="/a2b-intro.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 -z-20 h-full w-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/60 via-ink/70 to-ink" />
+
+        <AnimatePresence>
+          {!maskGone && (
+            <motion.img
+              key="hero-a2b-mask"
+              src="/a2b-mask.svg"
+              alt=""
+              aria-hidden="true"
+              initial={{ scale: 2.1, opacity: 0.6 }}
+              animate={{ scale: 1.88, opacity: 1 }}
+              exit={{ scale: 1.6, opacity: 0 }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover"
+              draggable={false}
+            />
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-20 mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40"
+        >
           <div className="max-w-3xl">
             <h1 className="font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.05] tracking-tight text-paper">
               Business payment solutions.
@@ -28,14 +68,14 @@ export default function HomePage() {
               </LinkButton>
               <a
                 href="tel:03334432645"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint hover:text-mint"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 bg-ink/40 px-8 text-base font-semibold text-paper backdrop-blur transition hover:border-mint hover:text-mint"
               >
                 <Phone className="h-5 w-5" />
                 0333 443 2645
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* VALUE PILLARS */}
