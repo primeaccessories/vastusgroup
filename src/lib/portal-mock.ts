@@ -1,8 +1,8 @@
 export const MOCK_USER = {
   id: 'cust_2X9k1Z',
   businessName: 'Riverside Bistro Ltd',
-  contactName: 'Sarah Whitmore',
-  email: 'sarah@riversidebistro.co.uk',
+  contactName: 'Daniel Pearce',
+  email: 'test1@test.co.uk',
   phone: '07712 345678',
   merchantId: 'MID-487-2261',
   accountManager: 'Georgia Hope',

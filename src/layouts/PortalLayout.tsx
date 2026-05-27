@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   CreditCard,
@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import BrandLogo from '../components/BrandLogo'
 import { MOCK_USER } from '../lib/portal-mock'
+import { isAuthed, signOut } from '../lib/auth'
 
 const NAV = [
   { to: '/portal', label: 'Overview', icon: LayoutDashboard, end: true },
@@ -26,10 +27,21 @@ const NAV = [
 export default function PortalLayout() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setOpen(false)
   }, [location.pathname])
+
+  if (!isAuthed()) {
+    return <Navigate to="/sign-in" replace />
+  }
+
+  const handleSignOut = (e: React.MouseEvent) => {
+    e.preventDefault()
+    signOut()
+    navigate('/sign-in', { replace: true })
+  }
 
   return (
     <div className="flex min-h-[100dvh] bg-paper-soft">
@@ -78,13 +90,14 @@ export default function PortalLayout() {
           </nav>
 
           <div className="border-t border-ink/5 p-3">
-            <Link
-              to="/"
+            <a
+              href="/sign-in"
+              onClick={handleSignOut}
               className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-muted transition hover:bg-ink/5 hover:text-ink"
             >
               <LogOut className="h-[18px] w-[18px]" />
               Sign out
-            </Link>
+            </a>
           </div>
         </div>
       </aside>

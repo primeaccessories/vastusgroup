@@ -2,17 +2,28 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import AuthShell from './AuthShell'
+import { signIn, DEMO_CREDENTIALS } from '../../lib/auth'
 
 export default function SignUpPage() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ name: '', business: '', email: '', password: '' })
+  const [error, setError] = useState<string | null>(null)
 
-  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [k]: e.target.value })
+    setError(null)
+  }
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    navigate('/portal')
+    const result = signIn(form.email, form.password)
+    if (result.ok) {
+      navigate('/portal')
+    } else {
+      setError(
+        `Sign-up is closed during the demo. Use ${DEMO_CREDENTIALS.email} / ${DEMO_CREDENTIALS.password} to view the portal.`,
+      )
+    }
   }
 
   return (
@@ -57,6 +68,12 @@ export default function SignUpPage() {
           />
           <span className="mt-1 block text-xs text-ink-fade">Minimum 8 characters.</span>
         </label>
+
+        {error && (
+          <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+            {error}
+          </div>
+        )}
 
         <Button type="submit" variant="primary" size="lg" className="w-full">
           Create account
