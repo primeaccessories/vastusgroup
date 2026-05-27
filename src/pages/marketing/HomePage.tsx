@@ -8,24 +8,49 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 1800
+const MASK_DURATION_MS = 2400
 
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
-    label: 'Cards we accept',
-    duration: 44,
-    items: ['VISA', 'Mastercard', 'American Express', 'Maestro'],
+    label: 'Cards & wallets',
+    duration: 52,
+    items: [
+      'VISA',
+      'Mastercard',
+      'American Express',
+      'Maestro',
+      'Discover',
+      'JCB',
+      'UnionPay',
+      'Diners Club',
+      'Apple Pay',
+      'Google Pay',
+      'Samsung Pay',
+      'Klarna',
+      'PayPal',
+      'Open Banking',
+    ],
   },
   {
-    label: 'Wallets & online',
-    duration: 38,
+    label: 'Standards & infra',
+    duration: 58,
     reverse: true,
-    items: ['Apple Pay', 'Google Pay', 'Klarna'],
-  },
-  {
-    label: 'Trusted by',
-    duration: 50,
-    items: ['Trustpilot', 'PCI-DSS', 'Chip & PIN', 'Contactless'],
+    items: [
+      'PCI-DSS Level 1',
+      '3D Secure 2',
+      'EMV Chip & PIN',
+      'Contactless NFC',
+      'Tap to Pay',
+      'P2PE',
+      'Tokenisation',
+      'AES-256',
+      'ISO 8583',
+      'ISO 20022',
+      'PSD2 / SCA',
+      'Visa Direct',
+      'Mastercard Send',
+      'Faster Payments',
+    ],
   },
 ]
 
@@ -57,10 +82,21 @@ export default function HomePage() {
               src="/a2b-mask.svg"
               alt=""
               aria-hidden="true"
-              initial={{ scale: 2.1, opacity: 0.6 }}
-              animate={{ scale: 1.88, opacity: 1 }}
-              exit={{ scale: 1.6, opacity: 0 }}
-              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ scale: 5.5, opacity: 0 }}
+              animate={{
+                scale: [5.5, 1.25, 1.25],
+                opacity: [0, 1, 1],
+                transition: {
+                  duration: 2.0,
+                  ease: [0.16, 1, 0.3, 1],
+                  times: [0, 0.62, 1],
+                },
+              }}
+              exit={{
+                scale: 0.9,
+                opacity: 0,
+                transition: { duration: 0.7, ease: [0.7, 0, 0.84, 0] },
+              }}
               className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover"
               draggable={false}
             />
@@ -110,7 +146,7 @@ export default function HomePage() {
       {/* TRUST MARQUEE — 3 rows, alternating direction */}
       <section className="border-y border-white/5 bg-ink py-12 text-paper sm:py-16">
         <p className="mb-8 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-paper/40 sm:mb-10 sm:text-xs">
-          Cards, wallets, trust
+          Cards, wallets &amp; the rails behind them
         </p>
         <div className="flex flex-col gap-5 sm:gap-7">
           {TRUST_ROWS.map((row, i) => (
