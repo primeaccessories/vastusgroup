@@ -8,7 +8,7 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 1000
+const MASK_DURATION_MS = 1700
 
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
@@ -87,9 +87,9 @@ export default function HomePage() {
                 scale: [1.0, 1.0, 2.6],
                 opacity: [1, 1, 0],
                 transition: {
-                  duration: 0.95,
+                  duration: 1.6,
                   ease: [0.55, 0, 0.3, 1],
-                  times: [0, 0.4, 1],
+                  times: [0, 0.62, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
