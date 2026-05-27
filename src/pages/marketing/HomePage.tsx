@@ -8,7 +8,7 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 2500
+const MASK_DURATION_MS = 2800
 
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
@@ -82,21 +82,17 @@ export default function HomePage() {
               src="/a2b-mask.svg"
               alt=""
               aria-hidden="true"
-              initial={{ scale: 0.4, opacity: 0 }}
+              initial={{ scale: 0.06, opacity: 0 }}
               animate={{
-                scale: [0.4, 0.45, 1.6, 1.6],
-                opacity: [0, 1, 1, 1],
+                scale: [0.06, 0.5, 1.4, 4.2],
+                opacity: [0, 1, 1, 0],
                 transition: {
-                  duration: 2.1,
-                  ease: [0.16, 1, 0.3, 1],
-                  times: [0, 0.18, 0.78, 1],
+                  duration: 2.7,
+                  ease: [0.4, 0, 0.2, 1],
+                  times: [0, 0.18, 0.55, 1],
                 },
               }}
-              exit={{
-                scale: 3.4,
-                opacity: 0,
-                transition: { duration: 0.7, ease: [0.55, 0, 0.85, 0.1] },
-              }}
+              exit={{ opacity: 0, transition: { duration: 0.1 } }}
               className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover will-change-transform"
               draggable={false}
             />
