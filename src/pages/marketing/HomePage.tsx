@@ -8,7 +8,7 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 1400
+const MASK_DURATION_MS = 1000
 
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
@@ -82,14 +82,14 @@ export default function HomePage() {
               src="/a2b-mask.svg"
               alt=""
               aria-hidden="true"
-              initial={{ scale: 0.98, opacity: 0 }}
+              initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [0.98, 1.0, 1.02, 2.8],
-                opacity: [0, 1, 1, 0],
+                scale: [1.0, 1.0, 2.6],
+                opacity: [1, 1, 0],
                 transition: {
-                  duration: 1.3,
-                  ease: [0.65, 0, 0.3, 1],
-                  times: [0, 0.2, 0.6, 1],
+                  duration: 0.95,
+                  ease: [0.55, 0, 0.3, 1],
+                  times: [0, 0.4, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
