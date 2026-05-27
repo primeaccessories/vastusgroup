@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Phone, ShieldCheck, Star, Zap, HeartHandshake, Quote } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, Star, Quote } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -86,22 +86,71 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* VALUE PILLARS */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-8 sm:grid-cols-3">
-          {[
-            { Icon: HeartHandshake, title: 'Best-in-class care', desc: 'Beyond transactional. We genuinely care about the businesses we serve — and it shows on every call.' },
-            { Icon: Zap, title: 'Fast where it matters', desc: 'Next-day terminals. 24-hour funding decisions. 48-hour onboarding. We move at the pace of trade.' },
-            { Icon: ShieldCheck, title: 'Honest pricing', desc: 'No hidden fees, no auto-roll contracts, no surprises on the statement. Every line item explained up-front.' },
-          ].map(({ Icon, title, desc }) => (
-            <div key={title} className="rounded-3xl border border-ink/5 bg-paper p-7 transition hover:border-ink/10 hover:shadow-lg">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-mint/15 text-mint-deep">
-                <Icon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-5 font-display text-xl font-semibold text-ink">{title}</h3>
-              <p className="mt-2 text-pretty text-ink-muted">{desc}</p>
+      {/* TRUST MARQUEE */}
+      <section className="border-y border-white/5 bg-ink py-8 text-paper sm:py-10">
+        <div className="relative overflow-hidden">
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-ink to-transparent sm:w-32"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-ink to-transparent sm:w-32"
+            aria-hidden="true"
+          />
+          <div className="flex w-max animate-marquee items-center gap-12 whitespace-nowrap sm:gap-16">
+            {Array.from({ length: 2 }).flatMap((_, dup) =>
+              [
+                'VISA',
+                'Mastercard',
+                'American Express',
+                'Apple Pay',
+                'Google Pay',
+                'Trustpilot',
+                'PCI-DSS',
+                'Klarna',
+                'Maestro',
+              ].map((brand) => (
+                <span
+                  key={`${dup}-${brand}`}
+                  className="font-display text-lg font-semibold uppercase tracking-[0.25em] text-paper/40 sm:text-xl"
+                >
+                  {brand}
+                </span>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* BIG STATEMENT */}
+      <section className="relative overflow-hidden bg-ink text-paper">
+        <div
+          className="pointer-events-none absolute -left-32 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full bg-mint/10 blur-3xl sm:-left-16"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-28 sm:px-8 sm:py-36 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-20 lg:py-48">
+          <h2 className="font-display text-balance text-[clamp(2.75rem,8vw,7rem)] font-semibold leading-[0.95] tracking-tight">
+            Payments
+            <br />
+            without the
+            <br />
+            <span className="text-mint">runaround.</span>
+          </h2>
+          <div>
+            <p className="max-w-md text-pretty text-base text-paper/60 sm:text-lg">
+              Talk to a real person. Get a real quote. Move at the pace of your business — not your acquirer's.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <LinkButton to="/products" variant="primary" size="lg">
+                See what we do
+                <ArrowDown className="h-5 w-5" />
+              </LinkButton>
+              <LinkButton to="/contact" variant="inverse" size="lg">
+                Talk to us
+                <ArrowUpRight className="h-5 w-5" />
+              </LinkButton>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
