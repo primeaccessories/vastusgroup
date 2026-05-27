@@ -1,12 +1,33 @@
-import { ArrowDown, ArrowUpRight, Check, Phone, Star, Quote } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Quote, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { LinkButton } from '../../components/Button'
+import GlassCard from '../../components/GlassCard'
+import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
 const MASK_DURATION_MS = 1800
+
+const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
+  {
+    label: 'Cards we accept',
+    duration: 44,
+    items: ['VISA', 'Mastercard', 'American Express', 'Maestro'],
+  },
+  {
+    label: 'Wallets & online',
+    duration: 38,
+    reverse: true,
+    items: ['Apple Pay', 'Google Pay', 'Klarna'],
+  },
+  {
+    label: 'Trusted by',
+    duration: 50,
+    items: ['Trustpilot', 'PCI-DSS', 'Chip & PIN', 'Contactless'],
+  },
+]
 
 export default function HomePage() {
   const [maskGone, setMaskGone] = useState(false)
@@ -86,39 +107,47 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* TRUST MARQUEE */}
-      <section className="border-y border-white/5 bg-ink py-8 text-paper sm:py-10">
-        <div className="relative overflow-hidden">
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-ink to-transparent sm:w-32"
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-ink to-transparent sm:w-32"
-            aria-hidden="true"
-          />
-          <div className="flex w-max animate-marquee items-center gap-12 whitespace-nowrap sm:gap-16">
-            {Array.from({ length: 2 }).flatMap((_, dup) =>
-              [
-                'VISA',
-                'Mastercard',
-                'American Express',
-                'Apple Pay',
-                'Google Pay',
-                'Trustpilot',
-                'PCI-DSS',
-                'Klarna',
-                'Maestro',
-              ].map((brand) => (
-                <span
-                  key={`${dup}-${brand}`}
-                  className="font-display text-lg font-semibold uppercase tracking-[0.25em] text-paper/40 sm:text-xl"
+      {/* TRUST MARQUEE — 3 rows, alternating direction */}
+      <section className="border-y border-white/5 bg-ink py-12 text-paper sm:py-16">
+        <p className="mb-8 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-paper/40 sm:mb-10 sm:text-xs">
+          Cards, wallets, trust
+        </p>
+        <div className="flex flex-col gap-5 sm:gap-7">
+          {TRUST_ROWS.map((row, i) => (
+            <div key={row.label} className="flex items-center gap-4">
+              <span className="hidden shrink-0 pl-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint/80 sm:block sm:w-40 sm:pl-8">
+                {row.label}
+              </span>
+              <div className="relative flex-1 overflow-hidden">
+                <div
+                  className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-ink to-transparent sm:w-24"
+                  aria-hidden="true"
+                />
+                <div
+                  className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-ink to-transparent sm:w-24"
+                  aria-hidden="true"
+                />
+                <div
+                  className="flex w-max animate-marquee items-center gap-10 whitespace-nowrap sm:gap-14"
+                  style={{
+                    animationDuration: `${row.duration}s`,
+                    animationDirection: row.reverse ? 'reverse' : 'normal',
+                  }}
                 >
-                  {brand}
-                </span>
-              ))
-            )}
-          </div>
+                  {Array.from({ length: 3 }).flatMap((_, dup) =>
+                    row.items.map((brand) => (
+                      <span
+                        key={`${i}-${dup}-${brand}`}
+                        className="font-display text-base font-semibold uppercase tracking-[0.25em] text-paper/40 sm:text-lg"
+                      >
+                        {brand}
+                      </span>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -154,13 +183,59 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* VALUE PILLARS — gloss tiles on ink */}
+      <section className="relative overflow-hidden bg-ink text-paper">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] translate-x-1/4 -translate-y-1/4 rounded-full bg-mint/10 blur-[120px]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+          <div className="mx-auto mb-14 max-w-2xl text-center sm:mb-20">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">
+              Why operators move to A2B
+            </p>
+            <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+              Built for businesses that don't have time to chase their acquirer.
+            </h2>
+          </div>
+
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+            {[
+              {
+                Icon: HeartHandshake,
+                title: 'Best-in-class care',
+                desc: 'A named account manager, a phone that gets answered, and a team who actually understands your industry.',
+              },
+              {
+                Icon: Zap,
+                title: 'Fast where it matters',
+                desc: 'Next-day terminals. 24-hour funding decisions. 48-hour onboarding. We move at the pace of trade.',
+              },
+              {
+                Icon: ShieldCheck,
+                title: 'Honest pricing',
+                desc: 'No hidden fees, no auto-roll contracts, no surprises on the statement. Every line item explained up-front.',
+              },
+            ].map(({ Icon, title, desc }) => (
+              <GlassCard key={title} surface="dark" interactive className="p-8 sm:p-9">
+                <GlassIcon Icon={Icon} tone="mint" size="lg" />
+                <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-paper sm:text-2xl">
+                  {title}
+                </h3>
+                <p className="mt-3 text-pretty text-paper/65">{desc}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PRODUCT GRID */}
       <section className="bg-ink-soft text-paper">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-mint">What we do</p>
-              <h2 className="mt-3 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">What we do</p>
+              <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
                 Everything your business needs to take and grow money.
               </h2>
             </div>
@@ -170,22 +245,20 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {PRODUCTS.map((p) => (
-              <Link
-                key={p.slug}
-                to={`/products/${p.slug}`}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-mint/40 hover:bg-white/[0.06]"
-              >
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-mint/15 text-mint">
-                  <p.Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-paper">{p.title}</h3>
-                <p className="mt-1.5 text-sm text-paper/60">{p.tagline}</p>
-                <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-mint">
-                  Learn more
-                  <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
+              <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
+                <GlassCard surface="dark" interactive className="p-7 sm:p-8">
+                  <GlassIcon Icon={p.Icon} tone="mint" size="md" />
+                  <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-paper sm:text-xl">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-paper/60">{p.tagline}</p>
+                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">
+                    Learn more
+                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </GlassCard>
               </Link>
             ))}
           </div>

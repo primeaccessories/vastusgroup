@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { ArrowUpRight, Phone, Mail, MapPin, Check } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { Button } from '../../components/Button'
+import GlassCard from '../../components/GlassCard'
+import GlassIcon from '../../components/GlassIcon'
 
 const INDUSTRIES = ['Hospitality / restaurant', 'Retail (in-person)', 'E-commerce / online', 'Trade / services', 'Beauty / wellness', 'Other']
 const VOLUMES = ['Under £5k / month', '£5k – £25k / month', '£25k – £100k / month', '£100k+ / month']
@@ -28,24 +31,23 @@ export default function ContactPage() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 sm:pt-24 sm:pb-16">
-        <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Contact</p>
-        <h1 className="mt-3 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Contact</p>
+        <h1 className="mt-4 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
           Let's talk about your business.
         </h1>
         <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted">
-          Tell us a little about what you do and we'll come back within one working day with a tailored quote — no commitment, no obligation.
+          Tell us a little about what you do and we'll come back within one working day with a tailored quote — no
+          commitment, no obligation.
         </p>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div className="rounded-3xl border border-ink/5 bg-paper p-8 sm:p-10">
+          <GlassCard surface="light" className="p-8 sm:p-10">
             {submitted ? (
-              <div className="flex h-full flex-col items-center justify-center text-center">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-mint text-ink">
-                  <Check className="h-8 w-8" strokeWidth={3} />
-                </div>
-                <h2 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink">
+              <div className="flex h-full min-h-[480px] flex-col items-center justify-center text-center">
+                <GlassIcon Icon={Check} tone="mint" size="lg" />
+                <h2 className="mt-7 font-display text-3xl font-semibold tracking-tight text-ink">
                   Thanks — we'll be in touch.
                 </h2>
                 <p className="mt-3 max-w-md text-pretty text-ink-muted">
@@ -114,14 +116,14 @@ export default function ContactPage() {
                 </p>
               </form>
             )}
-          </div>
+          </GlassCard>
 
           <aside className="space-y-4">
             <ContactCard
               Icon={Phone}
               title="Speak to us"
               lines={[
-                <a key="t" href="tel:03334432645" className="hover:text-mint">0333 443 2645</a>,
+                <a key="t" href="tel:03334432645" className="hover:text-mint-deep">0333 443 2645</a>,
                 <span key="h" className="text-ink-fade">Mon – Fri · 9am – 5:30pm</span>,
               ]}
             />
@@ -129,7 +131,7 @@ export default function ContactPage() {
               Icon={Mail}
               title="Email"
               lines={[
-                <a key="e" href="mailto:info@a2bpayments.co.uk" className="hover:text-mint">info@a2bpayments.co.uk</a>,
+                <a key="e" href="mailto:info@a2bpayments.co.uk" className="hover:text-mint-deep">info@a2bpayments.co.uk</a>,
               ]}
             />
             <ContactCard
@@ -144,25 +146,6 @@ export default function ContactPage() {
           </aside>
         </div>
       </section>
-
-      <style>{`
-        .input {
-          display: block;
-          width: 100%;
-          border-radius: 0.75rem;
-          border: 1px solid rgba(11,11,12,0.1);
-          background: #fff;
-          padding: 0.75rem 1rem;
-          font-size: 15px;
-          color: var(--color-ink);
-          transition: border-color 120ms, box-shadow 120ms;
-        }
-        .input:focus {
-          outline: none;
-          border-color: var(--color-mint);
-          box-shadow: 0 0 0 3px rgba(89,209,195,0.2);
-        }
-      `}</style>
     </>
   )
 }
@@ -179,16 +162,14 @@ function Field({ label, required, children }: { label: string; required?: boolea
   )
 }
 
-function ContactCard({ Icon, title, lines }: { Icon: typeof Phone; title: string; lines: React.ReactNode[] }) {
+function ContactCard({ Icon, title, lines }: { Icon: LucideIcon; title: string; lines: React.ReactNode[] }) {
   return (
-    <div className="rounded-2xl border border-ink/5 bg-paper p-6">
-      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-mint/15 text-mint-deep">
-        <Icon className="h-5 w-5" />
-      </div>
-      <h3 className="mt-4 font-display text-base font-semibold text-ink">{title}</h3>
+    <GlassCard surface="light" className="p-6">
+      <GlassIcon Icon={Icon} tone="mint" size="sm" />
+      <h3 className="mt-5 font-display text-base font-semibold text-ink">{title}</h3>
       <div className="mt-2 space-y-0.5 text-sm text-ink-muted">
         {lines.map((l, i) => <div key={i}>{l}</div>)}
       </div>
-    </div>
+    </GlassCard>
   )
 }
