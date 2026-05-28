@@ -89,13 +89,18 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-ink text-paper">
         <video
-          src="/a2b-intro.webm"
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-        />
+          preload="auto"
+          disablePictureInPicture
+          controls={false}
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
+        >
+          <source src="/a2b-intro.mp4" type="video/mp4" />
+          <source src="/a2b-intro.webm" type="video/webm" />
+        </video>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
         <AnimatePresence>
@@ -222,18 +227,18 @@ export default function HomePage() {
       </section>
 
       {/* PORTAL TEASE — cinematic dashboard cluster */}
-      <section className="relative overflow-hidden bg-ink text-paper">
+      <section className="relative overflow-hidden bg-gradient-to-b from-paper via-paper to-paper-soft text-ink">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(89,209,195,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(89,209,195,0.07)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_70%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,30,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,30,0.05)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_70%)]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 right-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint/25 blur-[140px]"
+          className="pointer-events-none absolute -top-40 right-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint/35 blur-[140px]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-40 left-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint-deep/20 blur-[140px]"
+          className="pointer-events-none absolute -bottom-40 left-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint-deep/15 blur-[140px]"
         />
 
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
