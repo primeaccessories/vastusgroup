@@ -9,7 +9,6 @@ import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
 const MASK_DURATION_MS = 2900
-const HERO_TEXT_DELAY_MS = 700
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -70,12 +69,6 @@ export default function HomePage() {
     return () => clearTimeout(t)
   }, [])
 
-  const [textIn, setTextIn] = useState(false)
-  useEffect(() => {
-    const t = setTimeout(() => setTextIn(true), HERO_TEXT_DELAY_MS)
-    return () => clearTimeout(t)
-  }, [])
-
   const [sublineIdx, setSublineIdx] = useState(0)
   useEffect(() => {
     const id = setInterval(() => setSublineIdx((i) => (i + 1) % SUBLINES.length), SUBLINE_ROTATE_MS)
@@ -122,7 +115,7 @@ export default function HomePage() {
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={textIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-20 mx-auto flex min-h-[88svh] max-w-7xl flex-col px-5 pt-32 pb-12 sm:px-8 sm:pt-40 sm:pb-16 lg:pt-44"
         >
