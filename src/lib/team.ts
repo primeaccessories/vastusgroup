@@ -3,6 +3,7 @@ export interface TeamMember {
   role: string
   bio?: string
   founder?: boolean
+  lead?: boolean
   image?: string
 }
 
@@ -21,12 +22,12 @@ export const TEAM: TeamMember[] = [
     image: '/team/jack-fletcher.webp',
     bio: 'Jack has built a wealth of knowledge on the merchant services industry, rising quickly through the ranks of his previous employer. His passion for being regarded as an extension of his clients\' business is built into the fabric of A2B.',
   },
-  { name: 'Richard Barker', role: 'Chief Technology Officer', image: '/team/richard-barker.webp' },
-  { name: 'Daniel Page', role: 'Head of Funding', image: '/team/daniel-page.webp' },
-  { name: 'Georgia Hope', role: 'Head of Finance', image: '/team/georgia-hope.webp' },
-  { name: 'Ellie Masterson', role: 'Head of Pricing', image: '/team/ellie-masterson.webp' },
-  { name: 'Lauren Wheatley', role: 'Head of Onboarding', image: '/team/lauren-wheatley.webp' },
-  { name: 'Patrick Hitie', role: 'Head of Marketing', image: '/team/patrick-hitie.webp' },
+  { name: 'Richard Barker', role: 'Chief Technology Officer', lead: true, image: '/team/richard-barker.webp' },
+  { name: 'Daniel Page', role: 'Head of Funding', lead: true, image: '/team/daniel-page.webp' },
+  { name: 'Georgia Hope', role: 'Head of Finance', lead: true, image: '/team/georgia-hope.webp' },
+  { name: 'Ellie Masterson', role: 'Head of Pricing', lead: true, image: '/team/ellie-masterson.webp' },
+  { name: 'Lauren Wheatley', role: 'Head of Onboarding', lead: true, image: '/team/lauren-wheatley.webp' },
+  { name: 'Patrick Hitie', role: 'Head of Marketing', lead: true, image: '/team/patrick-hitie.webp' },
   { name: 'Jamie Cotton', role: 'Senior Account Manager', image: '/team/jamie-cotton.webp' },
   { name: 'Harry Feeney', role: 'Senior Account Manager', image: '/team/harry-feeney.webp' },
   { name: 'Dylan Pumphrey', role: 'Sales Manager', image: '/team/dylan-pumphrey.webp' },

@@ -3,7 +3,8 @@ import { TEAM } from '../../lib/team'
 
 export default function TeamPage() {
   const founders = TEAM.filter((m) => m.founder)
-  const rest = TEAM.filter((m) => !m.founder)
+  const leads = TEAM.filter((m) => m.lead)
+  const rest = TEAM.filter((m) => !m.founder && !m.lead)
 
   return (
     <>
@@ -18,66 +19,84 @@ export default function TeamPage() {
         </p>
       </section>
 
-      <section className="relative overflow-hidden bg-ink text-paper">
+      <section className="relative overflow-hidden bg-paper-soft text-ink">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/3 rounded-full bg-mint/10 blur-[120px]"
+          className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/3 rounded-full bg-mint/20 blur-[120px]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">Founders</p>
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Founders</p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             Built A2B from the ground up.
           </h2>
 
-          <div className="mt-12 grid gap-4 sm:gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 sm:gap-8 md:grid-cols-2">
             {founders.map((m) => (
-              <GlassCard key={m.name} surface="dark" className="p-8">
-                <div className="flex items-start gap-5">
-                  <Avatar name={m.name} image={m.image} size="lg" />
-                  <div>
-                    <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">{m.name}</h3>
-                    <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint">{m.role}</p>
-                  </div>
+              <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
+                <Portrait name={m.name} image={m.image} ratio="4/5" />
+                <div className="p-8">
+                  <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">{m.name}</h3>
+                  <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint-deep">{m.role}</p>
+                  {m.bio && <p className="mt-5 text-pretty text-ink-muted">{m.bio}</p>}
                 </div>
-                {m.bio && <p className="mt-6 text-pretty text-paper/70">{m.bio}</p>}
               </GlassCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Wider team</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          The wider A2B team
-        </h2>
-        <p className="mt-3 text-ink-muted">{rest.length}+ specialists across client partnerships, support and marketing.</p>
+      {leads.length > 0 && (
+        <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Leadership</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            The heads behind A2B
+          </h2>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((m) => (
-            <GlassCard key={m.name} surface="light" interactive className="flex items-center gap-4 p-5">
-              <Avatar name={m.name} image={m.image} size="sm" />
-              <div className="min-w-0">
-                <p className="font-semibold text-ink">{m.name}</p>
-                <p className="truncate text-sm text-ink-fade">{m.role}</p>
+          <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+            {leads.map((m) => (
+              <GlassCard key={m.name} surface="light" interactive className="overflow-hidden p-0">
+                <Portrait name={m.name} image={m.image} ratio="1/1" />
+                <div className="p-3 sm:p-4">
+                  <p className="text-sm font-semibold text-ink leading-tight">{m.name}</p>
+                  <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.1em] text-mint-deep leading-snug">{m.role}</p>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="border-t border-ink/5 bg-paper-soft/40">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The team</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            The people you'll deal with
+          </h2>
+          <p className="mt-3 text-ink-muted">Account managers, specialists and support — your day-to-day A2B contacts.</p>
+
+          <div className="mt-10 grid gap-3 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-10">
+            {rest.map((m) => (
+              <div key={m.name} className="group">
+                <div className="overflow-hidden rounded-2xl ring-1 ring-ink/5 transition group-hover:ring-mint/40 group-hover:shadow-[0_12px_30px_-15px_rgba(15,23,42,0.25)]">
+                  <Portrait name={m.name} image={m.image} ratio="1/1" />
+                </div>
+                <p className="mt-2 text-xs font-semibold text-ink leading-tight">{m.name}</p>
+                <p className="text-[10.5px] text-ink-fade leading-snug">{m.role}</p>
               </div>
-            </GlassCard>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </>
   )
 }
 
-function Avatar({ name, image, size }: { name: string; image?: string; size: 'sm' | 'lg' }) {
+function Portrait({ name, image, ratio }: { name: string; image?: string; ratio: '1/1' | '4/5' }) {
   const initials = name.split(' ').map((n) => n[0]).join('')
-  const cls =
-    size === 'lg'
-      ? 'h-16 w-16 text-2xl rounded-2xl'
-      : 'h-12 w-12 text-base rounded-xl'
   return (
-    <span
-      className={`relative isolate inline-flex flex-shrink-0 items-center justify-center overflow-hidden bg-gradient-to-b from-mint/45 via-mint/25 to-mint/10 text-ink shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-mint/30 ${cls}`}
+    <div
+      className="relative w-full overflow-hidden bg-gradient-to-b from-mint/45 via-mint/25 to-mint/10"
+      style={{ aspectRatio: ratio }}
     >
       {image ? (
         <img
@@ -91,11 +110,13 @@ function Avatar({ name, image, size }: { name: string; image?: string; size: 'sm
         <>
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-2 top-1 h-1/3 rounded-b-full bg-gradient-to-b from-white/60 via-white/15 to-transparent opacity-80 blur-md"
+            className="pointer-events-none absolute inset-x-6 top-3 h-1/3 rounded-b-full bg-gradient-to-b from-white/60 via-white/15 to-transparent opacity-80 blur-md"
           />
-          <span className="relative font-display font-bold">{initials}</span>
+          <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-bold text-ink/70">
+            {initials}
+          </span>
         </>
       )}
-    </span>
+    </div>
   )
 }
