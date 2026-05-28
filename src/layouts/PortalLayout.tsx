@@ -110,16 +110,17 @@ export default function PortalLayout() {
       )}
 
       <div className="flex flex-1 flex-col lg:pl-72">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-ink/5 bg-paper/80 px-5 backdrop-blur-md sm:px-8 lg:hidden">
+        <header className="sticky top-0 z-30 flex flex-col gap-2 border-b border-ink/5 bg-paper/80 px-5 py-3 backdrop-blur-md sm:px-8 lg:hidden">
+          <BrandLogo hardNav />
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-paper text-ink"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/10 bg-paper px-3.5 py-1.5 text-xs font-semibold text-ink hover:bg-ink/5"
             aria-label="Open menu"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
+            Menu
           </button>
-          <BrandLogo hardNav />
         </header>
 
         <main className="flex-1 px-5 py-8 sm:px-8 lg:py-12">
