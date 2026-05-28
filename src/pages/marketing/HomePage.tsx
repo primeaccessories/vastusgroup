@@ -8,7 +8,7 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 2900
+const MASK_DURATION_MS = 2600
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
