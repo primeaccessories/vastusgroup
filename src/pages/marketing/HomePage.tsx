@@ -210,27 +210,70 @@ export default function HomePage() {
 
       {/* PORTAL TEASE */}
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper p-6 sm:p-14">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
-            <div>
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper px-6 pt-16 pb-10 sm:px-14 sm:pt-24 sm:pb-16">
+          {/* ambient glow orbs */}
+          <div
+            className="pointer-events-none absolute -top-24 right-[-10%] h-72 w-72 rounded-full bg-mint/25 blur-3xl sm:h-[28rem] sm:w-[28rem]"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute -bottom-32 left-[-12%] h-72 w-72 rounded-full bg-mint/15 blur-3xl sm:h-[28rem] sm:w-[28rem]"
+            aria-hidden="true"
+          />
+
+          <div className="relative flex flex-col items-center">
+            {/* PREVIEW with floating halo + live pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-[520px]"
+            >
+              {/* mint halo behind the screenshot */}
+              <div
+                className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/40 via-mint/20 to-transparent blur-2xl sm:-inset-10"
+                aria-hidden="true"
+              />
+              {/* live pill */}
+              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-xl ring-1 ring-white/10">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                </span>
+                Live
+              </div>
+              <PortalPreview />
+            </motion.div>
+
+            {/* connector line bridging image → text */}
+            <div
+              aria-hidden="true"
+              className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint-deep/40 to-mint/0 sm:my-10"
+            />
+
+            {/* TEXT */}
+            <div className="max-w-3xl text-center">
               <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
-              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
                 Your account, your numbers, in one place.
               </h2>
-              <p className="mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
-                Existing A2B customers can sign in to see live settlements, manage terminals, check loan balances and raise support tickets — all on any device.
+              <p className="mx-auto mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
+                Sign in to see live settlements, manage terminals, check loan balances and raise support tickets — on any device.
               </p>
-              <ul className="mt-8 grid gap-3 text-sm text-ink sm:grid-cols-2">
+
+              <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-ink sm:grid-cols-2">
                 {['Live transaction feed', 'Terminal health & status', 'Loan & cash advance balances', 'Statements & documents', 'Raise & track support tickets', 'Manage your team users'].map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
-                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint text-ink">
+                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
                     {line}
                   </li>
                 ))}
               </ul>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+
+              <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
                 <LinkButton to="/sign-in" variant="secondary" size="md">
                   Sign in to your portal
                 </LinkButton>
@@ -239,10 +282,6 @@ export default function HomePage() {
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
               </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-[440px] lg:mx-0">
-              <PortalPreview />
             </div>
           </div>
         </div>
@@ -448,7 +487,7 @@ function TrustpilotBadge() {
 
 function PortalPreview() {
   return (
-    <div className="relative w-full rounded-2xl border border-ink/10 bg-paper shadow-2xl">
+    <div className="relative w-full rounded-2xl border border-ink/10 bg-paper shadow-[0_30px_80px_-20px_rgba(15,23,30,0.35),0_10px_30px_-10px_rgba(89,209,195,0.25)]">
       <div className="flex items-center gap-1.5 border-b border-ink/5 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
