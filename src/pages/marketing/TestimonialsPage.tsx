@@ -37,12 +37,11 @@ export default function TestimonialsPage() {
               />
               <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-20px_rgba(15,23,30,0.4),0_10px_30px_-10px_rgba(89,209,195,0.25)] ring-1 ring-ink/10">
                 <iframe
-                  src="https://www.youtube.com/embed/cA8CLhAoKIQ?autoplay=1&mute=1&loop=1&playlist=cA8CLhAoKIQ&playsinline=1&modestbranding=1&rel=0"
+                  src="https://www.youtube-nocookie.com/embed/cA8CLhAoKIQ?autoplay=1&mute=1&loop=1&playlist=cA8CLhAoKIQ&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"
                   title="A2B Payments customer interview"
                   className="absolute inset-0 h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="autoplay; encrypted-media; picture-in-picture; web-share"
                   allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
                 />
               </div>
             </div>
