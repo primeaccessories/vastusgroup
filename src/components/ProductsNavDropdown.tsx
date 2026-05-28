@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, ArrowUpRight } from 'lucide-react'
 import { PRODUCTS } from '../lib/products'
 
@@ -16,7 +16,6 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<number | null>(null)
   const location = useLocation()
-  const navigate = useNavigate()
   const onProductsRoute = location.pathname.startsWith('/products')
 
   useEffect(() => {
@@ -48,33 +47,27 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
       onFocus={handleEnter}
       onBlur={scheduleClose}
     >
-      <NavLink
-        to="/products"
-        onClick={(e) => {
-          // Navigate explicitly so a press always reaches /products — the hover
-          // dropdown otherwise swallows the link's default activation.
-          e.preventDefault()
-          setOpen(false)
-          navigate('/products')
-        }}
-        className={() =>
-          `inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
-            onProductsRoute
-              ? darkMode
-                ? 'bg-paper text-ink'
-                : 'bg-ink text-paper'
-              : darkMode
-                ? 'text-paper/80 hover:bg-white/10 hover:text-paper'
-                : 'text-ink-fade hover:bg-ink/5 hover:text-ink'
-          }`
-        }
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen(true)}
+        className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
+          onProductsRoute
+            ? darkMode
+              ? 'bg-paper text-ink'
+              : 'bg-ink text-paper'
+            : darkMode
+              ? 'text-paper/80 hover:bg-white/10 hover:text-paper'
+              : 'text-ink-fade hover:bg-ink/5 hover:text-ink'
+        }`}
       >
         Products
         <ChevronDown
           className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           strokeWidth={2.2}
         />
-      </NavLink>
+      </button>
 
       <div
         aria-hidden={!open}
