@@ -113,13 +113,8 @@ function Column({ label, items }: ColumnProps) {
         {label}
       </p>
       <ul className="space-y-0.5">
-        {items.map((p, i) => (
-          <motion.li
-            key={p.slug}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.22, delay: 0.04 + i * 0.035, ease: [0.16, 1, 0.3, 1] }}
-          >
+        {items.map((p) => (
+          <li key={p.slug}>
             <Link
               to={`/products/${p.slug}`}
               className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition hover:bg-mint/10"
@@ -132,7 +127,7 @@ function Column({ label, items }: ColumnProps) {
                 <span className="block truncate text-xs text-ink-fade">{p.tagline}</span>
               </span>
             </Link>
-          </motion.li>
+          </li>
         ))}
       </ul>
     </div>
