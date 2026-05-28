@@ -33,7 +33,7 @@ export default function TeamPage() {
             {founders.map((m) => (
               <GlassCard key={m.name} surface="dark" className="p-8">
                 <div className="flex items-start gap-5">
-                  <Avatar name={m.name} size="lg" />
+                  <Avatar name={m.name} image={m.image} size="lg" />
                   <div>
                     <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">{m.name}</h3>
                     <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint">{m.role}</p>
@@ -56,7 +56,7 @@ export default function TeamPage() {
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((m) => (
             <GlassCard key={m.name} surface="light" interactive className="flex items-center gap-4 p-5">
-              <Avatar name={m.name} size="sm" />
+              <Avatar name={m.name} image={m.image} size="sm" />
               <div className="min-w-0">
                 <p className="font-semibold text-ink">{m.name}</p>
                 <p className="truncate text-sm text-ink-fade">{m.role}</p>
@@ -69,7 +69,7 @@ export default function TeamPage() {
   )
 }
 
-function Avatar({ name, size }: { name: string; size: 'sm' | 'lg' }) {
+function Avatar({ name, image, size }: { name: string; image?: string; size: 'sm' | 'lg' }) {
   const initials = name.split(' ').map((n) => n[0]).join('')
   const cls =
     size === 'lg'
@@ -79,11 +79,23 @@ function Avatar({ name, size }: { name: string; size: 'sm' | 'lg' }) {
     <span
       className={`relative isolate inline-flex flex-shrink-0 items-center justify-center overflow-hidden bg-gradient-to-b from-mint/45 via-mint/25 to-mint/10 text-ink shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-mint/30 ${cls}`}
     >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-2 top-1 h-1/3 rounded-b-full bg-gradient-to-b from-white/60 via-white/15 to-transparent opacity-80 blur-md"
-      />
-      <span className="relative font-display font-bold">{initials}</span>
+      {image ? (
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-2 top-1 h-1/3 rounded-b-full bg-gradient-to-b from-white/60 via-white/15 to-transparent opacity-80 blur-md"
+          />
+          <span className="relative font-display font-bold">{initials}</span>
+        </>
+      )}
     </span>
   )
 }
