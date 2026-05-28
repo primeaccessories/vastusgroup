@@ -480,21 +480,25 @@ export default function HomePage() {
       </section>
 
       {/* BIG STATEMENT */}
-      <section className="relative overflow-hidden bg-ink text-paper">
+      <section className="relative overflow-hidden bg-paper text-ink">
         <div
-          className="pointer-events-none absolute -left-32 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full bg-mint/10 blur-3xl sm:-left-16"
+          className="pointer-events-none absolute -left-32 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full bg-mint/30 blur-3xl sm:-left-16"
           aria-hidden="true"
         />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-28 sm:px-8 sm:py-36 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-20 lg:py-48">
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-[320px] w-[320px] translate-x-1/3 -translate-y-1/3 rounded-full bg-mint-deep/15 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-20 lg:py-40">
           <h2 className="font-display text-balance text-[clamp(2.75rem,8vw,7rem)] font-semibold leading-[0.95] tracking-tight">
             Payments
             <br />
             without the
             <br />
-            <span className="text-mint">runaround.</span>
+            <span className="text-mint-deep">runaround.</span>
           </h2>
           <div>
-            <p className="max-w-md text-pretty text-base text-paper/60 sm:text-lg">
+            <p className="max-w-md text-pretty text-base text-ink-muted sm:text-lg">
               Talk to a real person. Get a real quote. Move at the pace of your business — not your acquirer's.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -502,7 +506,7 @@ export default function HomePage() {
                 See what we do
                 <ArrowDown className="h-5 w-5" />
               </LinkButton>
-              <LinkButton to="/contact" variant="inverse" size="lg">
+              <LinkButton to="/contact" variant="secondary" size="lg">
                 Talk to us
                 <ArrowUpRight className="h-5 w-5" />
               </LinkButton>
@@ -511,15 +515,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* VALUE PILLARS — gloss tiles on ink */}
-      <section className="relative overflow-hidden bg-ink text-paper">
+      {/* VALUE PILLARS — gloss tiles on paper-soft */}
+      <section className="relative overflow-hidden bg-paper-soft text-ink">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] translate-x-1/4 -translate-y-1/4 rounded-full bg-mint/10 blur-[120px]"
+          className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] translate-x-1/4 -translate-y-1/4 rounded-full bg-mint/25 blur-[120px]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-          <div className="mx-auto mb-14 max-w-2xl text-center sm:mb-20">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">
               Why operators move to A2B
             </p>
             <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -545,12 +549,12 @@ export default function HomePage() {
                 desc: 'No hidden fees, no auto-roll contracts, no surprises on the statement. Every line item explained up-front.',
               },
             ].map(({ Icon, title, desc }) => (
-              <GlassCard key={title} surface="dark" interactive className="p-8 sm:p-9">
+              <GlassCard key={title} surface="light" interactive className="p-8 sm:p-9">
                 <GlassIcon Icon={Icon} tone="mint" size="lg" />
-                <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-paper sm:text-2xl">
+                <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                   {title}
                 </h3>
-                <p className="mt-3 text-pretty text-paper/65">{desc}</p>
+                <p className="mt-3 text-pretty text-ink-muted">{desc}</p>
               </GlassCard>
             ))}
           </div>
@@ -558,31 +562,31 @@ export default function HomePage() {
       </section>
 
       {/* PRODUCT GRID */}
-      <section className="bg-ink-soft text-paper">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      <section className="bg-paper text-ink">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">What we do</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">What we do</p>
               <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
                 Everything your business needs to take and grow money.
               </h2>
             </div>
-            <Link to="/products" className="group inline-flex items-center gap-2 text-sm font-semibold text-mint hover:text-mint-bright">
+            <Link to="/products" className="group inline-flex items-center gap-2 text-sm font-semibold text-mint-deep hover:text-ink">
               View all products
               <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {PRODUCTS.map((p) => (
               <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
-                <GlassCard surface="dark" interactive className="p-7 sm:p-8">
+                <GlassCard surface="light" interactive className="p-7 sm:p-8">
                   <GlassIcon Icon={p.Icon} tone="mint" size="md" />
-                  <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-paper sm:text-xl">
+                  <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
                     {p.title}
                   </h3>
-                  <p className="mt-2 text-sm text-paper/60">{p.tagline}</p>
-                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">
+                  <p className="mt-2 text-sm text-ink-muted">{p.tagline}</p>
+                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep">
                     Learn more
                     <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
@@ -594,44 +598,60 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-        <div className="mb-12 flex items-end justify-between gap-6">
-          <h2 className="font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Talk to anyone we've worked with.
-          </h2>
-        </div>
-        <TestimonialGrid limit={3} />
-        <div className="mt-8 text-center">
-          <Link to="/testimonials" className="text-sm font-semibold text-ink underline-offset-4 hover:underline">
-            Read more stories →
-          </Link>
+      <section className="bg-paper-soft">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Customer stories</p>
+              <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+                Talk to anyone we've worked with.
+              </h2>
+            </div>
+          </div>
+          <TestimonialGrid limit={3} />
+          <div className="mt-10 text-center">
+            <Link to="/testimonials" className="text-sm font-semibold text-mint-deep underline-offset-4 hover:text-ink hover:underline">
+              Read more stories →
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* CTA STRIP */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-        <div className="overflow-hidden rounded-3xl bg-ink p-10 text-paper sm:p-14 lg:p-20">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <h2 className="font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-                Ready to switch?
-              </h2>
-              <p className="mt-4 max-w-xl text-pretty text-paper/70 sm:text-lg">
-                Send us your last statement and we'll come back with a like-for-like quote in 24 hours. No commitment, no awkward sales calls.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <LinkButton to="/contact" variant="primary" size="lg">
-                Get a quote
-                <ArrowUpRight className="h-5 w-5" />
-              </LinkButton>
-              <a
-                href="tel:03334432645"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint hover:text-mint"
-              >
-                <Phone className="h-5 w-5" />
-                0333 443 2645
-              </a>
+      <section className="bg-paper">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-paper-soft via-paper to-paper p-10 ring-1 ring-ink/5 sm:p-14 lg:p-20">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 -top-24 h-[360px] w-[360px] rounded-full bg-mint/30 blur-3xl"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-32 -left-16 h-[320px] w-[320px] rounded-full bg-mint-deep/15 blur-3xl"
+            />
+            <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Get a quote</p>
+                <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+                  Ready to switch?
+                </h2>
+                <p className="mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
+                  Send us your last statement and we'll come back with a like-for-like quote in 24 hours. No commitment, no awkward sales calls.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <LinkButton to="/contact" variant="primary" size="lg">
+                  Get a quote
+                  <ArrowUpRight className="h-5 w-5" />
+                </LinkButton>
+                <a
+                  href="tel:03334432645"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-ink/15 px-8 text-base font-semibold text-ink transition hover:border-mint-deep hover:text-mint-deep"
+                >
+                  <Phone className="h-5 w-5" />
+                  0333 443 2645
+                </a>
+              </div>
             </div>
           </div>
         </div>
