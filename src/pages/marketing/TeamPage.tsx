@@ -11,30 +11,37 @@ export default function TeamPage() {
       <section className="relative overflow-hidden bg-paper-soft text-ink">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/3 rounded-full bg-mint/20 blur-[120px]"
+          className="pointer-events-none absolute -left-20 top-0 h-[460px] w-[460px] rounded-full bg-mint/25 blur-[130px]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 sm:pt-14 sm:pb-16">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-xl">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
-              <h1 className="mt-3 font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-                A team that <span className="text-mint-deep">genuinely cares</span>.
-              </h1>
-              <p className="mt-3 max-w-md text-pretty text-ink-muted sm:text-lg">
-                Blackpool-based. The people you'll actually deal with.
-              </p>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-1/4 h-[360px] w-[360px] translate-x-1/3 rounded-full bg-mint-deep/10 blur-[130px]"
+        />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          {/* Intro */}
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
+            <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl">
+              A team that <span className="text-mint-deep">genuinely cares</span> about your business.
+            </h1>
+            <p className="mt-5 max-w-md text-pretty text-lg text-ink-muted">
+              We're a Blackpool-based team with a simple belief: care about the people you work with. Here are the faces you'll actually deal with.
+            </p>
+            <div className="mt-7 inline-flex items-center gap-3">
+              <span className="h-px w-8 bg-mint-deep" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The founders</p>
             </div>
-            <p className="hidden text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep sm:block">Founders</p>
           </div>
 
-          <div className="mt-8 grid gap-6 sm:gap-8 md:grid-cols-2">
+          {/* Founder portraits as the hero visual */}
+          <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
             {founders.map((m) => (
               <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
                 <Portrait name={m.name} image={m.image} ratio="4/5" />
-                <div className="p-6 sm:p-7">
-                  <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">{m.name}</h3>
-                  <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint-deep">{m.role}</p>
-                  {m.bio && <p className="mt-4 text-pretty text-ink-muted">{m.bio}</p>}
+                <div className="p-5 sm:p-6">
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">{m.name}</h3>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
+                  {m.bio && <p className="mt-3 text-pretty text-sm text-ink-muted">{m.bio}</p>}
                 </div>
               </GlassCard>
             ))}
