@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 
-const MASK_DURATION_MS = 3700
-const HERO_TEXT_DELAY_MS = 3300
+const MASK_DURATION_MS = 2600
+const HERO_TEXT_DELAY_MS = 2200
 
 // Module-scoped: resets on any full page load (incl. refresh / hard refresh),
 // but survives in-app route changes — so the intro replays on refresh yet is
@@ -149,6 +149,7 @@ export default function HomePage() {
   }, [maskGone])
 
   // Lock scroll while the mask is playing so users can't scroll behind the fixed overlay.
+  // overflow:hidden alone doesn't stop iOS touch scrolling, so also block touchmove.
   useEffect(() => {
     if (maskGone) return
     const html = document.documentElement
@@ -156,11 +157,17 @@ export default function HomePage() {
     window.scrollTo(0, 0)
     const prevHtml = html.style.overflow
     const prevBody = body.style.overflow
+    const prevTouch = body.style.touchAction
     html.style.overflow = 'hidden'
     body.style.overflow = 'hidden'
+    body.style.touchAction = 'none'
+    const blockTouch = (e: TouchEvent) => e.preventDefault()
+    document.addEventListener('touchmove', blockTouch, { passive: false })
     return () => {
       html.style.overflow = prevHtml
       body.style.overflow = prevBody
+      body.style.touchAction = prevTouch
+      document.removeEventListener('touchmove', blockTouch)
     }
   }, [maskGone])
 
@@ -254,8 +261,8 @@ export default function HomePage() {
               scale: [1, 1.7],
               opacity: [1, 1, 0],
               transition: {
-                scale: { duration: 2.2, delay: 1.4, ease: [0.55, 0, 0.2, 1] },
-                opacity: { duration: 2.2, delay: 1.4, times: [0, 0.45, 1], ease: 'easeIn' },
+                scale: { duration: 1.6, delay: 0.9, ease: [0.55, 0, 0.2, 1] },
+                opacity: { duration: 1.6, delay: 0.9, times: [0, 0.45, 1], ease: 'easeIn' },
               },
             }}
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
@@ -306,7 +313,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={textIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-36 pb-8 sm:px-8 sm:pt-44 sm:pb-10 lg:pt-52"
         >
           <div className="max-w-4xl">
