@@ -192,6 +192,44 @@ export default function HomePage() {
     return () => document.removeEventListener('visibilitychange', onVisible)
   }, [src4kReady])
 
+  // Explore section — scroll-driven stack: each card scales down + blurs as the
+  // next card rises to cover it, mirroring the og a2bpayments.co.uk transition.
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  useEffect(() => {
+    const PIN = 96 // matches sticky top-24 (6rem)
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const els = cardRefs.current
+      for (let i = 0; i < els.length; i++) {
+        const inner = els[i]
+        if (!inner) continue
+        const next = els[i + 1]
+        let progress = 0
+        if (next) {
+          const slot = inner.getBoundingClientRect().height
+          const gap = next.getBoundingClientRect().top - PIN
+          progress = Math.min(Math.max(1 - gap / slot, 0), 1)
+        }
+        const scale = 1 - progress * 0.2
+        const blur = progress * 5
+        const lift = -progress * 28
+        inner.style.transform = `translateY(${lift}px) scale(${scale})`
+        inner.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none'
+        inner.style.opacity = `${1 - progress * 0.35}`
+      }
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <>
       {/* A2B LOADING MASK — full-viewport overlay, sits under the sticky header */}
@@ -571,35 +609,38 @@ export default function HomePage() {
           </div>
 
           <div className="pb-20 sm:pb-24">
-            {PAGES_GRID.map((p) => (
-              <article
-                key={p.title}
-                className="sticky top-20 mb-6 sm:top-24 sm:mb-10"
-              >
-                <Link
-                  to={p.to}
-                  className="group relative block aspect-[5/4] overflow-hidden rounded-2xl ring-1 ring-ink/10 shadow-[0_24px_60px_-30px_rgba(15,23,30,0.45)] sm:aspect-[16/9] lg:aspect-[2/1]"
+            {PAGES_GRID.map((p, i) => (
+              <article key={p.title} className="sticky top-24 mb-10">
+                <div
+                  ref={(el) => { cardRefs.current[i] = el }}
+                  style={{ zIndex: i, willChange: 'transform, filter, opacity', transition: 'transform 0.12s linear, filter 0.12s linear, opacity 0.12s linear' }}
+                  className="relative origin-top"
                 >
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/15" />
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-                    <h3 className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-5xl lg:text-6xl">
-                      {p.title}
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-pretty text-sm text-paper/80 sm:mt-4 sm:text-base lg:text-lg">
-                      {p.excerpt}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint sm:mt-6">
-                      Read more
-                      <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </span>
-                  </div>
-                </Link>
+                  <Link
+                    to={p.to}
+                    className="group relative block h-[220px] overflow-hidden rounded-2xl ring-1 ring-ink/10 shadow-[0_24px_60px_-30px_rgba(15,23,30,0.45)] sm:h-[320px] lg:h-[440px]"
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/15" />
+                    <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
+                      <h3 className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-5xl lg:text-6xl">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 max-w-2xl text-pretty text-sm text-paper/80 sm:mt-4 sm:text-base lg:text-lg">
+                        {p.excerpt}
+                      </p>
+                      <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint sm:mt-6">
+                        Read more
+                        <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
