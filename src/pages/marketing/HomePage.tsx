@@ -11,6 +11,7 @@ import { PRODUCTS } from '../../lib/products'
 
 const MASK_DURATION_MS = 4500
 const HERO_TEXT_DELAY_MS = 4400
+const MASK_SEEN_KEY = 'a2b-mask-seen'
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -153,17 +154,33 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
 ]
 
 export default function HomePage() {
-  const [maskGone, setMaskGone] = useState(false)
-  useEffect(() => {
-    const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
-    return () => clearTimeout(t)
-  }, [])
+  const alreadySeen =
+    typeof window !== 'undefined' && sessionStorage.getItem(MASK_SEEN_KEY) === 'true'
 
-  const [textIn, setTextIn] = useState(false)
+  const [maskGone, setMaskGone] = useState(alreadySeen)
   useEffect(() => {
+    if (maskGone) return
+    const t = setTimeout(() => {
+      setMaskGone(true)
+      try { sessionStorage.setItem(MASK_SEEN_KEY, 'true') } catch { /* private mode */ }
+    }, MASK_DURATION_MS)
+    return () => clearTimeout(t)
+  }, [maskGone])
+
+  // Lock body scroll while the mask is playing so users can't scroll behind it.
+  useEffect(() => {
+    if (maskGone) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [maskGone])
+
+  const [textIn, setTextIn] = useState(alreadySeen)
+  useEffect(() => {
+    if (textIn) return
     const t = setTimeout(() => setTextIn(true), HERO_TEXT_DELAY_MS)
     return () => clearTimeout(t)
-  }, [])
+  }, [textIn])
 
   const [sublineIdx, setSublineIdx] = useState(0)
   useEffect(() => {
