@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ArrowUpRight } from 'lucide-react'
@@ -8,7 +8,7 @@ interface Props {
   darkMode: boolean
 }
 
-const CLOSE_DELAY_MS = 140
+const CLOSE_DELAY_MS = 200
 
 const PAYMENTS = PRODUCTS.filter((p) => p.category === 'payments')
 const FINANCE = PRODUCTS.filter((p) => p.category === 'finance')
@@ -18,6 +18,10 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
   const closeTimer = useRef<number | null>(null)
   const location = useLocation()
   const onProductsRoute = location.pathname.startsWith('/products')
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
 
   const cancelClose = () => {
     if (closeTimer.current) {
@@ -72,7 +76,7 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 top-full z-50 w-[640px] -translate-x-1/2 pt-3"
+            className="absolute left-0 top-full z-50 w-[640px] max-w-[calc(100vw-2rem)] pt-3"
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
           >
