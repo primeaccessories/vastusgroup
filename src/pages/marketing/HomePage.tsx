@@ -1,13 +1,8 @@
-import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Zap } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
-import GlassCard from '../../components/GlassCard'
-import GlassIcon from '../../components/GlassIcon'
-import ProductImage from '../../components/ProductImage'
-import TestimonialGrid from '../../components/TestimonialGrid'
-import { PRODUCTS } from '../../lib/products'
 
 const MASK_DURATION_MS = 4500
 const HERO_TEXT_DELAY_MS = 4400
@@ -607,108 +602,6 @@ export default function HomePage() {
                 </Link>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VALUE PILLARS — gloss tiles on paper-soft */}
-      <section className="relative overflow-hidden bg-paper-soft text-ink">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] translate-x-1/4 -translate-y-1/4 rounded-full bg-mint/25 blur-[120px]"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">
-              Why operators move to A2B
-            </p>
-            <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              Built for businesses that don't have time to chase their acquirer.
-            </h2>
-          </div>
-
-          <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
-            {[
-              {
-                Icon: HeartHandshake,
-                title: 'Best-in-class care',
-                desc: 'A named account manager, a phone that gets answered, and a team who actually understands your industry.',
-              },
-              {
-                Icon: Zap,
-                title: 'Fast where it matters',
-                desc: 'Next-day terminals. 24-hour funding decisions. 48-hour onboarding. We move at the pace of trade.',
-              },
-              {
-                Icon: ShieldCheck,
-                title: 'Honest pricing',
-                desc: 'No hidden fees, no auto-roll contracts, no surprises on the statement. Every line item explained up-front.',
-              },
-            ].map(({ Icon, title, desc }) => (
-              <GlassCard key={title} surface="light" interactive className="p-8 sm:p-9">
-                <GlassIcon Icon={Icon} tone="mint" size="lg" />
-                <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
-                  {title}
-                </h3>
-                <p className="mt-3 text-pretty text-ink-muted">{desc}</p>
-              </GlassCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCT GRID */}
-      <section className="bg-paper text-ink">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">What we do</p>
-              <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-                Everything your business needs to take and grow money.
-              </h2>
-            </div>
-            <Link to="/products" className="group inline-flex items-center gap-2 text-sm font-semibold text-mint-deep hover:text-ink">
-              View all products
-              <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-            {PRODUCTS.map((p) => (
-              <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
-                <GlassCard surface="light" interactive className="p-7 sm:p-8">
-                  <ProductImage src={p.image} alt={p.title} size="md" tone="light" />
-                  <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-ink-muted">{p.tagline}</p>
-                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep">
-                    Learn more
-                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
-                </GlassCard>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="bg-paper-soft">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mb-10 flex items-end justify-between gap-6">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Customer stories</p>
-              <h2 className="mt-4 font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-                Talk to anyone we've worked with.
-              </h2>
-            </div>
-          </div>
-          <TestimonialGrid limit={3} />
-          <div className="mt-10 text-center">
-            <Link to="/testimonials" className="text-sm font-semibold text-mint-deep underline-offset-4 hover:text-ink hover:underline">
-              Read more stories →
-            </Link>
           </div>
         </div>
       </section>
