@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ArrowUpRight } from 'lucide-react'
 import { PRODUCTS } from '../lib/products'
 
@@ -8,7 +7,7 @@ interface Props {
   darkMode: boolean
 }
 
-const CLOSE_DELAY_MS = 200
+const CLOSE_DELAY_MS = 120
 
 const PAYMENTS = PRODUCTS.filter((p) => p.category === 'payments')
 const FINANCE = PRODUCTS.filter((p) => p.category === 'finance')
@@ -69,34 +68,31 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
         />
       </NavLink>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 top-full z-50 w-[640px] max-w-[calc(100vw-2rem)] pt-3"
-            onMouseEnter={cancelClose}
-            onMouseLeave={scheduleClose}
-          >
-            <div className="overflow-hidden rounded-2xl border border-ink/5 bg-paper shadow-[0_20px_60px_-15px_rgba(15,23,42,0.25)] ring-1 ring-ink/5">
-              <div className="grid grid-cols-2 gap-1 p-3">
-                <Column label="Payments" items={PAYMENTS} />
-                <Column label="Finance" items={FINANCE} />
-              </div>
+      <div
+        aria-hidden={!open}
+        className={`absolute left-0 top-full z-50 w-[640px] max-w-[calc(100vw-2rem)] pt-3 transition-[opacity,transform] duration-150 ease-out ${
+          open
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-2 pointer-events-none'
+        }`}
+        onMouseEnter={cancelClose}
+        onMouseLeave={scheduleClose}
+      >
+        <div className="overflow-hidden rounded-2xl border border-ink/5 bg-paper shadow-[0_20px_60px_-15px_rgba(15,23,42,0.25)] ring-1 ring-ink/5">
+          <div className="grid grid-cols-2 gap-1 p-3">
+            <Column label="Payments" items={PAYMENTS} />
+            <Column label="Finance" items={FINANCE} />
+          </div>
 
-              <Link
-                to="/products"
-                className="group flex items-center justify-between border-t border-ink/5 bg-paper-soft px-5 py-3.5 text-sm font-semibold text-ink transition hover:bg-ink/[0.04]"
-              >
-                See all products
-                <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <Link
+            to="/products"
+            className="group flex items-center justify-between border-t border-ink/5 bg-paper-soft px-5 py-3.5 text-sm font-semibold text-ink transition hover:bg-ink/[0.04]"
+          >
+            See all products
+            <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }
@@ -119,8 +115,8 @@ function Column({ label, items }: ColumnProps) {
               to={`/products/${p.slug}`}
               className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition hover:bg-mint/10"
             >
-              <span className="mt-0.5 inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-mint/15 text-mint-deep transition group-hover:bg-mint group-hover:text-ink">
-                <p.Icon className="h-4 w-4" strokeWidth={1.8} />
+              <span className="mt-0.5 inline-flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white ring-1 ring-ink/5 transition group-hover:ring-mint/40">
+                <img src={p.image} alt="" loading="lazy" className="max-h-7 max-w-7 object-contain" />
               </span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-ink">{p.title}</span>

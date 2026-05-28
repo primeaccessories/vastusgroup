@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
-import GlassIcon from '../../components/GlassIcon'
+import ProductImage from '../../components/ProductImage'
 import { PRODUCTS } from '../../lib/products'
 
 export default function ProductsPage() {
@@ -80,7 +80,7 @@ function ProductSection({ title, tagline, items, dark = false }: ProductSectionP
           {items.map((p) => (
             <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
               <GlassCard surface={dark ? 'dark' : 'light'} interactive className="p-7 sm:p-8">
-                <GlassIcon Icon={p.Icon} tone={dark ? 'mint' : 'mint'} size="md" />
+                <ProductImage src={p.image} alt={p.title} size="md" tone={dark ? 'dark' : 'light'} />
                 <h3
                   className={`mt-6 font-display text-lg font-semibold tracking-tight sm:text-xl ${
                     dark ? 'text-paper' : 'text-ink'

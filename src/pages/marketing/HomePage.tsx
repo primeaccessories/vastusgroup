@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
+import ProductImage from '../../components/ProductImage'
 import TestimonialGrid from '../../components/TestimonialGrid'
 import { PRODUCTS } from '../../lib/products'
 
@@ -581,7 +582,7 @@ export default function HomePage() {
             {PRODUCTS.map((p) => (
               <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
                 <GlassCard surface="light" interactive className="p-7 sm:p-8">
-                  <GlassIcon Icon={p.Icon} tone="mint" size="md" />
+                  <ProductImage src={p.image} alt={p.title} size="md" tone="light" />
                   <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
                     {p.title}
                   </h3>

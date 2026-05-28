@@ -4,6 +4,7 @@ import { productBySlug, PRODUCTS } from '../../lib/products'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
+import ProductImage from '../../components/ProductImage'
 
 export default function ProductDetailPage() {
   const { slug } = useParams()
@@ -28,7 +29,7 @@ export default function ProductDetailPage() {
 
           <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-2xl">
-              <GlassIcon Icon={product.Icon} tone="mint" size="lg" />
+              <ProductImage src={product.image} alt={product.title} size="lg" tone="dark" />
               <p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">
                 {product.category === 'payments' ? 'Card payments' : 'Business finance'}
               </p>
@@ -113,7 +114,7 @@ export default function ProductDetailPage() {
               {related.map((p) => (
                 <Link key={p.slug} to={`/products/${p.slug}`} className="contents">
                   <GlassCard surface="light" interactive className="p-7">
-                    <GlassIcon Icon={p.Icon} tone="mint" size="md" />
+                    <ProductImage src={p.image} alt={p.title} size="md" tone="light" />
                     <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-ink">{p.title}</h3>
                     <p className="mt-2 text-sm text-ink-muted">{p.tagline}</p>
                   </GlassCard>
