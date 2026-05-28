@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 
-const MASK_DURATION_MS = 4500
-const HERO_TEXT_DELAY_MS = 4400
+const MASK_DURATION_MS = 4300
+const HERO_TEXT_DELAY_MS = 3900
 
 // Module-scoped: resets on any full page load (incl. refresh / hard refresh),
 // but survives in-app route changes — so the intro replays on refresh yet is
@@ -240,7 +240,10 @@ export default function HomePage() {
 
   return (
     <>
-      {/* A2B LOADING MASK — full-viewport overlay, sits under the sticky header */}
+      {/* A2B LOADING MASK — opaque white splash, A2B logo cut out as a window
+          onto the hero video. Stays opaque while it zooms, then dissolves only
+          at the very end so the dark hero is revealed THROUGH the growing logo
+          (no muddy white→black crossfade). Sits above the header for a clean splash. */}
       <AnimatePresence>
         {!maskGone && (
           <motion.img
@@ -250,15 +253,15 @@ export default function HomePage() {
             aria-hidden="true"
             initial={{ scale: 1.0, opacity: 1 }}
             animate={{
-              scale: 5.5,
-              opacity: 0,
+              scale: [1, 1.04, 9],
+              opacity: [1, 1, 1, 0],
               transition: {
-                scale: { duration: 2.4, delay: 2.0, ease: [0.42, 0, 0.6, 1] },
-                opacity: { duration: 2.4, delay: 2.0, ease: [0.5, 0, 0.9, 1] },
+                scale: { duration: 2.6, delay: 1.6, times: [0, 0.12, 1], ease: [0.55, 0, 0.2, 1] },
+                opacity: { duration: 2.6, delay: 1.6, times: [0, 0.55, 0.72, 1], ease: 'easeIn' },
               },
             }}
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
-            className="pointer-events-none fixed inset-0 z-30 h-full w-full select-none object-cover will-change-transform"
+            className="pointer-events-none fixed inset-0 z-50 h-full w-full select-none object-cover will-change-transform"
             draggable={false}
           />
         )}
