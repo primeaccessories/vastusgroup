@@ -30,14 +30,14 @@ export default function TestimonialsPage() {
           />
 
           <div className="relative grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-            <div className="relative mx-auto w-full max-w-[340px] lg:mx-0">
+            <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/40 via-mint/20 to-transparent blur-2xl"
               />
-              <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-20px_rgba(15,23,30,0.4),0_10px_30px_-10px_rgba(89,209,195,0.25)] ring-1 ring-ink/10">
+              <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-20px_rgba(15,23,30,0.4),0_10px_30px_-10px_rgba(89,209,195,0.25)] ring-1 ring-ink/10">
                 <iframe
-                  src="https://www.youtube-nocookie.com/embed/cA8CLhAoKIQ?autoplay=1&mute=1&loop=1&playlist=cA8CLhAoKIQ&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"
+                  src="https://www.youtube-nocookie.com/embed/3cuR0j5_XdE?autoplay=1&mute=1&start=19&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"
                   title="A2B Payments customer interview"
                   className="absolute inset-0 h-full w-full"
                   allow="autoplay; encrypted-media; picture-in-picture; web-share"
