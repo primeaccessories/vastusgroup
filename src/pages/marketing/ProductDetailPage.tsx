@@ -21,12 +21,12 @@ export default function ProductDetailPage() {
           className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full opacity-25 blur-3xl"
           style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
         />
-        <div className="relative mx-auto max-w-7xl px-5 pt-10 pb-16 sm:px-8 sm:pt-14 sm:pb-24">
+        <div className="relative mx-auto max-w-7xl px-5 pt-8 pb-12 sm:px-8 sm:pt-12 sm:pb-16">
           <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/60 transition hover:text-mint">
             <ArrowLeft className="h-4 w-4" /> All products
           </Link>
 
-          <div className="mt-10 grid items-center gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-16">
+          <div className="mt-8 grid items-center gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">
                 {isFinance ? 'Business finance' : 'Card payments'}
@@ -34,10 +34,10 @@ export default function ProductDetailPage() {
               <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl">
                 {product.title}
               </h1>
-              <p className="mt-5 max-w-xl text-pretty text-xl text-paper/70">{product.tagline}</p>
-              <p className="mt-5 max-w-xl text-pretty text-paper/55">{product.description}</p>
+              <p className="mt-4 max-w-xl text-pretty text-xl text-paper/70">{product.tagline}</p>
+              <p className="mt-4 max-w-xl text-pretty text-paper/55">{product.description}</p>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <LinkButton to="/contact" variant="primary" size="lg">
                   Enquire about {product.shortTitle.toLowerCase()}
                   <ArrowUpRight className="h-5 w-5" />
@@ -60,7 +60,7 @@ export default function ProductDetailPage() {
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="absolute inset-0 h-full w-full object-contain p-10 sm:p-14"
+                  className="absolute inset-0 h-full w-full object-contain p-8 sm:p-12"
                 />
               </div>
             </div>
@@ -73,9 +73,9 @@ export default function ProductDetailPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-ink/5 ring-1 ring-ink/5 lg:grid-cols-4">
             {product.features.map((f) => (
-              <div key={f} className="bg-paper px-5 py-7 sm:px-7 sm:py-8">
+              <div key={f} className="bg-paper px-5 py-5 sm:px-7 sm:py-6">
                 <Check className="h-5 w-5 text-mint-deep" strokeWidth={2.5} />
-                <p className="mt-3 text-sm font-medium text-ink">{f}</p>
+                <p className="mt-2.5 text-sm font-medium text-ink">{f}</p>
               </div>
             ))}
           </div>
@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
 
       {/* CTA BAND */}
       <section className="bg-ink text-paper">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
           <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
             <div>
               <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -118,11 +118,11 @@ export default function ProductDetailPage() {
       {/* RELATED */}
       {related.length > 0 && (
         <section className="bg-paper-soft">
-          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
               {isFinance ? 'More ways to get funded' : 'More ways to take payments'}
             </h2>
-            <div className="mt-8 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-7 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (
                 <Link key={p.slug} to={`/products/${p.slug}`} className="group contents">
                   <GlassCard surface="light" interactive className="flex flex-col overflow-hidden p-0">
@@ -170,9 +170,9 @@ function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean 
   if (section.kind === 'prose') {
     return (
       <section className={bg}>
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
           <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
-          <p className="mt-6 max-w-3xl text-pretty text-lg text-ink-muted">{section.body}</p>
+          <p className="mt-5 max-w-3xl text-pretty text-lg text-ink-muted">{section.body}</p>
         </div>
       </section>
     )
@@ -181,18 +181,18 @@ function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean 
   if (section.kind === 'cards') {
     return (
       <section className={bg}>
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
           <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
-          <div className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-7 grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
             {section.items.map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl bg-paper p-7 ring-1 ring-ink/8 shadow-[0_18px_40px_-30px_rgba(15,23,30,0.4)]"
+                className="rounded-2xl bg-paper p-6 ring-1 ring-ink/8 shadow-[0_18px_40px_-30px_rgba(15,23,30,0.4)]"
               >
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-mint/15 text-mint-deep">
                   <Check className="h-4 w-4" strokeWidth={2.5} />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold tracking-tight text-ink">{item.title}</h3>
+                <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink">{item.title}</h3>
                 <p className="mt-2 text-pretty text-sm text-ink-muted">{item.desc}</p>
               </div>
             ))}
@@ -205,11 +205,11 @@ function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean 
   if (section.kind === 'list') {
     return (
       <section className={bg}>
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
           <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
-          <ul className="mt-8 grid gap-x-12 gap-y-1 sm:grid-cols-2">
+          <ul className="mt-7 grid gap-x-12 gap-y-1 sm:grid-cols-2">
             {section.items.map((item) => (
-              <li key={item} className="flex items-center gap-4 border-t border-ink/10 py-4">
+              <li key={item} className="flex items-center gap-4 border-t border-ink/10 py-3.5">
                 <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-mint/15 text-mint-deep">
                   <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
                 </span>
@@ -225,12 +225,12 @@ function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean 
   if (section.kind === 'stats') {
     return (
       <section className="bg-ink text-paper">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
           {section.eyebrow && (
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">{section.eyebrow}</p>
           )}
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">{section.heading}</h2>
-          <div className="mt-10 grid gap-8 sm:grid-cols-3">
+          <div className="mt-8 grid gap-8 sm:grid-cols-3">
             {section.items.map((item) => (
               <div key={item.value} className="border-t border-white/15 pt-6">
                 <p className="font-display text-5xl font-semibold tracking-tight text-mint">{item.value}</p>
@@ -246,11 +246,11 @@ function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean 
   // faq
   return (
     <section className={bg}>
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
         <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
-        <div className="mt-8 max-w-3xl divide-y divide-ink/10 border-t border-ink/10">
+        <div className="mt-7 max-w-3xl divide-y divide-ink/10 border-t border-ink/10">
           {section.items.map((item) => (
-            <div key={item.q} className="py-6">
+            <div key={item.q} className="py-5">
               <h3 className="font-display text-lg font-semibold tracking-tight text-ink">{item.q}</h3>
               <p className="mt-2 text-pretty text-ink-muted">{item.a}</p>
             </div>
