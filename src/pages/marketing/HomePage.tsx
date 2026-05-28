@@ -8,7 +8,7 @@ import GlassIcon from '../../components/GlassIcon'
 import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
-const MASK_DURATION_MS = 2600
+const MASK_DURATION_MS = 4500
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -98,12 +98,12 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 4.0, 5.5],
-                opacity: [1, 1, 0],
+                scale: [1.0, 1.0, 4.0, 5.5],
+                opacity: [1, 1, 1, 0],
                 transition: {
-                  duration: 2.5,
+                  duration: 4.4,
                   ease: [0.45, 0, 0.5, 1],
-                  times: [0, 0.8, 1],
+                  times: [0, 0.45, 0.9, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
