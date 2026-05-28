@@ -276,7 +276,7 @@ export default function HomePage() {
               </p>
 
               <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-ink sm:grid-cols-2">
-                {['Live transaction feed', 'Terminal health & status', 'Loan & cash advance balances', 'Statements & documents', 'Raise & track support tickets', 'Manage your team users'].map((line) => (
+                {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
                     <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
                       <Check className="h-3 w-3" strokeWidth={3} />
