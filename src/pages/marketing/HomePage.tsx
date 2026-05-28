@@ -60,13 +60,6 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
     to: '/products/revenue-based-loans',
   },
   {
-    title: 'Privacy Policy',
-    excerpt:
-      'Thank you for choosing A2B Payment Solutions. This Privacy Policy describes how we handle your information.',
-    image: '/pages-grid/privacy.png',
-    to: '/privacy',
-  },
-  {
     title: 'Our Team',
     excerpt: 'Meet the people behind A2B — solutions that are efficient, and a team you can actually reach.',
     image: '/pages-grid/team.jpg',
@@ -91,13 +84,6 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
     excerpt:
       'Solutions that are efficient and cost-effective. Talk to a member of the A2B team about your business.',
     image: '/pages-grid/contact.jpg',
-    to: '/contact',
-  },
-  {
-    title: 'Christmas Page',
-    excerpt:
-      'For urgent help over the holidays, please contact your acquiring bank directly. Find the appropriate contact details here.',
-    image: '/pages-grid/team.jpg',
     to: '/contact',
   },
   {
@@ -576,43 +562,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PAGES GRID — explore the site */}
+      {/* PAGES GRID — sticky-stack scroll, mirrors og a2bpayments.co.uk */}
       <section className="bg-paper">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8 sm:pt-24">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Explore</p>
             <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               Everything A2B in one place.
             </h2>
             <p className="mt-3 text-pretty text-ink-muted">
-              Products, finance, the team behind it all — and the pages you tend to need before you call us.
+              Products, finance, the team behind it all — scroll through the pages people land on most.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+
+          <div className="pb-20 sm:pb-24">
             {PAGES_GRID.map((p) => (
-              <Link
+              <article
                 key={p.title}
-                to={p.to}
-                className="group relative block aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-ink/5"
+                className="sticky top-20 mb-6 sm:top-24 sm:mb-10"
               >
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/40 to-ink/10" />
-                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-paper sm:text-2xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 line-clamp-3 text-sm text-paper/80">{p.excerpt}</p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">
-                    Read more
-                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </div>
-              </Link>
+                <Link
+                  to={p.to}
+                  className="group relative block aspect-[5/4] overflow-hidden rounded-2xl ring-1 ring-ink/10 shadow-[0_24px_60px_-30px_rgba(15,23,30,0.45)] sm:aspect-[16/9] lg:aspect-[2/1]"
+                >
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/15" />
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
+                    <h3 className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-5xl lg:text-6xl">
+                      {p.title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-pretty text-sm text-paper/80 sm:mt-4 sm:text-base lg:text-lg">
+                      {p.excerpt}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint sm:mt-6">
+                      Read more
+                      <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </div>
+                </Link>
+              </article>
             ))}
           </div>
         </div>

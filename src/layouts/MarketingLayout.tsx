@@ -213,9 +213,14 @@ export default function MarketingLayout() {
           </div>
 
           <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-            <p className="text-xs text-paper/50">
-              © {new Date().getFullYear()} A2B Payment Solutions Ltd. Registered in England &amp; Wales. Authorised payment institution.
-            </p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+              <p className="text-xs text-paper/50">
+                © {new Date().getFullYear()} A2B Payment Solutions Ltd. Registered in England &amp; Wales. Authorised payment institution.
+              </p>
+              <Link to="/privacy" className="text-xs text-paper/60 hover:text-mint">
+                Privacy Policy
+              </Link>
+            </div>
             <TurboITPill />
           </div>
         </div>
