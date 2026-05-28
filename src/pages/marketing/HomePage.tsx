@@ -480,42 +480,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BIG STATEMENT */}
-      <section className="relative overflow-hidden bg-paper text-ink">
-        <div
-          className="pointer-events-none absolute -left-32 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full bg-mint/30 blur-3xl sm:-left-16"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute right-0 top-0 h-[320px] w-[320px] translate-x-1/3 -translate-y-1/3 rounded-full bg-mint-deep/15 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-20 lg:py-40">
-          <h2 className="font-display text-balance text-[clamp(2.75rem,8vw,7rem)] font-semibold leading-[0.95] tracking-tight">
-            Payments
-            <br />
-            without the
-            <br />
-            <span className="text-mint-deep">runaround.</span>
-          </h2>
-          <div>
-            <p className="max-w-md text-pretty text-base text-ink-muted sm:text-lg">
-              Talk to a real person. Get a real quote. Move at the pace of your business — not your acquirer's.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <LinkButton to="/products" variant="primary" size="lg">
-                See what we do
-                <ArrowDown className="h-5 w-5" />
-              </LinkButton>
-              <LinkButton to="/contact" variant="secondary" size="lg">
-                Talk to us
-                <ArrowUpRight className="h-5 w-5" />
-              </LinkButton>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* VALUE PILLARS — gloss tiles on paper-soft */}
       <section className="relative overflow-hidden bg-paper-soft text-ink">
         <div
