@@ -255,7 +255,7 @@ export default function HomePage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/45 via-mint/20 to-transparent blur-2xl sm:-inset-10"
               />
-              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink shadow-xl ring-1 ring-mint/30">
+              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-xl ring-1 ring-mint/40">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
@@ -267,18 +267,18 @@ export default function HomePage() {
 
             <div
               aria-hidden="true"
-              className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint/40 to-mint/0"
+              className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint-deep/50 to-mint/0"
             />
 
             <div className="max-w-2xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-mint">Customer portal</p>
-              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
-                Your account, your numbers, <span className="text-mint">in one place.</span>
+              <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
+              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                Your account, your numbers, <span className="text-mint-deep">in one place.</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-pretty text-paper/70 sm:text-lg">
+              <p className="mx-auto mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
                 Sign in to see live settlements, manage terminals, check loan balances and raise support tickets — on any device.
               </p>
-              <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-paper/90 sm:grid-cols-2">
+              <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-ink sm:grid-cols-2">
                 {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
                     <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
@@ -292,7 +292,7 @@ export default function HomePage() {
                 <LinkButton to="/sign-in" variant="primary" size="md">
                   Sign in to your portal
                 </LinkButton>
-                <LinkButton to="/sign-up" variant="inverse" size="md">
+                <LinkButton to="/sign-up" variant="secondary" size="md">
                   Create an account
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
@@ -316,7 +316,7 @@ export default function HomePage() {
                   aria-hidden="true"
                   className="pointer-events-none absolute -inset-10 -z-10 bg-gradient-to-tr from-mint/35 via-mint/15 to-transparent blur-3xl"
                 />
-                <div className="absolute -top-3 left-6 z-30 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink shadow-2xl ring-1 ring-mint/30">
+                <div className="absolute -top-3 left-6 z-30 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-2xl ring-1 ring-mint/40">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
@@ -336,7 +336,7 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-64 rounded-2xl bg-paper/95 p-4 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                  className="w-64 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-mint-deep">
@@ -365,7 +365,7 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-                  className="w-60 rounded-2xl bg-paper/95 p-4 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                  className="w-60 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-fade">Settled today</p>
                   <p className="mt-1 font-display text-2xl font-semibold">£1,422.30</p>
@@ -387,7 +387,7 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
-                  className="rounded-2xl bg-paper/95 px-4 py-3 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                  className="rounded-2xl bg-paper px-4 py-3 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <div className="flex items-center gap-2">
                     <span className="inline-flex h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_rgba(89,209,195,0.8)]" />
@@ -399,18 +399,18 @@ export default function HomePage() {
 
             {/* RIGHT — copy */}
             <div>
-              <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-mint">
-                <span className="h-px w-8 bg-mint" />
+              <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-mint-deep">
+                <span className="h-px w-8 bg-mint-deep" />
                 Customer portal
               </p>
-              <h2 className="mt-5 font-display text-balance text-[clamp(2.5rem,4.2vw,4.75rem)] font-semibold leading-[1.02] tracking-tight text-paper">
+              <h2 className="mt-5 font-display text-balance text-[clamp(2.5rem,4.2vw,4.75rem)] font-semibold leading-[1.02] tracking-tight text-ink">
                 Your account,<br />your numbers,<br />
-                <span className="text-mint">in one place.</span>
+                <span className="text-mint-deep">in one place.</span>
               </h2>
-              <p className="mt-6 max-w-xl text-pretty text-lg text-paper/70">
+              <p className="mt-6 max-w-xl text-pretty text-lg text-ink-muted">
                 Sign in to see live settlements, manage terminals, check loan balances and raise support tickets — on any device.
               </p>
-              <ul className="mt-10 grid max-w-xl grid-cols-2 gap-3 text-sm text-paper/90">
+              <ul className="mt-10 grid max-w-xl grid-cols-2 gap-3 text-sm text-ink">
                 {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
                     <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
@@ -424,7 +424,7 @@ export default function HomePage() {
                 <LinkButton to="/sign-in" variant="primary" size="lg">
                   Sign in to your portal
                 </LinkButton>
-                <LinkButton to="/sign-up" variant="inverse" size="lg">
+                <LinkButton to="/sign-up" variant="secondary" size="lg">
                   Create an account
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
