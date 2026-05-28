@@ -18,6 +18,15 @@ const SUBLINES = [
 ]
 const SUBLINE_ROTATE_MS = 3000
 
+const PORTAL_FEATURES = [
+  'Live transaction feed',
+  'Terminal health & status',
+  'Loan & cash advance balances',
+  'Statements & documents',
+  'Raise & track support tickets',
+  'Manage your team users',
+]
+
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
     label: 'Cards & wallets',
@@ -98,12 +107,11 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 1.0, 4.0, 5.5],
-                opacity: [1, 1, 1, 0],
+                scale: 5.5,
+                opacity: 0,
                 transition: {
-                  duration: 4.4,
-                  ease: [0.45, 0, 0.5, 1],
-                  times: [0, 0.45, 0.9, 1],
+                  scale: { duration: 2.4, delay: 2.0, ease: [0.42, 0, 0.6, 1] },
+                  opacity: { duration: 2.4, delay: 2.0, ease: [0.5, 0, 0.9, 1] },
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
@@ -117,7 +125,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex min-h-[72svh] max-w-7xl flex-col px-5 pt-20 pb-10 sm:px-8 sm:pt-32 sm:pb-12 lg:pt-36"
+          className="relative z-20 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pt-24 pb-10 sm:min-h-[88svh] sm:px-8 sm:pt-32 sm:pb-12 lg:pt-36"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />
@@ -131,7 +139,12 @@ export default function HomePage() {
             </h1>
 
             <div className="mt-10">
-              <LinkButton to="/contact" variant="primary" size="lg">
+              <LinkButton
+                to="/contact"
+                variant="primary"
+                size="lg"
+                className="w-full !shadow-none sm:w-auto"
+              >
                 Let's get started
               </LinkButton>
             </div>
