@@ -47,12 +47,12 @@ function TestimonialCard({ t, onOpen }: { t: Testimonial; onOpen: () => void }) 
       className="group flex h-full flex-col rounded-3xl border border-ink/5 bg-paper p-6 text-left transition hover:-translate-y-0.5 hover:border-mint/40 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.18)] sm:p-7"
     >
       <div className="flex items-center gap-4">
-        <span className="inline-flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper-soft ring-1 ring-ink/5">
+        <span className="inline-flex h-20 w-20 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper-soft p-2 ring-1 ring-ink/5">
           <img
             src={t.logo}
             alt={`${t.business} logo`}
             loading="lazy"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
         </span>
         <div className="min-w-0">
@@ -107,8 +107,8 @@ function TestimonialModal({ t, onClose }: { t: Testimonial; onClose: () => void 
         </button>
 
         <div className="flex items-center gap-5 border-b border-ink/5 bg-paper-soft px-7 py-6 sm:px-9">
-          <span className="inline-flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper ring-1 ring-ink/10">
-            <img src={t.logo} alt={`${t.business} logo`} className="h-full w-full object-cover" />
+          <span className="inline-flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper p-2.5 ring-1 ring-ink/10">
+            <img src={t.logo} alt={`${t.business} logo`} className="h-full w-full object-contain" />
           </span>
           <div className="min-w-0">
             <p className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
