@@ -98,12 +98,12 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 1.0, 2.0],
+                scale: [1.0, 1.0, 2.4],
                 opacity: [1, 1, 0],
                 transition: {
-                  duration: 2.8,
-                  ease: [0.55, 0, 0.4, 1],
-                  times: [0, 0.5, 1],
+                  duration: 2.6,
+                  ease: [0.6, 0, 0.35, 1],
+                  times: [0, 0.82, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
@@ -117,7 +117,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex min-h-[88svh] max-w-7xl flex-col px-5 pt-32 pb-12 sm:px-8 sm:pt-40 sm:pb-16 lg:pt-44"
+          className="relative z-20 mx-auto flex min-h-[88svh] max-w-7xl flex-col px-5 pt-24 pb-12 sm:px-8 sm:pt-40 sm:pb-16 lg:pt-44"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />
@@ -137,9 +137,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-auto flex items-end justify-end pt-16">
-            <div className="flex max-w-md items-end gap-6">
-              <div className="relative min-h-[3.5rem] flex-1 sm:min-h-[4rem]">
+          <div className="mt-auto flex items-end justify-start pt-12 sm:justify-end sm:pt-16">
+            <div className="flex w-full max-w-md items-end gap-4 sm:gap-6">
+              <div className="relative min-h-[5rem] flex-1 sm:min-h-[4rem]">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={sublineIdx}
@@ -147,7 +147,7 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-pretty text-base text-paper/70 sm:text-lg"
+                    className="text-pretty text-sm text-paper/70 sm:text-lg"
                   >
                     {SUBLINES[sublineIdx]}
                   </motion.p>
@@ -209,9 +209,9 @@ export default function HomePage() {
       </section>
 
       {/* PORTAL TEASE */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper p-8 sm:p-14">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
+        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper p-6 sm:p-14">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
               <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
@@ -241,7 +241,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block">
+            <div className="relative mx-auto w-full max-w-[440px] lg:mx-0">
               <PortalPreview />
             </div>
           </div>
@@ -448,7 +448,7 @@ function TrustpilotBadge() {
 
 function PortalPreview() {
   return (
-    <div className="relative w-[440px] rounded-2xl border border-ink/10 bg-paper shadow-2xl">
+    <div className="relative w-full rounded-2xl border border-ink/10 bg-paper shadow-2xl">
       <div className="flex items-center gap-1.5 border-b border-ink/5 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
