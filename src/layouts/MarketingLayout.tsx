@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
 import BrandLogo from '../components/BrandLogo'
@@ -17,8 +17,16 @@ export default function MarketingLayout() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
+  // Scroll to top on route CHANGES only. Skip the initial mount so a page
+  // refresh lets the browser restore the previous scroll position natively
+  // (forcing top here fought that restore and caused a top→back jump).
+  const firstRender = useRef(true)
   useEffect(() => {
     setOpen(false)
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [location.pathname])
 
@@ -145,7 +153,7 @@ export default function MarketingLayout() {
         <Outlet />
       </main>
 
-      <footer className="mt-32 bg-ink text-paper">
+      <footer className="bg-ink text-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
