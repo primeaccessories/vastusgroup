@@ -92,6 +92,7 @@ export default function HomePage() {
   }, [])
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [videoPlaying, setVideoPlaying] = useState(false)
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
@@ -101,6 +102,10 @@ export default function HomePage() {
     v.setAttribute('playsinline', '')
     v.setAttribute('webkit-playsinline', '')
     const tryPlay = () => v.play().catch(() => undefined)
+    const onPlaying = () => setVideoPlaying(true)
+    const onPause = () => setVideoPlaying(false)
+    v.addEventListener('playing', onPlaying)
+    v.addEventListener('pause', onPause)
     tryPlay()
     const onVisible = () => {
       if (document.visibilityState === 'visible') tryPlay()
@@ -108,6 +113,8 @@ export default function HomePage() {
     document.addEventListener('visibilitychange', onVisible)
     document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
     return () => {
+      v.removeEventListener('playing', onPlaying)
+      v.removeEventListener('pause', onPause)
       document.removeEventListener('visibilitychange', onVisible)
     }
   }, [])
@@ -157,6 +164,15 @@ export default function HomePage() {
           <source src="/a2b-intro.mp4" type="video/mp4" />
           <source src="/a2b-intro.webm" type="video/webm" />
         </video>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+          style={{
+            zIndex: -15,
+            backgroundImage: "url(/a2b-poster.jpg)",
+            opacity: videoPlaying ? 0 : 1,
+          }}
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
         <motion.div
