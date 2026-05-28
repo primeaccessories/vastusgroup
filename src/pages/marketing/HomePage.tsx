@@ -29,6 +29,85 @@ const PORTAL_FEATURES = [
   'Manage your team users',
 ]
 
+const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[] = [
+  {
+    title: 'Testimonials',
+    excerpt:
+      'Discover how A2B Payment Solutions is empowering businesses with seamless service and trusted partnerships.',
+    image: '/pages-grid/testimonials.png',
+    to: '/testimonials',
+  },
+  {
+    title: 'Terminals',
+    excerpt:
+      'Solutions that are efficient and cost-effective. The latest payment technology — we guarantee you can always take a payment.',
+    image: '/pages-grid/terminals.jpg',
+    to: '/products/payment-terminals',
+  },
+  {
+    title: 'Term Loans',
+    excerpt:
+      'Looking for flexible financing to grow your business? Competitive term loans designed to meet your unique needs.',
+    image: '/pages-grid/ukmoney.png',
+    to: '/products/term-loans',
+  },
+  {
+    title: 'Revenue-Based Loans',
+    excerpt:
+      'Looking for flexible financing to grow your business? Competitive revenue-based loans designed to meet your business.',
+    image: '/pages-grid/ukmoney.png',
+    to: '/products/revenue-based-loans',
+  },
+  {
+    title: 'Privacy Policy',
+    excerpt:
+      'Thank you for choosing A2B Payment Solutions. This Privacy Policy describes how we handle your information.',
+    image: '/pages-grid/privacy.png',
+    to: '/privacy',
+  },
+  {
+    title: 'Our Team',
+    excerpt: 'Meet the people behind A2B — solutions that are efficient, and a team you can actually reach.',
+    image: '/pages-grid/team.jpg',
+    to: '/team',
+  },
+  {
+    title: 'E-POS Systems',
+    excerpt:
+      'Bespoke solutions designed to meet business needs. Electronic point of sale systems — choose what fits.',
+    image: '/pages-grid/epos.jpg',
+    to: '/products/epos-systems',
+  },
+  {
+    title: 'E-Commerce Payment Solutions',
+    excerpt:
+      'Offering solutions to accept online payments securely. 105+ partners and integrations — WooCommerce, Magento, WIX and more.',
+    image: '/pages-grid/ecommerce.jpg',
+    to: '/products/ecommerce',
+  },
+  {
+    title: 'Contact Us',
+    excerpt:
+      'Solutions that are efficient and cost-effective. Talk to a member of the A2B team about your business.',
+    image: '/pages-grid/contact.jpg',
+    to: '/contact',
+  },
+  {
+    title: 'Christmas Page',
+    excerpt:
+      'For urgent help over the holidays, please contact your acquiring bank directly. Find the appropriate contact details here.',
+    image: '/pages-grid/team.jpg',
+    to: '/contact',
+  },
+  {
+    title: 'Cash Advance',
+    excerpt:
+      'Flexible finance for businesses accepting card payments. Pay it back as a percentage of every transaction.',
+    image: '/pages-grid/cash-advance.png',
+    to: '/products/cash-advance',
+  },
+]
+
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
     label: 'Cards & wallets',
@@ -476,6 +555,48 @@ export default function HomePage() {
                 </LinkButton>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAGES GRID — explore the site */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mb-10 max-w-2xl sm:mb-12">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Explore</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              Everything A2B in one place.
+            </h2>
+            <p className="mt-3 text-pretty text-ink-muted">
+              Products, finance, the team behind it all — and the pages you tend to need before you call us.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            {PAGES_GRID.map((p) => (
+              <Link
+                key={p.title}
+                to={p.to}
+                className="group relative block aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-ink/5"
+              >
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/40 to-ink/10" />
+                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-paper sm:text-2xl">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-3 text-sm text-paper/80">{p.excerpt}</p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">
+                    Read more
+                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
