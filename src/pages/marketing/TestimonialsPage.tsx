@@ -37,9 +37,8 @@ export default function TestimonialsPage() {
               />
               <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-20px_rgba(15,23,30,0.4),0_10px_30px_-10px_rgba(89,209,195,0.25)] ring-1 ring-ink/10">
                 <iframe
-                  src="https://www.youtube.com/embed/cA8CLhAoKIQ?modestbranding=1&rel=0"
+                  src="https://www.youtube.com/embed/cA8CLhAoKIQ?autoplay=1&mute=1&loop=1&playlist=cA8CLhAoKIQ&playsinline=1&modestbranding=1&rel=0"
                   title="A2B Payments customer interview"
-                  loading="lazy"
                   className="absolute inset-0 h-full w-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -60,7 +59,7 @@ export default function TestimonialsPage() {
                 A real conversation with one of our customers — why they switched, what's changed for their business, and what they'd tell you if you're sitting on the fence.
               </p>
               <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-ink-fade">
-                ▶ Tap to play · 60-second interview
+                Muted · tap the video for sound
               </p>
             </div>
           </div>
