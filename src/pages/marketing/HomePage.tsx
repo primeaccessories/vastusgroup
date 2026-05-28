@@ -98,12 +98,12 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 1.0, 3.5],
+                scale: [1.0, 4.0, 5.5],
                 opacity: [1, 1, 0],
                 transition: {
-                  duration: 2.6,
-                  ease: [0.72, 0, 0.28, 1],
-                  times: [0, 0.78, 1],
+                  duration: 2.5,
+                  ease: [0.45, 0, 0.5, 1],
+                  times: [0, 0.8, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
