@@ -44,7 +44,7 @@ export default function MarketingLayout() {
         : 'bg-paper'
 
   return (
-    <div className="flex min-h-[100dvh] flex-col bg-paper">
+    <div className={`flex min-h-[100dvh] flex-col ${isHome ? 'bg-ink' : 'bg-paper'}`}>
       <header className={`sticky top-0 z-40 transition-colors duration-300 ${headerBg}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <BrandLogo variant={darkMode ? 'dark' : 'light'} />
