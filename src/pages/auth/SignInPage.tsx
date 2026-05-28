@@ -33,8 +33,8 @@ export default function SignInPage() {
       footer={
         <>
           New to A2B?{' '}
-          <Link to="/sign-up" className="font-semibold text-ink underline-offset-4 hover:underline">
-            Create an account
+          <Link to="/contact" className="font-semibold text-ink underline-offset-4 hover:underline">
+            Contact us today
           </Link>
         </>
       }

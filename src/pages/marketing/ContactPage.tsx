@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import {
   ArrowUpRight,
   Phone,
-  Mail,
   MapPin,
   Check,
   Clock,
@@ -86,15 +85,11 @@ export default function ContactPage() {
         <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
           <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:items-end">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-mint-deep">
-                <span className="h-1.5 w-1.5 rounded-full bg-mint-deep" />
-                Get in touch
-              </span>
-              <h1 className="mt-5 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
-                Let's talk about your business.
+              <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+                Get a quote.
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted sm:text-xl">
-                Tell us a little about what you do and we'll come back within one working day with a tailored quote — no commitment, no obligation.
+                Fill the form below and someone from the team will call you back — usually the same day, never longer than one working day.
               </p>
             </div>
 
@@ -204,12 +199,12 @@ export default function ContactPage() {
                   </Field>
                 </FormSection>
 
-                <div className="flex flex-col gap-4 border-t border-ink/[0.06] pt-6 sm:flex-row sm:items-center sm:justify-between">
-                  <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
-                    Send my enquiry
+                <div className="border-t border-ink/[0.06] pt-6">
+                  <Button type="submit" variant="primary" size="lg" className="w-full whitespace-nowrap">
+                    <span>Send my enquiry</span>
                     <ArrowUpRight className="h-5 w-5" />
                   </Button>
-                  <p className="max-w-sm text-xs text-ink-fade">
+                  <p className="mt-4 text-center text-xs text-ink-fade">
                     By submitting this form you agree to A2B Payments contacting you about your enquiry. We never sell your data.
                   </p>
                 </div>
@@ -235,18 +230,9 @@ export default function ContactPage() {
               </div>
             </GlassCard>
 
-            <ContactCard
-              Icon={Phone}
-              title="Speak to us"
-              lines={[
-                <a key="t" href="tel:03334432645" className="font-semibold text-ink hover:text-mint-deep">
-                  0333 443 2645
-                </a>,
-                <span key="h" className="text-ink-fade">
-                  Mon – Fri · 9am – 5:30pm
-                </span>,
-              ]}
-              status={
+            <GlassCard surface="light" className="p-6">
+              <div className="flex items-start justify-between gap-4">
+                <GlassIcon Icon={Phone} tone="mint" size="sm" />
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium">
                   <span
                     className={`relative inline-flex h-2 w-2 rounded-full ${
@@ -261,21 +247,24 @@ export default function ContactPage() {
                     {openNow ? 'Open now' : 'Closed — leave a message'}
                   </span>
                 </span>
-              }
-            />
+              </div>
 
-            <ContactCard
-              Icon={Mail}
-              title="Email"
-              lines={[
-                <a key="e" href="mailto:info@a2bpayments.co.uk" className="font-semibold text-ink hover:text-mint-deep">
+              <div className="mt-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-fade">Call us</p>
+                <a href="tel:03334432645" className="mt-1 block font-display text-xl font-semibold tracking-tight text-ink hover:text-mint-deep">
+                  0333 443 2645
+                </a>
+                <p className="mt-0.5 text-xs text-ink-fade">Mon – Fri · 9am – 5:30pm</p>
+              </div>
+
+              <div className="mt-5 border-t border-ink/[0.06] pt-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-fade">Email</p>
+                <a href="mailto:info@a2bpayments.co.uk" className="mt-1 block font-semibold text-ink hover:text-mint-deep">
                   info@a2bpayments.co.uk
-                </a>,
-                <span key="h" className="text-ink-fade">
-                  Replies within one working day
-                </span>,
-              ]}
-            />
+                </a>
+                <p className="mt-0.5 text-xs text-ink-fade">Replies within one working day</p>
+              </div>
+            </GlassCard>
 
             <ContactCard
               Icon={MapPin}
@@ -297,37 +286,23 @@ export default function ContactPage() {
             />
           </aside>
         </div>
-      </section>
 
-      {/* WHY A2B */}
-      <section className="border-t border-ink/[0.06] bg-paper-soft">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mint-deep">
-              What you get
-            </p>
-            <h2 className="mt-4 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Honest pricing, real humans, and a switch that takes days — not weeks.
-            </h2>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <Pillar
-              Icon={ShieldCheck}
-              title="Honest pricing"
-              body="No hidden fees, no opaque PCI line items, no surprise statement charges. What you're quoted is what you pay."
-            />
-            <Pillar
-              Icon={HeartHandshake}
-              title="Real UK support"
-              body="A named account manager who actually picks up the phone — not a ticket queue with a service-level dance."
-            />
-            <Pillar
-              Icon={Zap}
-              title="Switch in days"
-              body="Most businesses are taking payments through A2B inside a week. No long contracts, no migration tax."
-            />
-          </div>
+        <div className="mt-16 grid gap-6 md:grid-cols-3 sm:mt-20">
+          <Pillar
+            Icon={ShieldCheck}
+            title="Honest pricing"
+            body="No hidden fees, no opaque PCI line items, no surprise statement charges. What you're quoted is what you pay."
+          />
+          <Pillar
+            Icon={HeartHandshake}
+            title="Real UK support"
+            body="A named account manager who actually picks up the phone — not a ticket queue with a service-level dance."
+          />
+          <Pillar
+            Icon={Zap}
+            title="Switch in days"
+            body="Most businesses are taking payments through A2B inside a week. No long contracts, no migration tax."
+          />
         </div>
       </section>
     </>

@@ -420,8 +420,8 @@ export default function HomePage() {
                 <LinkButton to="/sign-in" variant="primary" size="md">
                   Sign in to your portal
                 </LinkButton>
-                <LinkButton to="/sign-up" variant="secondary" size="md">
-                  Create an account
+                <LinkButton to="/contact" variant="secondary" size="md">
+                  Contact us today
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
               </div>
@@ -552,8 +552,8 @@ export default function HomePage() {
                 <LinkButton to="/sign-in" variant="primary" size="lg">
                   Sign in to your portal
                 </LinkButton>
-                <LinkButton to="/sign-up" variant="secondary" size="lg">
-                  Create an account
+                <LinkButton to="/contact" variant="secondary" size="lg">
+                  Contact us today
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
               </div>

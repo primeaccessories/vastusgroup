@@ -10,7 +10,6 @@ import TestimonialsPage from './pages/marketing/TestimonialsPage'
 import ContactPage from './pages/marketing/ContactPage'
 import PrivacyPolicyPage from './pages/marketing/PrivacyPolicyPage'
 import SignInPage from './pages/auth/SignInPage'
-import SignUpPage from './pages/auth/SignUpPage'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage'
 import AdminSignInPage from './pages/auth/AdminSignInPage'
 import PortalDashboardPage from './pages/portal/DashboardPage'
@@ -45,7 +44,6 @@ export default function App() {
       </Route>
 
       <Route path="/sign-in" element={<SignInPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/admin/sign-in" element={<AdminSignInPage />} />
 

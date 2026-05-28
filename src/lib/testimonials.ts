@@ -7,9 +7,31 @@ export interface Testimonial {
   shortQuote: string
   quote: string
   rating: number
+  logoBg?: 'dark'
+  video?: {
+    mp4: string
+    poster?: string
+  }
 }
 
 export const TESTIMONIALS: Testimonial[] = [
+  {
+    slug: 'elite-competitions',
+    business: 'Elite Competitions',
+    name: 'Alex Beckett',
+    role: 'Founder & CEO',
+    logo: '/testimonials/elite-competitions.svg',
+    logoBg: 'dark',
+    shortQuote:
+      'Watch Alex Beckett share why one of the UK’s biggest online competitions brands runs on A2B Payments.',
+    quote:
+      'Hear it straight from Alex — Founder of Elite Competitions, the Blackpool-based online competitions company that has paid out more than £100 million in prizes since 2015 — on what working with A2B Payments looks like day-to-day.',
+    rating: 5,
+    video: {
+      mp4: '/testimonials/alex-elite.mp4',
+      poster: '/testimonials/alex-elite-poster.jpg',
+    },
+  },
   {
     slug: 'the-vine-inn',
     business: 'The Vine Inn',

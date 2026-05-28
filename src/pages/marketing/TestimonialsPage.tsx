@@ -1,65 +1,77 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Star } from 'lucide-react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import TestimonialGrid from '../../components/TestimonialGrid'
+import { TESTIMONIALS } from '../../lib/testimonials'
 
 export default function TestimonialsPage() {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 sm:pt-24 sm:pb-16">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Testimonials</p>
-        <h1 className="mt-4 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
-          What our customers say.
-        </h1>
-        <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted">
-          We're proudest of the businesses we serve — the cafés, restaurants, retailers and trade suppliers across the
-          UK who trust us to handle their money.
-        </p>
-      </section>
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] h-72 w-72 rounded-full bg-mint/20 blur-3xl sm:h-[26rem] sm:w-[26rem]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-40 left-[-10%] h-60 w-60 rounded-full bg-mint/10 blur-3xl sm:h-80 sm:w-80"
+        />
 
-      {/* FEATURED INTERVIEW */}
-      <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-24">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper-soft p-6 sm:p-12 lg:p-16">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-32 right-[-10%] h-72 w-72 rounded-full bg-mint/25 blur-3xl sm:h-[28rem] sm:w-[28rem]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 left-[-10%] h-72 w-72 rounded-full bg-mint/15 blur-3xl sm:h-[24rem] sm:w-[24rem]"
-          />
+        <div className="relative mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 sm:pt-24 sm:pb-16">
+          <span className="inline-flex items-center gap-2 rounded-full bg-mint/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep ring-1 ring-mint/30">
+            <span className="h-1.5 w-1.5 rounded-full bg-mint-deep" />
+            Real customers · Real receipts
+          </span>
 
-          <div className="relative grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-            <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/40 via-mint/20 to-transparent blur-2xl"
-              />
-              <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-20px_rgba(15,23,30,0.4),0_10px_30px_-10px_rgba(89,209,195,0.25)] ring-1 ring-ink/10">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/3cuR0j5_XdE?autoplay=1&mute=1&start=19&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"
-                  title="A2B Payments customer interview"
-                  className="absolute inset-0 h-full w-full"
-                  allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+          <h1 className="mt-6 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            What our customers say{' '}
+            <span className="text-mint-deep">— and why they keep saying it.</span>
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted">
+            From village pubs to gyms to seaside hotels, the businesses on this page trusted us with the
+            single most important thing they own: their money. Here's what they said back.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-0.5 text-mint-deep">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" strokeWidth={0} />
+                ))}
               </div>
+              <span className="text-sm font-semibold text-ink">
+                5-star average
+                <span className="ml-1.5 font-normal text-ink-fade">
+                  across every customer on this page
+                </span>
+              </span>
             </div>
 
-            <div>
-              <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-mint-deep">
-                <span className="h-px w-8 bg-mint-deep" />
-                Customer story
-              </p>
-              <h2 className="mt-5 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                Hear it straight <span className="text-mint-deep">from a customer.</span>
-              </h2>
-              <p className="mt-6 max-w-xl text-pretty text-ink-muted sm:text-lg">
-                A real conversation with one of our customers — why they switched, what's changed for their business, and what they'd tell you if you're sitting on the fence.
-              </p>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-ink-fade">
-                Muted · tap the video for sound
-              </p>
+            <div className="hidden h-6 w-px bg-ink/10 sm:block" />
+
+            <div className="flex items-center gap-3">
+              <span className="flex -space-x-2">
+                {TESTIMONIALS.slice(0, 5).map((t) => (
+                  <span
+                    key={t.slug}
+                    title={t.business}
+                    className={`inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full p-1 ring-2 ring-paper ${
+                      t.logoBg === 'dark' ? 'bg-ink' : 'bg-paper-soft'
+                    }`}
+                  >
+                    <img
+                      src={t.logo}
+                      alt={`${t.business} logo`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </span>
+                ))}
+              </span>
+              <span className="text-sm text-ink-muted">
+                Hospitality · retail · trade · competitions
+              </span>
             </div>
           </div>
         </div>
