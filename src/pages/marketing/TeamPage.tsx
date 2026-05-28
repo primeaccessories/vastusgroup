@@ -8,33 +8,30 @@ export default function TeamPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-5 pt-12 pb-6 sm:px-8 sm:pt-16 sm:pb-8">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
-        <h1 className="mt-3 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
-          A team that <span className="text-mint-deep">genuinely cares</span> about your business.
-        </h1>
-        <p className="mt-5 max-w-2xl text-pretty text-lg text-ink-muted">
-          We're a Blackpool-based team with a simple belief: if you want to be successful, you've got to genuinely care
-          about the people you work with. Here are the people you'll deal with.
-        </p>
-      </section>
-
       <section className="relative overflow-hidden bg-paper-soft text-ink">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/3 rounded-full bg-mint/20 blur-[120px]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Founders</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            Built A2B from the ground up.
-          </h2>
+        <div className="relative mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 sm:pt-14 sm:pb-16">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
+              <h1 className="mt-3 font-display text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+                A team that <span className="text-mint-deep">genuinely cares</span>.
+              </h1>
+              <p className="mt-3 max-w-md text-pretty text-ink-muted sm:text-lg">
+                Blackpool-based. The people you'll actually deal with.
+              </p>
+            </div>
+            <p className="hidden text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep sm:block">Founders</p>
+          </div>
 
           <div className="mt-8 grid gap-6 sm:gap-8 md:grid-cols-2">
             {founders.map((m) => (
               <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
                 <Portrait name={m.name} image={m.image} ratio="4/5" />
-                <div className="p-7">
+                <div className="p-6 sm:p-7">
                   <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">{m.name}</h3>
                   <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint-deep">{m.role}</p>
                   {m.bio && <p className="mt-4 text-pretty text-ink-muted">{m.bio}</p>}
