@@ -148,12 +148,20 @@ export default function HomePage() {
     return () => clearTimeout(t)
   }, [maskGone])
 
-  // Lock body scroll while the mask is playing so users can't scroll behind it.
+  // Lock scroll while the mask is playing so users can't scroll behind the fixed overlay.
   useEffect(() => {
     if (maskGone) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = prev }
+    const html = document.documentElement
+    const body = document.body
+    window.scrollTo(0, 0)
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
+    }
   }, [maskGone])
 
   const [textIn, setTextIn] = useState(alreadySeen)
@@ -596,18 +604,8 @@ export default function HomePage() {
       </section>
 
       {/* PAGES GRID — sticky-stack scroll, mirrors og a2bpayments.co.uk */}
-      <section className="bg-paper">
+      <section className="bg-paper-soft">
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8 sm:pt-24">
-          <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Explore</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Everything A2B in one place.
-            </h2>
-            <p className="mt-3 text-pretty text-ink-muted">
-              Products, finance, the team behind it all — scroll through the pages people land on most.
-            </p>
-          </div>
-
           <div className="pb-20 sm:pb-24">
             {PAGES_GRID.map((p, i) => (
               <article key={p.title} className="sticky top-24 mb-10">
