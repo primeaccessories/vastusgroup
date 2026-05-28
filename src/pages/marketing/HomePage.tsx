@@ -130,7 +130,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pt-24 pb-10 sm:min-h-[68svh] sm:px-8 sm:pt-28 sm:pb-10 lg:min-h-[62svh] lg:pt-32"
+          className="relative z-20 mx-auto flex min-h-[70dvh] max-w-7xl flex-col px-5 pt-24 pb-8 sm:min-h-[62dvh] sm:px-8 sm:pt-28 sm:pb-10 lg:min-h-[58dvh] lg:pt-32"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />
@@ -183,7 +183,7 @@ export default function HomePage() {
       </section>
 
       {/* TRUST MARQUEE — 3 rows, alternating direction */}
-      <section className="border-y border-white/5 bg-ink py-12 text-paper sm:py-16">
+      <section className="border-y border-white/5 bg-ink py-8 text-paper sm:py-12">
         <p className="mb-8 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-paper/40 sm:mb-10 sm:text-xs">
           Cards, wallets &amp; the rails behind them
         </p>
