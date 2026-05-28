@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Quote, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
@@ -91,34 +91,6 @@ export default function HomePage() {
     return () => clearInterval(id)
   }, [])
 
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [videoPlaying, setVideoPlaying] = useState(false)
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
-    v.muted = true
-    v.defaultMuted = true
-    v.setAttribute('muted', '')
-    v.setAttribute('playsinline', '')
-    v.setAttribute('webkit-playsinline', '')
-    const tryPlay = () => v.play().catch(() => undefined)
-    const onPlaying = () => setVideoPlaying(true)
-    const onPause = () => setVideoPlaying(false)
-    v.addEventListener('playing', onPlaying)
-    v.addEventListener('pause', onPause)
-    tryPlay()
-    const onVisible = () => {
-      if (document.visibilityState === 'visible') tryPlay()
-    }
-    document.addEventListener('visibilitychange', onVisible)
-    document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
-    return () => {
-      v.removeEventListener('playing', onPlaying)
-      v.removeEventListener('pause', onPause)
-      document.removeEventListener('visibilitychange', onVisible)
-    }
-  }, [])
-
   return (
     <>
       {/* A2B LOADING MASK — full-viewport overlay, sits under the sticky header */}
@@ -149,29 +121,12 @@ export default function HomePage() {
       <div className="flex min-h-[100dvh] flex-col bg-ink">
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/a2b-poster.jpg"
-          disablePictureInPicture
-          controls={false}
-          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden [&::-webkit-media-controls-overlay-play-button]:hidden"
-        >
-          <source src="/a2b-intro.mp4" type="video/mp4" />
-          <source src="/a2b-intro.webm" type="video/webm" />
-        </video>
-        <div
+        <img
+          src="/a2b-intro.webp"
+          alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-          style={{
-            zIndex: -15,
-            backgroundImage: "url(/a2b-poster.jpg)",
-            opacity: videoPlaying ? 0 : 1,
-          }}
+          draggable={false}
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full select-none object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
@@ -179,7 +134,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={textIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-24 pb-8 sm:px-8 sm:pt-28 sm:pb-10 lg:pt-32"
+          className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-36 pb-8 sm:px-8 sm:pt-44 sm:pb-10 lg:pt-52"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />
