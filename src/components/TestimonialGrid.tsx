@@ -46,8 +46,8 @@ function TestimonialCard({ t, onOpen }: { t: Testimonial; onOpen: () => void }) 
       onClick={onOpen}
       className="group flex h-full flex-col rounded-3xl border border-ink/5 bg-paper p-6 text-left transition hover:-translate-y-0.5 hover:border-mint/40 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.18)] sm:p-7"
     >
-      <div className="flex items-center gap-4">
-        <span className="inline-flex h-20 w-20 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper-soft p-2 ring-1 ring-ink/5">
+      <div className="flex items-center gap-5">
+        <span className="inline-flex h-28 w-28 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper-soft p-3 ring-1 ring-ink/5 sm:h-32 sm:w-32">
           <img
             src={t.logo}
             alt={`${t.business} logo`}
@@ -56,8 +56,8 @@ function TestimonialCard({ t, onOpen }: { t: Testimonial; onOpen: () => void }) 
           />
         </span>
         <div className="min-w-0">
-          <p className="font-display text-base font-semibold tracking-tight text-ink">{t.business}</p>
-          <p className="truncate text-xs text-ink-fade">{t.name}</p>
+          <p className="font-display text-lg font-semibold tracking-tight text-ink">{t.business}</p>
+          <p className="truncate text-sm text-ink-fade">{t.name}</p>
         </div>
       </div>
 
@@ -106,8 +106,8 @@ function TestimonialModal({ t, onClose }: { t: Testimonial; onClose: () => void 
           <X className="h-4 w-4" />
         </button>
 
-        <div className="flex items-center gap-5 border-b border-ink/5 bg-paper-soft px-7 py-6 sm:px-9">
-          <span className="inline-flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper p-2.5 ring-1 ring-ink/10">
+        <div className="flex items-center gap-6 border-b border-ink/5 bg-paper-soft px-7 py-7 sm:px-9 sm:py-8">
+          <span className="inline-flex h-32 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-paper p-3 ring-1 ring-ink/10 sm:h-36 sm:w-36">
             <img src={t.logo} alt={`${t.business} logo`} className="h-full w-full object-contain" />
           </span>
           <div className="min-w-0">
@@ -125,11 +125,32 @@ function TestimonialModal({ t, onClose }: { t: Testimonial; onClose: () => void 
           </div>
         </div>
 
-        <div className="max-h-[60vh] overflow-y-auto px-7 py-7 sm:px-9 sm:py-9">
-          <Quote className="h-7 w-7 text-mint-deep" />
-          <p className="mt-4 whitespace-pre-line text-pretty text-base leading-relaxed text-ink sm:text-lg">
-            {t.quote}
-          </p>
+        <div className="max-h-[70vh] overflow-y-auto px-7 py-7 sm:px-9 sm:py-9">
+          {t.video ? (
+            <div className="space-y-5">
+              <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink shadow-[0_20px_50px_-20px_rgba(15,23,30,0.4)] ring-1 ring-ink/10">
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  src={t.video.mp4}
+                  poster={t.video.poster}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+              </div>
+              <p className="text-pretty text-base leading-relaxed text-ink-muted sm:text-lg">
+                {t.quote}
+              </p>
+            </div>
+          ) : (
+            <>
+              <Quote className="h-7 w-7 text-mint-deep" />
+              <p className="mt-4 whitespace-pre-line text-pretty text-base leading-relaxed text-ink sm:text-lg">
+                {t.quote}
+              </p>
+            </>
+          )}
         </div>
       </motion.div>
     </motion.div>
