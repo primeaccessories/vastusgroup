@@ -15,13 +15,13 @@ const sizeClasses: Record<Size, string> = {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-mint text-ink shadow-[0_8px_24px_-12px_rgba(89,209,195,0.7)] hover:bg-mint-bright hover:shadow-[0_12px_28px_-12px_rgba(89,209,195,0.9)]',
+    'bg-mint text-paper shadow-[0_8px_24px_-12px_rgba(11,83,245,0.7)] hover:bg-mint-bright hover:shadow-[0_12px_28px_-12px_rgba(11,83,245,0.9)]',
   secondary:
     'bg-ink text-paper hover:bg-ink-soft',
   ghost:
     'bg-transparent text-ink hover:bg-ink/5',
   inverse:
-    'bg-paper text-ink hover:bg-mint hover:text-ink',
+    'bg-paper text-ink hover:bg-mint hover:text-paper',
 }
 
 interface SharedProps {

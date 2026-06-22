@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Quote, Star, X } from 'lucide-react'
+import { ArrowUpRight, Quote, Star, X, Youtube } from 'lucide-react'
 import { TESTIMONIALS, type Testimonial } from '../lib/testimonials'
 
 interface Props {
@@ -54,7 +54,7 @@ function TestimonialCard({
   featured?: boolean
 }) {
   const wrapperClasses = featured
-    ? 'group relative flex h-full flex-col overflow-hidden rounded-3xl bg-paper text-left shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)] ring-2 ring-mint/60 transition hover:-translate-y-0.5 hover:ring-mint lg:col-span-2 lg:row-span-2'
+    ? 'group relative flex h-full flex-col overflow-hidden rounded-3xl bg-paper text-left shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)] ring-2 ring-mint/60 transition hover:-translate-y-0.5 hover:ring-mint sm:col-span-2 lg:col-span-2'
     : 'group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/5 bg-paper p-0 text-left transition hover:-translate-y-0.5 hover:border-mint/40 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.18)]'
 
   return (
@@ -82,7 +82,7 @@ function TestimonialCard({
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/70 to-transparent"
           />
-          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-ink shadow-lg">
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-paper shadow-lg">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" />
             Featured interview
           </span>
@@ -119,7 +119,7 @@ function TestimonialCard({
             src={t.logo}
             alt={`${t.business} logo`}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover"
+            className={`absolute inset-0 h-full w-full object-cover ${t.imagePos ?? 'object-center'}`}
           />
         </div>
       )}
@@ -232,6 +232,28 @@ function TestimonialModal({ t, onClose }: { t: Testimonial; onClose: () => void 
               <p className="text-pretty text-base leading-relaxed text-ink-muted sm:text-lg">
                 {t.quote}
               </p>
+              {t.video.channelUrl && (
+                <a
+                  href={t.video.channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="group/yt flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper-soft p-4 transition hover:border-[#FF0000]/40 hover:bg-paper sm:p-5"
+                >
+                  <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#FF0000] text-white shadow-sm sm:h-14 sm:w-14">
+                    <Youtube className="h-7 w-7 sm:h-8 sm:w-8" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-display text-base font-semibold tracking-tight text-ink sm:text-lg">
+                      Watch the full podcast
+                    </p>
+                    <p className="truncate text-sm text-ink-muted">
+                      @JACKFSAYLESS · all episodes on YouTube
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-ink-fade transition group-hover/yt:translate-x-0.5 group-hover/yt:text-[#FF0000]" />
+                </a>
+              )}
             </div>
           ) : (
             <>

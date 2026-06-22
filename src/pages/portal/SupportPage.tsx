@@ -45,7 +45,7 @@ export default function SupportPage() {
       <section className="mt-10 rounded-2xl bg-ink p-6 text-paper sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div className="max-w-md">
-            <p className="text-xs font-semibold uppercase tracking-wider text-mint">Urgent?</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-mint-bright">Urgent?</p>
             <h2 className="mt-3 font-display text-xl font-semibold">Call your account manager directly.</h2>
             <p className="mt-2 text-sm text-paper/70">
               Out-of-hours emergencies (terminal down on a busy night, can't take payments) — call us, don't email.
@@ -53,8 +53,8 @@ export default function SupportPage() {
           </div>
           <div className="flex flex-col gap-1 text-sm">
             <span className="text-paper/60">Georgia Hope</span>
-            <a href="tel:03334432645" className="font-mono text-mint hover:text-mint-bright">0333 443 2645</a>
-            <a href="mailto:georgia@a2bpayments.co.uk" className="text-paper/70 hover:text-mint">georgia@a2bpayments.co.uk</a>
+            <a href="tel:03334432645" className="font-mono text-mint-bright hover:text-paper">0333 443 2645</a>
+            <a href="mailto:georgia@vastusgroup.com" className="text-paper/70 hover:text-mint-bright">georgia@vastusgroup.com</a>
           </div>
         </div>
       </section>

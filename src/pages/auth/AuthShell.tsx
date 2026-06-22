@@ -49,7 +49,7 @@ export default function AuthShell({ title, subtitle, children, footer }: Props) 
         </main>
 
         <footer className="px-5 py-6 text-xs text-ink-fade sm:px-10">
-          © {new Date().getFullYear()} A2B Payment Solutions Ltd
+          © {new Date().getFullYear()} Vastus Group Ltd
         </footer>
       </div>
 
@@ -57,11 +57,11 @@ export default function AuthShell({ title, subtitle, children, footer }: Props) 
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
         <div
           className="pointer-events-none absolute -top-32 -left-32 h-[640px] w-[640px] rounded-full opacity-30 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
+          style={{ background: 'radial-gradient(closest-side, #0b53f5, transparent 70%)' }}
         />
         <div
           className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[400px] translate-x-1/4 translate-y-1/4 rounded-full opacity-25 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #2f9d92, transparent 70%)' }}
+          style={{ background: 'radial-gradient(closest-side, #0a3fd0, transparent 70%)' }}
         />
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center p-14 text-center text-paper">
@@ -70,7 +70,7 @@ export default function AuthShell({ title, subtitle, children, footer }: Props) 
               <GlassIcon Icon={Quote} tone="mint" size="md" />
             </div>
             <div key={index} className="auth-rotator">
-              <blockquote className="mt-6 font-display text-2xl leading-[1.2] tracking-tight text-balance text-paper sm:text-3xl">
+              <blockquote className="mt-6 line-clamp-7 font-display text-xl leading-[1.25] tracking-tight text-paper sm:text-2xl">
                 "{current.quote}"
               </blockquote>
               <p className="mt-6 text-sm text-paper/60">

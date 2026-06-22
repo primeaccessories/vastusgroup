@@ -18,12 +18,7 @@ export default function TestimonialsPage() {
         />
 
         <div className="relative mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 sm:pt-24 sm:pb-16">
-          <span className="inline-flex items-center gap-2 rounded-full bg-mint/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep ring-1 ring-mint/30">
-            <span className="h-1.5 w-1.5 rounded-full bg-mint-deep" />
-            Real customers · Real receipts
-          </span>
-
-          <h1 className="mt-6 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
             What our customers say{' '}
             <span className="text-mint-deep">— and why they keep saying it.</span>
           </h1>

@@ -3,7 +3,7 @@ const STORAGE_KEY = 'a2b.session'
 const DEMO_EMAIL = 'test1@test.co.uk'
 const DEMO_PASSWORD = 'test123'
 
-const ADMIN_EMAIL = 'owner@a2bpayments.co.uk'
+const ADMIN_EMAIL = 'owner@vastusgroup.com'
 const ADMIN_PASSWORD = 'admin123'
 
 type Role = 'customer' | 'admin'

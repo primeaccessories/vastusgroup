@@ -162,11 +162,11 @@ export default function MarketingLayout() {
                 Best-in-class card payments and business finance for UK businesses. Based in Blackpool, trusted across the country.
               </p>
               <div className="mt-6 flex flex-col gap-3 text-sm text-paper/70">
-                <a href="tel:03334432645" className="inline-flex items-center gap-3 hover:text-mint">
+                <a href="tel:03334432645" className="inline-flex items-center gap-3 hover:text-mint-bright">
                   <Phone className="h-4 w-4" /> 0333 443 2645
                 </a>
-                <a href="mailto:info@a2bpayments.co.uk" className="inline-flex items-center gap-3 hover:text-mint">
-                  <Mail className="h-4 w-4" /> info@a2bpayments.co.uk
+                <a href="mailto:info@vastusgroup.com" className="inline-flex items-center gap-3 hover:text-mint-bright">
+                  <Mail className="h-4 w-4" /> info@vastusgroup.com
                 </a>
                 <span className="inline-flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
@@ -185,7 +185,7 @@ export default function MarketingLayout() {
               <ul className="mt-4 space-y-2.5 text-sm">
                 {['payment-terminals', 'virtual-terminal', 'epos-systems', 'ecommerce'].map((s) => (
                   <li key={s}>
-                    <Link to={`/products/${s}`} className="text-paper/80 hover:text-mint">
+                    <Link to={`/products/${s}`} className="text-paper/80 hover:text-mint-bright">
                       {s === 'payment-terminals' && 'Payment terminals'}
                       {s === 'virtual-terminal' && 'Virtual terminal'}
                       {s === 'epos-systems' && 'E-POS systems'}
@@ -201,9 +201,9 @@ export default function MarketingLayout() {
                 Finance
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
-                <li><Link to="/products/cash-advance" className="text-paper/80 hover:text-mint">Cash advance</Link></li>
-                <li><Link to="/products/term-loans" className="text-paper/80 hover:text-mint">Term loans</Link></li>
-                <li><Link to="/products/revenue-based-loans" className="text-paper/80 hover:text-mint">Revenue-based loans</Link></li>
+                <li><Link to="/products/cash-advance" className="text-paper/80 hover:text-mint-bright">Cash advance</Link></li>
+                <li><Link to="/products/term-loans" className="text-paper/80 hover:text-mint-bright">Term loans</Link></li>
+                <li><Link to="/products/revenue-based-loans" className="text-paper/80 hover:text-mint-bright">Revenue-based loans</Link></li>
               </ul>
             </div>
 
@@ -212,10 +212,10 @@ export default function MarketingLayout() {
                 Company
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
-                <li><Link to="/team" className="text-paper/80 hover:text-mint">Our team</Link></li>
-                <li><Link to="/testimonials" className="text-paper/80 hover:text-mint">Testimonials</Link></li>
-                <li><Link to="/contact" className="text-paper/80 hover:text-mint">Contact</Link></li>
-                <li><Link to="/sign-in" className="text-paper/80 hover:text-mint">Customer portal</Link></li>
+                <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
+                <li><Link to="/testimonials" className="text-paper/80 hover:text-mint-bright">Testimonials</Link></li>
+                <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
+                <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
               </ul>
             </div>
           </div>
@@ -223,9 +223,9 @@ export default function MarketingLayout() {
           <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
               <p className="text-xs text-paper/50">
-                © {new Date().getFullYear()} A2B Payment Solutions Ltd. Registered in England &amp; Wales. Authorised payment institution.
+                © {new Date().getFullYear()} Vastus Group Ltd. Registered in England &amp; Wales. Authorised payment institution.
               </p>
-              <Link to="/privacy" className="text-xs text-paper/60 hover:text-mint">
+              <Link to="/privacy" className="text-xs text-paper/60 hover:text-mint-bright">
                 Privacy Policy
               </Link>
             </div>

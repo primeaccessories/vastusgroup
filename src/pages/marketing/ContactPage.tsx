@@ -74,12 +74,12 @@ export default function ContactPage() {
         <div
           aria-hidden
           className="pointer-events-none absolute -top-32 -right-40 h-[520px] w-[520px] rounded-full opacity-50 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #59d1c3 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(closest-side, #0b53f5 0%, transparent 70%)' }}
         />
         <div
           aria-hidden
           className="pointer-events-none absolute -bottom-24 -left-24 h-[360px] w-[360px] rounded-full opacity-30 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #2f9d92 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(closest-side, #0a3fd0 0%, transparent 70%)' }}
         />
 
         <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
@@ -205,7 +205,7 @@ export default function ContactPage() {
                     <ArrowUpRight className="h-5 w-5" />
                   </Button>
                   <p className="mt-4 text-center text-xs text-ink-fade">
-                    By submitting this form you agree to A2B Payments contacting you about your enquiry. We never sell your data.
+                    By submitting this form you agree to Vastus contacting you about your enquiry. We never sell your data.
                   </p>
                 </div>
               </form>
@@ -259,8 +259,8 @@ export default function ContactPage() {
 
               <div className="mt-5 border-t border-ink/[0.06] pt-5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-fade">Email</p>
-                <a href="mailto:info@a2bpayments.co.uk" className="mt-1 block font-semibold text-ink hover:text-mint-deep">
-                  info@a2bpayments.co.uk
+                <a href="mailto:info@vastusgroup.com" className="mt-1 block font-semibold text-ink hover:text-mint-deep">
+                  info@vastusgroup.com
                 </a>
                 <p className="mt-0.5 text-xs text-ink-fade">Replies within one working day</p>
               </div>
@@ -301,7 +301,7 @@ export default function ContactPage() {
           <Pillar
             Icon={Zap}
             title="Switch in days"
-            body="Most businesses are taking payments through A2B inside a week. No long contracts, no migration tax."
+            body="Most businesses are taking payments through Vastus inside a week. No long contracts, no migration tax."
           />
         </div>
       </section>

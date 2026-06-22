@@ -47,7 +47,7 @@ const SECTIONS: { title: string; body?: string; bullets?: string[] }[] = [
   },
   {
     title: '8. Contact Us',
-    body: 'If you have any questions or concerns about this Privacy Policy, please contact us at customerservice@a2bpayments.co.uk',
+    body: 'If you have any questions or concerns about this Privacy Policy, please contact us at customerservice@vastusgroup.com',
   },
 ]
 
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="mt-6 text-pretty text-lg text-paper/70">
-            Thank you for choosing A2B Payment Solutions. This Privacy Policy describes how we collect, use, and
+            Thank you for choosing Vastus. This Privacy Policy describes how we collect, use, and
             disclose your personal information when you use our services.
           </p>
         </div>

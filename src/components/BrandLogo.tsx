@@ -12,24 +12,23 @@ export default function BrandLogo({ variant = 'light', className = '', to = '/',
   const isDark = variant === 'dark'
   const img = (
     <img
-      src="/a2b-logo.webp"
-      alt="A2B Payments"
+      src={isDark ? '/vastus-logo-dark.webp' : '/vastus-logo-light.webp'}
+      alt="Vastus"
       width={320}
-      height={56}
+      height={43}
       className="h-9 w-auto sm:h-10"
-      style={isDark ? undefined : { filter: 'brightness(0)' }}
     />
   )
   const linkClass = `group inline-flex items-center ${className}`
   if (hardNav) {
     return (
-      <a href={to} className={linkClass} aria-label="A2B Payments home">
+      <a href={to} className={linkClass} aria-label="Vastus home">
         {img}
       </a>
     )
   }
   return (
-    <Link to={to} className={linkClass} aria-label="A2B Payments home">
+    <Link to={to} className={linkClass} aria-label="Vastus home">
       {img}
     </Link>
   )

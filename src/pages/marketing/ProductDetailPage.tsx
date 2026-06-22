@@ -19,7 +19,7 @@ export default function ProductDetailPage() {
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-20" />
         <div
           className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full opacity-25 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #59d1c3, transparent 70%)' }}
+          style={{ background: 'radial-gradient(closest-side, #0b53f5, transparent 70%)' }}
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-8 pb-12 sm:px-8 sm:pt-12 sm:pb-16">
           <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/60 transition hover:text-mint">

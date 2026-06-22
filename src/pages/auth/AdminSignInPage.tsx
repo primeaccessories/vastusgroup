@@ -45,7 +45,7 @@ export default function AdminSignInPage() {
             <Shield className="h-3 w-3" /> Staff portal
           </div>
           <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink">Staff sign in</h1>
-          <p className="mt-2 text-sm text-ink-muted">Internal A2B Payments admin console.</p>
+          <p className="mt-2 text-sm text-ink-muted">Internal Vastus admin console.</p>
 
           <form onSubmit={submit} className="mt-8 space-y-5">
             <label className="block">
@@ -59,7 +59,7 @@ export default function AdminSignInPage() {
                   setError(null)
                 }}
                 className="input"
-                placeholder="you@a2bpayments.co.uk"
+                placeholder="you@vastusgroup.com"
                 autoComplete="email"
               />
             </label>
@@ -121,7 +121,7 @@ export default function AdminSignInPage() {
       </main>
 
       <footer className="px-5 py-6 text-xs text-ink-fade sm:px-8">
-        © {new Date().getFullYear()} A2B Payment Solutions Ltd
+        © {new Date().getFullYear()} Vastus Group Ltd
       </footer>
     </div>
   )

@@ -5,7 +5,7 @@ export const ADMIN_USER = {
   id: 'staff_001',
   name: 'Daniel Pearce',
   role: 'Owner' as const,
-  email: 'owner@a2bpayments.co.uk',
+  email: 'owner@vastusgroup.com',
   initials: 'DP',
 }
 
@@ -217,13 +217,13 @@ export const ADMIN_TICKETS: AdminTicket[] = [
 ]
 
 export const ADMIN_STAFF: AdminStaff[] = [
-  { id: 'staff_001', name: 'Daniel Pearce', email: 'owner@a2bpayments.co.uk', role: 'Owner', status: 'active', lastActive: 'now', assignedMerchants: 0, initials: 'DP' },
-  { id: 'staff_002', name: 'Georgia Hope', email: 'georgia@a2bpayments.co.uk', role: 'Account Manager', status: 'active', lastActive: '12 min ago', assignedMerchants: 6, initials: 'GH' },
-  { id: 'staff_003', name: 'Tom Reid', email: 'tom@a2bpayments.co.uk', role: 'Account Manager', status: 'active', lastActive: '4 min ago', assignedMerchants: 5, initials: 'TR' },
-  { id: 'staff_004', name: 'Lena Park', email: 'lena@a2bpayments.co.uk', role: 'Underwriter', status: 'active', lastActive: '38 min ago', assignedMerchants: 0, initials: 'LP' },
-  { id: 'staff_005', name: 'Marcus Vella', email: 'marcus@a2bpayments.co.uk', role: 'Support', status: 'active', lastActive: '2h ago', assignedMerchants: 0, initials: 'MV' },
-  { id: 'staff_006', name: 'Asha Patel', email: 'asha@a2bpayments.co.uk', role: 'Support', status: 'invited', lastActive: '—', assignedMerchants: 0, initials: 'AP' },
-  { id: 'staff_007', name: 'Roger Wynn', email: 'roger@a2bpayments.co.uk', role: 'Read-only', status: 'active', lastActive: 'yesterday', assignedMerchants: 0, initials: 'RW' },
+  { id: 'staff_001', name: 'Daniel Pearce', email: 'owner@vastusgroup.com', role: 'Owner', status: 'active', lastActive: 'now', assignedMerchants: 0, initials: 'DP' },
+  { id: 'staff_002', name: 'Georgia Hope', email: 'georgia@vastusgroup.com', role: 'Account Manager', status: 'active', lastActive: '12 min ago', assignedMerchants: 6, initials: 'GH' },
+  { id: 'staff_003', name: 'Tom Reid', email: 'tom@vastusgroup.com', role: 'Account Manager', status: 'active', lastActive: '4 min ago', assignedMerchants: 5, initials: 'TR' },
+  { id: 'staff_004', name: 'Lena Park', email: 'lena@vastusgroup.com', role: 'Underwriter', status: 'active', lastActive: '38 min ago', assignedMerchants: 0, initials: 'LP' },
+  { id: 'staff_005', name: 'Marcus Vella', email: 'marcus@vastusgroup.com', role: 'Support', status: 'active', lastActive: '2h ago', assignedMerchants: 0, initials: 'MV' },
+  { id: 'staff_006', name: 'Asha Patel', email: 'asha@vastusgroup.com', role: 'Support', status: 'invited', lastActive: '—', assignedMerchants: 0, initials: 'AP' },
+  { id: 'staff_007', name: 'Roger Wynn', email: 'roger@vastusgroup.com', role: 'Read-only', status: 'active', lastActive: 'yesterday', assignedMerchants: 0, initials: 'RW' },
 ]
 
 export const ADMIN_AUDIT: AuditEntry[] = [

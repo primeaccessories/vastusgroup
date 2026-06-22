@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUpRight, Check, Phone, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 
@@ -10,7 +10,7 @@ const HERO_TEXT_DELAY_MS = 2200
 // Plays once per browser tab session. A normal refresh keeps the flag, so the
 // intro is skipped and the scroll position is preserved; a fresh tab / new
 // session replays it.
-const MASK_SEEN_KEY = 'a2b-mask-seen'
+const MASK_SEEN_KEY = 'vastus-mask-seen'
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -33,7 +33,7 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
   {
     title: 'Testimonials',
     excerpt:
-      'Discover how A2B Payment Solutions is empowering businesses with seamless service and trusted partnerships.',
+      'Discover how Vastus is empowering businesses with seamless service and trusted partnerships.',
     image: '/pages-grid/testimonials.png',
     to: '/testimonials',
   },
@@ -60,7 +60,7 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
   },
   {
     title: 'Our Team',
-    excerpt: 'Meet the people behind A2B — solutions that are efficient, and a team you can actually reach.',
+    excerpt: 'Meet the people behind Vastus — solutions that are efficient, and a team you can actually reach.',
     image: '/pages-grid/team.jpg',
     to: '/team',
   },
@@ -81,7 +81,7 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
   {
     title: 'Contact Us',
     excerpt:
-      'Solutions that are efficient and cost-effective. Talk to a member of the A2B team about your business.',
+      'Solutions that are efficient and cost-effective. Talk to a member of the Vastus team about your business.',
     image: '/pages-grid/contact.jpg',
     to: '/contact',
   },
@@ -217,8 +217,14 @@ export default function HomePage() {
     target: portalRef,
     offset: ['start end', 'end start'],
   })
-  const portalCardY = useTransform(portalProgress, [0, 1], [50, -50])
-  const portalTextY = useTransform(portalProgress, [0, 1], [24, -24])
+  // Smooth the raw scroll value through a spring so the parallax glides instead of
+  // tracking every jittery scroll tick (the laggy feel, esp. on mobile).
+  const portalSmooth = useSpring(portalProgress, { stiffness: 70, damping: 22, mass: 0.25 })
+  const portalCardY = useTransform(portalSmooth, [0, 1], [50, -50])
+  const portalTextY = useTransform(portalSmooth, [0, 1], [24, -24])
+  // Floating cards drift further + in opposite directions for a slick layered parallax.
+  const portalFloat1Y = useTransform(portalSmooth, [0, 1], [110, -110])
+  const portalFloat2Y = useTransform(portalSmooth, [0, 1], [-80, 90])
 
   // Explore section — scroll-driven stack: each card scales down + blurs as the
   // next card rises to cover it, mirroring the og a2bpayments.co.uk transition.
@@ -260,14 +266,14 @@ export default function HomePage() {
 
   return (
     <>
-      {/* A2B LOADING MASK — dark (ink) splash with the A2B logo in white. The
+      {/* VASTUS LOADING MASK — dark (ink) splash with the VASTUS logo in white. The
           ink sheet covers the screen; the cut-out letters sit over a white
           backing so the logo reads white. Gentle zoom + fade to the dark hero
           (ink→ink, so no flash). Sits above the header for a clean splash. */}
       <AnimatePresence>
         {!maskGone && (
           <motion.div
-            key="hero-a2b-mask"
+            key="hero-vastus-mask"
             aria-hidden="true"
             initial={{ scale: 1.0, opacity: 1 }}
             animate={{
@@ -279,11 +285,11 @@ export default function HomePage() {
               },
             }}
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
-            className="pointer-events-none fixed inset-0 z-50 overflow-hidden will-change-transform"
+            className="pointer-events-none fixed left-0 top-[-10vh] z-50 h-[120vh] w-screen overflow-hidden will-change-transform"
           >
             <div className="absolute inset-0 bg-white" />
             <img
-              src="/a2b-mask.svg"
+              src="/vastus-mask.svg"
               alt=""
               aria-hidden="true"
               draggable={false}
@@ -293,8 +299,11 @@ export default function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* HERO + MARQUEE — one viewport-tall landing block */}
-      <div className="flex min-h-[100dvh] flex-col bg-ink">
+      {/* HERO + MARQUEE — one viewport-tall landing block. Height compensates for
+          the header pull-up (-mt-[72px]/sm:-mt-[80px]) so it fills exactly to the
+          viewport bottom on every browser (Safari was ending ~72px short, revealing
+          the next section + lifting content). */}
+      <div className="flex min-h-[calc(100dvh_+_72px)] flex-col bg-ink sm:min-h-[calc(100dvh_+_80px)]">
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
         <video
@@ -449,7 +458,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
           {/* MOBILE / TABLET — clean stack */}
           <div ref={portalRef} className="flex flex-col items-center lg:hidden">
-            <motion.div style={{ y: portalCardY }} className="w-full max-w-[480px]">
+            <motion.div style={{ y: portalCardY }} className="w-full max-w-[480px] will-change-transform">
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -469,6 +478,57 @@ export default function HomePage() {
                   Live
                 </div>
                 <PortalPreview />
+
+                {/* Floating live cards — drift with scroll + gentle float, like desktop */}
+                <motion.div style={{ y: portalFloat1Y }} className="absolute -right-1 top-10 z-30 will-change-transform sm:right-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, x: 12 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="w-40 rounded-2xl bg-paper p-3.5 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 sm:w-48"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-wider text-mint-deep sm:text-[10px]">
+                          <span className="relative flex h-2 w-2">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                          </span>
+                          New txn
+                        </span>
+                        <span className="text-[9px] text-ink-fade sm:text-[10px]">14:32</span>
+                      </div>
+                      <div className="mt-1.5 flex items-baseline justify-between">
+                        <span className="font-display text-lg font-semibold sm:text-xl">+£42.50</span>
+                        <span className="text-[10px] text-ink-muted sm:text-xs">Visa ••4521</span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+
+                <motion.div style={{ y: portalFloat2Y }} className="absolute -left-1 bottom-12 z-30 will-change-transform sm:left-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, x: -12 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <motion.div
+                      animate={{ y: [0, 6, 0] }}
+                      transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                      className="rounded-2xl bg-paper px-3.5 py-2.5 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_rgba(11,83,245,0.8)]" />
+                        <span className="text-[11px] font-semibold sm:text-xs">4 terminals online</span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </motion.div>
 
@@ -477,7 +537,7 @@ export default function HomePage() {
               className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint-deep/50 to-mint/0"
             />
 
-            <motion.div style={{ y: portalTextY }} className="max-w-2xl text-center">
+            <motion.div style={{ y: portalTextY }} className="max-w-2xl text-center will-change-transform">
               <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
               <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
                 Your account, your numbers, <span className="text-mint-deep">in one place.</span>
@@ -488,7 +548,7 @@ export default function HomePage() {
               <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-ink sm:grid-cols-2">
                 {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
-                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
+                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-paper">
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
                     {line}
@@ -543,7 +603,7 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-64 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
+                  className="w-64 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-mint-deep">
@@ -572,7 +632,7 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-                  className="w-60 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
+                  className="w-60 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-fade">Settled today</p>
                   <p className="mt-1 font-display text-2xl font-semibold">£1,422.30</p>
@@ -594,10 +654,10 @@ export default function HomePage() {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
-                  className="rounded-2xl bg-paper px-4 py-3 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(89,209,195,0.3)] ring-1 ring-ink/10 backdrop-blur"
+                  className="rounded-2xl bg-paper px-4 py-3 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_rgba(89,209,195,0.8)]" />
+                    <span className="inline-flex h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_rgba(11,83,245,0.8)]" />
                     <span className="text-xs font-semibold">4 terminals online</span>
                   </div>
                 </motion.div>
@@ -620,7 +680,7 @@ export default function HomePage() {
               <ul className="mt-10 grid max-w-xl grid-cols-2 gap-3 text-sm text-ink">
                 {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
-                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
+                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-paper">
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
                     {line}
@@ -729,7 +789,7 @@ export default function HomePage() {
 function TrustpilotBadge() {
   return (
     <a
-      href="https://uk.trustpilot.com/review/a2bpayments.co.uk"
+      href="https://uk.trustpilot.com/review/vastusgroup.com"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-2.5 text-paper"
@@ -754,12 +814,12 @@ function TrustpilotBadge() {
 
 function PortalPreview() {
   return (
-    <div className="relative w-full rounded-2xl border border-ink/10 bg-paper shadow-[0_30px_80px_-20px_rgba(15,23,30,0.35),0_10px_30px_-10px_rgba(89,209,195,0.25)]">
+    <div className="relative w-full rounded-2xl border border-ink/10 bg-paper shadow-[0_30px_80px_-20px_rgba(15,23,30,0.35),0_10px_30px_-10px_rgba(11,83,245,0.25)]">
       <div className="flex items-center gap-1.5 border-b border-ink/5 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-        <span className="ml-3 text-xs text-ink-fade">portal.a2bpayments.co.uk</span>
+        <span className="ml-3 text-xs text-ink-fade">portal.vastusgroup.com</span>
       </div>
       <div className="p-5">
         <p className="text-xs text-ink-fade">Today's takings</p>

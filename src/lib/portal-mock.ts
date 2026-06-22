@@ -6,7 +6,7 @@ export const MOCK_USER = {
   phone: '07712 345678',
   merchantId: 'MID-487-2261',
   accountManager: 'Georgia Hope',
-  accountManagerEmail: 'georgia@a2bpayments.co.uk',
+  accountManagerEmail: 'georgia@vastusgroup.com',
   joinedAt: '2024-03-18',
 }
 

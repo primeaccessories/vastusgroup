@@ -78,18 +78,18 @@ export default function DashboardPage() {
         </section>
 
         <section className="rounded-2xl border border-ink/5 bg-ink p-6 text-paper">
-          <p className="text-xs font-semibold uppercase tracking-wider text-mint">Your account manager</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-mint-bright">Your account manager</p>
           <p className="mt-3 font-display text-lg font-semibold">{MOCK_USER.accountManager}</p>
           <p className="text-sm text-paper/60">Client Partnership Lead</p>
-          <a href={`mailto:${MOCK_USER.accountManagerEmail}`} className="mt-4 inline-block text-sm text-mint hover:text-mint-bright">
+          <a href={`mailto:${MOCK_USER.accountManagerEmail}`} className="mt-4 inline-block text-sm text-mint-bright hover:text-paper">
             {MOCK_USER.accountManagerEmail}
           </a>
-          <a href="tel:03334432645" className="block text-sm text-paper/70 hover:text-mint">
+          <a href="tel:03334432645" className="block text-sm text-paper/70 hover:text-mint-bright">
             0333 443 2645
           </a>
 
           <div className="mt-6 border-t border-white/10 pt-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-mint">Quick actions</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-mint-bright">Quick actions</p>
             <div className="mt-3 grid gap-2">
               <Link to="/portal/support" className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2.5 text-sm hover:bg-white/10">
                 Raise a support ticket <ArrowUpRight className="h-4 w-4" />

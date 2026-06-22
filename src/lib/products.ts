@@ -129,7 +129,7 @@ export const PRODUCTS: Product[] = [
         kind: 'prose',
         eyebrow: 'Overview',
         heading: 'Electronic point of sale solutions',
-        body: 'Selecting the right Electronic Point of Sale (EPOS) provider is a crucial decision for businesses seeking smooth transactions and efficient operations. At A2B Payment Solutions, we stand out as a paragon of reliability, innovation, and bespoke solutions designed to meet the distinctive needs of businesses across diverse sectors.',
+        body: 'Selecting the right Electronic Point of Sale (EPOS) provider is a crucial decision for businesses seeking smooth transactions and efficient operations. At Vastus, we stand out as a paragon of reliability, innovation, and bespoke solutions designed to meet the distinctive needs of businesses across diverse sectors.',
       },
       {
         kind: 'list',
@@ -150,7 +150,7 @@ export const PRODUCTS: Product[] = [
       },
       {
         kind: 'cards',
-        eyebrow: 'Why A2B',
+        eyebrow: 'Why Vastus',
         heading: 'Reliability, innovation, support',
         items: [
           { title: 'Versatility', desc: 'We offer an array of options, ensuring that our systems can be tailored to suit the specific requirements of businesses across various sectors.' },
@@ -184,11 +184,11 @@ export const PRODUCTS: Product[] = [
         kind: 'prose',
         eyebrow: 'Overview',
         heading: 'Your trusted e-commerce partner',
-        body: "At A2B Payment Solutions, we're your trusted partner in the ever-evolving world of e-commerce. With a network boasting over 105 strategic partners and integrations, including industry leaders like WooCommerce, PrestaShop, Opayo, WIX, Magento and WordPress, we ensure your payment processes are seamlessly integrated with the best names in the business.",
+        body: "At Vastus, we're your trusted partner in the ever-evolving world of e-commerce. With a network boasting over 105 strategic partners and integrations, including industry leaders like WooCommerce, PrestaShop, Opayo, WIX, Magento and WordPress, we ensure your payment processes are seamlessly integrated with the best names in the business.",
       },
       {
         kind: 'cards',
-        heading: 'Why choose A2B',
+        heading: 'Why choose Vastus',
         items: [
           { title: 'Extensive partnerships', desc: 'Benefit from our vast network of over 105 strategic partners, offering you a wide range of options for your e-commerce platform.' },
           { title: 'Top integrations', desc: 'Seamlessly integrate with well-known platforms like WooCommerce, PrestaShop, Opayo, WIX and WordPress, ensuring compatibility and efficiency.' },
@@ -277,7 +277,7 @@ export const PRODUCTS: Product[] = [
       },
       {
         kind: 'cards',
-        eyebrow: 'Why choose A2B',
+        eyebrow: 'Why choose Vastus',
         heading: 'Funding, handled',
         items: [
           { title: 'Fast funding', desc: 'Get approved quickly and access your funds fast so you can keep your business moving forward.' },

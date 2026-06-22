@@ -53,7 +53,7 @@ export default function TeamPage() {
         <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Leadership</p>
           <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            The heads behind A2B
+            The heads behind Vastus
           </h2>
 
           <div className="mt-8 grid gap-5 grid-cols-2 sm:grid-cols-3">
@@ -76,7 +76,7 @@ export default function TeamPage() {
           <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             The people you'll deal with
           </h2>
-          <p className="mt-2 text-ink-muted">Account managers, specialists and support — your day-to-day A2B contacts.</p>
+          <p className="mt-2 text-ink-muted">Account managers, specialists and support — your day-to-day Vastus contacts.</p>
 
           <div className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {rest.map((m) => (

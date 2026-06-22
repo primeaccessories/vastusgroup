@@ -4,7 +4,7 @@ interface Props {
 
 export default function TurboITPill({ className = '' }: Props) {
   const utm = new URLSearchParams({
-    utm_source: 'a2bpayments',
+    utm_source: 'vastus',
     utm_medium: 'footer',
     utm_campaign: 'powered_by',
   })

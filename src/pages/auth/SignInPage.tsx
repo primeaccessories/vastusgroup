@@ -32,7 +32,7 @@ export default function SignInPage() {
       subtitle="Sign in to manage your account, view transactions and raise tickets."
       footer={
         <>
-          New to A2B?{' '}
+          New to Vastus?{' '}
           <Link to="/contact" className="font-semibold text-ink underline-offset-4 hover:underline">
             Contact us today
           </Link>
