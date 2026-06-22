@@ -1,8 +1,9 @@
-import { ArrowDown, ArrowUpRight, Check, Phone, Star } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, Globe, Smartphone, Code2, Sparkles, UtensilsCrossed, ShoppingBag, ShoppingCart, Scissors, Car, Briefcase, Hammer, Ticket, type LucideIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { LinkButton } from '../../components/Button'
+import { Button, LinkButton } from '../../components/Button'
+import GlassIcon from '../../components/GlassIcon'
 
 const MASK_DURATION_MS = 2600
 const HERO_TEXT_DELAY_MS = 2200
@@ -13,10 +14,10 @@ const HERO_TEXT_DELAY_MS = 2200
 const MASK_SEEN_KEY = 'vastus-mask-seen'
 
 const SUBLINES = [
-  'Lower rates, faster settlements, and support you can actually reach.',
-  'Honest pricing, quick settlements, and human support when you need it.',
-  'Card processing built for UK businesses tired of opaque fees.',
-  'Switch in days, save from week one — no long contracts.',
+  'Payments, finance and technology — one group, working as one team.',
+  'Card processing, business funding and digital solutions under one roof.',
+  'Joined-up thinking for businesses that refuse to settle for ordinary.',
+  'One partner for the tools that move your business forward.',
 ]
 const SUBLINE_ROTATE_MS = 3000
 
@@ -30,13 +31,6 @@ const PORTAL_FEATURES = [
 ]
 
 const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[] = [
-  {
-    title: 'Testimonials',
-    excerpt:
-      'Discover how Vastus is empowering businesses with seamless service and trusted partnerships.',
-    image: '/pages-grid/testimonials.png',
-    to: '/testimonials',
-  },
   {
     title: 'Terminals',
     excerpt:
@@ -138,6 +132,49 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
   },
 ]
 
+const GROUP_COMPANIES: { name: string; tag: string; blurb: string; to: string; logo: string }[] = [
+  {
+    name: 'Vastus Pay',
+    tag: 'Payments',
+    blurb: 'Card payments, terminals and merchant services built for UK businesses.',
+    to: '/products',
+    logo: '/vastus-pay.webp',
+  },
+  {
+    name: 'Vastus Capital',
+    tag: 'Finance',
+    blurb: 'Business funding, cash advances and flexible finance to help you grow.',
+    to: '/products/cash-advance',
+    logo: '/vastus-capital.webp',
+  },
+  {
+    name: 'Vastus Technology',
+    tag: 'Technology',
+    blurb: 'Websites, apps and software — digital solutions delivered end to end.',
+    to: '#technology',
+    logo: '/vastus-technology.webp',
+  },
+]
+
+const TECH_SERVICES: { title: string; blurb: string; Icon: LucideIcon }[] = [
+  { title: 'Website Development', blurb: 'High-performance, conversion-focused sites built to modern standards.', Icon: Globe },
+  { title: 'Mobile App Development', blurb: 'Native and cross-platform apps for iOS and Android.', Icon: Smartphone },
+  { title: 'Software & Technology Solutions', blurb: 'Custom software, integrations and automation for your operations.', Icon: Code2 },
+  { title: 'Other Digital Services', blurb: 'Branding, hosting, SEO and the digital essentials to grow online.', Icon: Sparkles },
+]
+
+// TODO(owner): swap these placeholder sectors for the client's final target-sector list.
+const SECTORS: { name: string; Icon: LucideIcon }[] = [
+  { name: 'Hospitality', Icon: UtensilsCrossed },
+  { name: 'Retail', Icon: ShoppingBag },
+  { name: 'E-commerce', Icon: ShoppingCart },
+  { name: 'Health & Beauty', Icon: Scissors },
+  { name: 'Automotive', Icon: Car },
+  { name: 'Professional Services', Icon: Briefcase },
+  { name: 'Trades & Construction', Icon: Hammer },
+  { name: 'Leisure & Entertainment', Icon: Ticket },
+]
+
 export default function HomePage() {
   const alreadySeen =
     typeof window !== 'undefined' && sessionStorage.getItem(MASK_SEEN_KEY) === 'true'
@@ -187,28 +224,9 @@ export default function HomePage() {
     return () => clearInterval(id)
   }, [])
 
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [src4kReady, setSrc4kReady] = useState(false)
-  useEffect(() => {
-    fetch('/a2b-intro-2160.mp4', { method: 'HEAD' })
-      .then((r) => { if (r.ok) setSrc4kReady(true) })
-      .catch(() => undefined)
-  }, [])
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
-    v.muted = true
-    v.defaultMuted = true
-    v.setAttribute('muted', '')
-    v.setAttribute('playsinline', '')
-    v.setAttribute('webkit-playsinline', '')
-    const tryPlay = () => v.play().catch(() => undefined)
-    tryPlay()
-    const onVisible = () => { if (document.visibilityState === 'visible') tryPlay() }
-    document.addEventListener('visibilitychange', onVisible)
-    document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
-    return () => document.removeEventListener('visibilitychange', onVisible)
-  }, [src4kReady])
+  const scrollToGroup = () => {
+    document.getElementById('group')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   // Portal tease (mobile) — small scroll-driven parallax: the card and text drift
   // at different speeds as the section passes through the viewport.
@@ -227,7 +245,7 @@ export default function HomePage() {
   const portalFloat2Y = useTransform(portalSmooth, [0, 1], [-80, 90])
 
   // Explore section — scroll-driven stack: each card scales down + blurs as the
-  // next card rises to cover it, mirroring the og a2bpayments.co.uk transition.
+  // next card rises to cover it for a smooth, cinematic transition.
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   useEffect(() => {
     const PIN = 96 // matches sticky top-24 (6rem)
@@ -266,10 +284,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* VASTUS LOADING MASK — dark (ink) splash with the VASTUS logo in white. The
-          ink sheet covers the screen; the cut-out letters sit over a white
-          backing so the logo reads white. Gentle zoom + fade to the dark hero
-          (ink→ink, so no flash). Sits above the header for a clean splash. */}
+      {/* VASTUS LOADING SPLASH — full-screen ink sheet with the complete Vastus
+          logo (blue V mark + wordmark) centred. Gentle zoom + fade into the dark
+          hero (ink→ink, so no flash). Sits above the header for a clean splash. */}
       <AnimatePresence>
         {!maskGone && (
           <motion.div
@@ -287,14 +304,24 @@ export default function HomePage() {
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
             className="pointer-events-none fixed left-0 top-[-10vh] z-50 h-[120vh] w-screen overflow-hidden will-change-transform"
           >
-            <div className="absolute inset-0 bg-white" />
-            <img
-              src="/vastus-mask.svg"
-              alt=""
-              aria-hidden="true"
-              draggable={false}
-              className="absolute inset-0 h-full w-full select-none object-cover"
-            />
+            <div className="absolute inset-0 bg-ink" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex items-center gap-3 px-6 sm:gap-5">
+                <img
+                  src="/vastus-mark.webp"
+                  alt=""
+                  aria-hidden="true"
+                  draggable={false}
+                  className="h-14 w-14 select-none sm:h-20 sm:w-20"
+                />
+                <img
+                  src="/vastus-logo-dark.webp"
+                  alt="Vastus"
+                  draggable={false}
+                  className="h-8 w-auto select-none sm:h-12"
+                />
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -306,38 +333,20 @@ export default function HomePage() {
       <div className="flex min-h-[calc(100dvh_+_72px)] flex-col bg-ink sm:min-h-[calc(100dvh_+_80px)]">
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
-        <video
-          key={src4kReady ? '4k' : 'hd'}
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/a2b-intro.webp"
-          disablePictureInPicture
-          disableRemotePlayback
-          x-webkit-airplay="deny"
-          controls={false}
-          className="pointer-events-none absolute inset-0 -z-20 hidden h-full w-full object-cover sm:block [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-overlay-play-button]:!hidden [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls-panel]:!hidden"
-        >
-          {src4kReady && (
-            <>
-              <source src="/a2b-intro-2160.webm" type="video/webm" media="(min-width: 1024px), (min-resolution: 2dppx)" />
-              <source src="/a2b-intro-2160.mp4" type="video/mp4" media="(min-width: 1024px), (min-resolution: 2dppx)" />
-            </>
-          )}
-          <source src="/a2b-intro.webm" type="video/webm" />
-          <source src="/a2b-intro.mp4" type="video/mp4" />
-        </video>
-        {/* Mobile: static poster instead of <video> — kills the native iOS/WhatsApp play overlay */}
-        <img
-          src="/a2b-intro.webp"
-          alt=""
+        {/* Ambient brand backdrop — replaces the old intro video. */}
+        <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover sm:hidden"
+          className="pointer-events-none absolute inset-0 -z-20 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-40 right-[-10%] -z-20 h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-[-25%] left-[-15%] -z-20 h-[40rem] w-[40rem] rounded-full bg-mint-deep/20 blur-[150px]"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/0 via-ink/30 to-ink" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -346,25 +355,28 @@ export default function HomePage() {
           className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-36 pb-8 sm:px-8 sm:pt-44 sm:pb-10 lg:pt-52"
         >
           <div className="max-w-4xl">
-            <TrustpilotBadge />
+            <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-mint-bright sm:text-xs">
+              <span className="h-px w-8 bg-mint-bright" />
+              One group · Three companies
+            </p>
 
-            <h1 className="mt-6 font-display text-balance text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.95] tracking-tight text-paper">
-              Business
+            <h1 className="mt-6 font-display text-balance text-[clamp(2.5rem,7.5vw,6rem)] font-semibold uppercase leading-[0.95] tracking-tight text-paper">
+              Ordinary is
               <br />
-              Payment
-              <br />
-              Solutions
+              not an option
             </h1>
 
             <div className="mt-10">
-              <LinkButton
-                to="/contact"
+              <Button
+                type="button"
+                onClick={scrollToGroup}
                 variant="primary"
                 size="lg"
                 className="w-full !shadow-none sm:w-auto"
               >
-                Let's get started
-              </LinkButton>
+                Explore the Group
+                <ArrowDown className="h-5 w-5" />
+              </Button>
             </div>
           </div>
 
@@ -701,7 +713,132 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PAGES GRID — sticky-stack scroll, mirrors og a2bpayments.co.uk */}
+      {/* GROUP STRUCTURE — the three Vastus companies */}
+      <section id="group" className="relative overflow-hidden bg-ink text-paper">
+        <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-mint/20 blur-[150px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="inline-flex items-center justify-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">
+              <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
+            </p>
+            <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
+              One group. <span className="text-mint-bright">Three companies.</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
+              Payments, finance and technology under one roof — joined-up solutions to help your business move faster.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-3 sm:gap-6">
+            {GROUP_COMPANIES.map((c) => {
+              const inner = (
+                <>
+                  <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/5">
+                    <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
+                  </div>
+                  <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
+                  <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-mint-bright">
+                    Explore
+                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </>
+              )
+              const cardCls =
+                'group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8'
+              return c.to.startsWith('#') ? (
+                <a key={c.name} href={c.to} className={cardCls}>{inner}</a>
+              ) : (
+                <Link key={c.name} to={c.to} className={cardCls}>{inner}</Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* WHO WE SERVE — target sectors (placeholder list until owner provides final) */}
+      <section id="sectors" className="relative overflow-hidden bg-paper text-ink">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-0 h-[30rem] w-[30rem] rounded-full bg-mint/15 blur-[150px]" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Who we serve</p>
+              <h2 className="mt-4 font-display text-balance text-[clamp(2.25rem,4.5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight text-ink">
+                Built for <span className="text-mint-deep">ambitious</span> UK businesses.
+              </h2>
+              <p className="mt-5 max-w-md text-pretty text-lg text-ink-muted">
+                From the high street to high growth, we partner with businesses across every sector — payments, finance and technology, tailored to how you actually work.
+              </p>
+              <div className="mt-8">
+                <LinkButton to="/contact" variant="primary" size="lg">
+                  Talk to our team
+                  <ArrowUpRight className="h-5 w-5" />
+                </LinkButton>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {SECTORS.map((s) => (
+                <div
+                  key={s.name}
+                  className="group flex items-center gap-4 rounded-2xl bg-white p-4 ring-1 ring-ink/[0.06] shadow-[0_18px_40px_-28px_rgba(10,18,38,0.4)] transition duration-300 hover:-translate-y-0.5 hover:ring-mint/40 sm:p-5"
+                >
+                  <GlassIcon Icon={s.Icon} tone="mint" size="md" />
+                  <span className="font-display text-sm font-semibold tracking-tight text-ink sm:text-base">{s.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* VASTUS TECHNOLOGY — dedicated lead-gen pillar */}
+      <section id="technology" className="relative overflow-hidden bg-ink text-paper">
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 right-[-10%] h-[34rem] w-[34rem] rounded-full bg-mint/20 blur-[150px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_bottom,black_20%,transparent_70%)]" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">Vastus Technology</p>
+              <h2 className="mt-4 font-display text-balance text-[clamp(2.25rem,4.5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
+                Digital that means <span className="text-mint-bright">business.</span>
+              </h2>
+              <p className="mt-5 max-w-md text-pretty text-paper/70 sm:text-lg">
+                Websites, apps and software — designed and built end to end. Tell us what you're trying to achieve and we'll put the right team on it.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <LinkButton to="/contact" variant="primary" size="lg">
+                  Start a project
+                  <ArrowUpRight className="h-5 w-5" />
+                </LinkButton>
+                <a
+                  href="tel:03334432645"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint-bright hover:text-mint-bright"
+                >
+                  <Phone className="h-5 w-5" />
+                  0333 443 2645
+                </a>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {TECH_SERVICES.map((svc) => (
+                <div
+                  key={svc.title}
+                  className="group rounded-3xl bg-white/[0.03] p-6 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-7"
+                >
+                  <GlassIcon Icon={svc.Icon} tone="paper" size="md" />
+                  <h3 className="mt-5 font-display text-lg font-semibold tracking-tight sm:text-xl">{svc.title}</h3>
+                  <p className="mt-2 text-pretty text-sm text-paper/65">{svc.blurb}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAGES GRID — sticky-stack scroll, refined card-stack transition */}
       <section className="bg-paper-soft">
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8 sm:pt-24">
           <div className="pb-10 sm:pb-12">
@@ -783,32 +920,6 @@ export default function HomePage() {
         </div>
       </section>
     </>
-  )
-}
-
-function TrustpilotBadge() {
-  return (
-    <a
-      href="https://uk.trustpilot.com/review/vastusgroup.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2.5 text-paper"
-    >
-      <span className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-tight">
-        <Star className="h-4 w-4 fill-mint text-mint" />
-        Trustpilot
-      </span>
-      <span className="flex items-center gap-0.5">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <span
-            key={i}
-            className="inline-flex h-6 w-6 items-center justify-center bg-mint"
-          >
-            <Star className="h-4 w-4 fill-paper text-paper" strokeWidth={0} />
-          </span>
-        ))}
-      </span>
-    </a>
   )
 }
 

@@ -20,7 +20,7 @@ export default function TeamPage() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* Intro */}
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">MEET VASTUS</p>
             <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl">
               A team that <span className="text-mint-deep">genuinely cares</span> about your business.
             </h1>
@@ -29,7 +29,7 @@ export default function TeamPage() {
             </p>
             <div className="mt-7 inline-flex items-center gap-3">
               <span className="h-px w-8 bg-mint-deep" />
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The founders</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The founder</p>
             </div>
           </div>
 
@@ -52,8 +52,9 @@ export default function TeamPage() {
       {leads.length > 0 && (
         <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Leadership</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            The heads behind Vastus
+          <h2 className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            The Team Behind
+            <img src="/vastus-logo-light.webp" alt="Vastus" className="h-7 w-auto sm:h-9" />
           </h2>
 
           <div className="mt-8 grid gap-5 grid-cols-2 sm:grid-cols-3">
@@ -70,6 +71,7 @@ export default function TeamPage() {
         </section>
       )}
 
+      {rest.length > 0 && (
       <section className="border-t border-ink/5 bg-paper-soft/40">
         <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The team</p>
@@ -91,6 +93,7 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
+      )}
     </>
   )
 }

@@ -82,7 +82,7 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* RICH SECTIONS — full content cross-referenced to a2bpayments.co.uk */}
+      {/* RICH SECTIONS — full product content */}
       {product.sections.map((section, i) => (
         <SectionBlock key={i} section={section} alt={i % 2 === 1} />
       ))}

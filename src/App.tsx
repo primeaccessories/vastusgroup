@@ -6,7 +6,6 @@ import HomePage from './pages/marketing/HomePage'
 import ProductsPage from './pages/marketing/ProductsPage'
 import ProductDetailPage from './pages/marketing/ProductDetailPage'
 import TeamPage from './pages/marketing/TeamPage'
-import TestimonialsPage from './pages/marketing/TestimonialsPage'
 import ContactPage from './pages/marketing/ContactPage'
 import PrivacyPolicyPage from './pages/marketing/PrivacyPolicyPage'
 import SignInPage from './pages/auth/SignInPage'
@@ -38,7 +37,6 @@ export default function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:slug" element={<ProductDetailPage />} />
         <Route path="/team" element={<TeamPage />} />
-        <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
       </Route>

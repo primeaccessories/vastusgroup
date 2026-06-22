@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* VASTUS brand palette — deep navy + royal blue (was A2B near-black + mint).
+  /* VASTUS brand palette — deep navy + royal blue.
      Token names are kept so existing utility classes recolour automatically. */
   --color-ink: #0a1226;
   --color-ink-soft: #141d33;

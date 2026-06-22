@@ -8,7 +8,6 @@ import ProductsNavDropdown from '../components/ProductsNavDropdown'
 
 const NAV = [
   { to: '/team', label: 'Our team' },
-  { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -213,7 +212,6 @@ export default function MarketingLayout() {
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
                 <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
-                <li><Link to="/testimonials" className="text-paper/80 hover:text-mint-bright">Testimonials</Link></li>
                 <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
                 <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
               </ul>

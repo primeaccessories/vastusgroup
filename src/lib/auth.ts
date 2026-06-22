@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'a2b.session'
+const STORAGE_KEY = 'vastus.session'
 
 const DEMO_EMAIL = 'test1@test.co.uk'
 const DEMO_PASSWORD = 'test123'
