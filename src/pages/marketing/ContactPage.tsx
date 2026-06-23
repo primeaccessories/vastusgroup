@@ -14,21 +14,6 @@ import { Button } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
 
-const INDUSTRIES = [
-  'Hospitality / restaurant',
-  'Retail (in-person)',
-  'E-commerce / online',
-  'Trade / services',
-  'Beauty / wellness',
-  'Other',
-]
-const VOLUMES = [
-  'Under £5k / month',
-  '£5k – £25k / month',
-  '£25k – £100k / month',
-  '£100k+ / month',
-]
-
 function isInOfficeHours(now: Date) {
   // Mon–Fri, 9:00 – 17:30 UK local time.
   const uk = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }))
@@ -45,8 +30,6 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
-    industry: '',
-    volume: '',
     notes: '',
   })
 
@@ -134,24 +117,6 @@ export default function ContactPage() {
                       placeholder="e.g. Riverside Bistro Ltd"
                     />
                   </Field>
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field label="Industry">
-                      <select value={form.industry} onChange={update('industry')} className="input">
-                        <option value="">Select…</option>
-                        {INDUSTRIES.map((i) => (
-                          <option key={i}>{i}</option>
-                        ))}
-                      </select>
-                    </Field>
-                    <Field label="Monthly card volume">
-                      <select value={form.volume} onChange={update('volume')} className="input">
-                        <option value="">Select…</option>
-                        {VOLUMES.map((v) => (
-                          <option key={v}>{v}</option>
-                        ))}
-                      </select>
-                    </Field>
-                  </div>
                 </FormSection>
 
                 <FormSection title="About you">

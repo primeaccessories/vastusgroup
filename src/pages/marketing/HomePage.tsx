@@ -652,7 +652,7 @@ export default function HomePage() {
               <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
             </p>
             <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
-              One group. <span className="text-mint-bright">Four companies.</span>
+              One group. <span className="text-mint-bright">One mission.</span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
               Payments, finance, technology and utilities under one roof — joined-up solutions to help your business move faster.

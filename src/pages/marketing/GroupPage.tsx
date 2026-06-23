@@ -21,7 +21,7 @@ export default function GroupPage() {
             <span className="h-px w-8 bg-mint-bright" /> The Vastus Group
           </p>
           <h1 className="mt-6 max-w-3xl font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.0] tracking-tight text-paper">
-            One group.<br /><span className="text-mint-bright">Four companies.</span>
+            One group.<br /><span className="text-mint-bright">One mission.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-paper/70 sm:text-lg">
             Vastus brings payments, finance, technology and utilities together under one roof — so ambitious UK businesses have one partner for the tools that move them forward.

@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     description:
       'Take card, contactless and mobile wallet payments anywhere you trade. Desktop, Wi-Fi and fully-mobile GPRS terminals — bespoke pricing, set up by you, supported by a UK team.',
     features: ['Built-in GPRS SIM card', 'All-day battery life', 'Easy plug-and-pay setup', 'Fast thermal printer'],
-    image: '/products/terminals.png',
+    image: '/products/terminals.webp',
     sections: [
       {
         kind: 'prose',
