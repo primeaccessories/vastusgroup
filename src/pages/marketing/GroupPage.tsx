@@ -4,7 +4,7 @@ import { LinkButton } from '../../components/Button'
 import { GROUP } from '../../lib/group'
 
 const WHY = [
-  { title: 'One relationship', body: 'A single point of contact across payments, finance and technology — no being passed from pillar to post.' },
+  { title: 'One relationship', body: 'A single point of contact across payments, finance, technology and utilities — no being passed from pillar to post.' },
   { title: 'Joined-up solutions', body: 'Take payments, fund growth and build the tools to scale — all from one group that already knows your business.' },
   { title: 'A UK team', body: 'Real people and real support, based in the UK — from your first quote to your hundredth payout.' },
 ]
@@ -21,18 +21,18 @@ export default function GroupPage() {
             <span className="h-px w-8 bg-mint-bright" /> The Vastus Group
           </p>
           <h1 className="mt-6 max-w-3xl font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.0] tracking-tight text-paper">
-            One group.<br /><span className="text-mint-bright">Three companies.</span>
+            One group.<br /><span className="text-mint-bright">Four companies.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-paper/70 sm:text-lg">
-            Vastus brings payments, finance and technology together under one roof — so ambitious UK businesses have one partner for the tools that move them forward.
+            Vastus brings payments, finance, technology and utilities together under one roof — so ambitious UK businesses have one partner for the tools that move them forward.
           </p>
         </div>
       </section>
 
-      {/* THREE COMPANIES */}
+      {/* GROUP COMPANIES */}
       <section className="bg-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {GROUP.map((c) => (
               <Link
                 key={c.slug}

@@ -17,7 +17,7 @@ const HERO_TEXT_DELAY_MS = 1850
 let maskPlayed = false
 
 const SUBLINES = [
-  'Payments, finance and technology — one group, working as one team.',
+  'Payments, finance, technology and utilities — one group, working as one team.',
   'Card processing, business funding and digital solutions under one roof.',
   'Joined-up thinking for businesses that refuse to settle for ordinary.',
   'One partner for the tools that move your business forward.',
@@ -637,7 +637,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GROUP STRUCTURE — the three Vastus companies */}
+      {/* GROUP STRUCTURE — the Vastus companies */}
       <section id="group" className="relative overflow-hidden bg-ink text-paper">
         <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-mint/20 blur-[150px]" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
@@ -647,14 +647,14 @@ export default function HomePage() {
               <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
             </p>
             <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
-              One group. <span className="text-mint-bright">Three companies.</span>
+              One group. <span className="text-mint-bright">Four companies.</span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
-              Payments, finance and technology under one roof — joined-up solutions to help your business move faster.
+              Payments, finance, technology and utilities under one roof — joined-up solutions to help your business move faster.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-3 sm:gap-6">
+          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {GROUP.map((c) => (
               <Link
                 key={c.slug}
@@ -687,7 +687,7 @@ export default function HomePage() {
                 Built for <span className="text-mint-deep">ambitious</span> UK businesses.
               </h2>
               <p className="mt-5 max-w-md text-pretty text-lg text-ink-muted">
-                From the high street to high growth, we partner with businesses across every sector — payments, finance and technology, tailored to how you actually work.
+                From the high street to high growth, we partner with businesses across every sector — payments, finance, technology and utilities, tailored to how you actually work.
               </p>
               <div className="mt-8">
                 <LinkButton to="/contact" variant="primary" size="lg">

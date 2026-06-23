@@ -1,6 +1,6 @@
 import { Globe, Smartphone, Code2, Sparkles, type LucideIcon } from 'lucide-react'
 
-export type GroupSlug = 'pay' | 'capital' | 'technology'
+export type GroupSlug = 'pay' | 'capital' | 'technology' | 'utilities'
 
 export interface GroupCompany {
   slug: GroupSlug
@@ -10,7 +10,7 @@ export interface GroupCompany {
   blurb: string
   description: string
   logo: string
-  offers: 'payments' | 'finance' | 'technology'
+  offers: 'payments' | 'finance' | 'technology' | 'utilities'
   highlights?: string[]
 }
 
@@ -64,6 +64,23 @@ export const GROUP: GroupCompany[] = [
       'iOS & Android mobile apps',
       'Custom software & integrations',
       'Branding, hosting & SEO',
+    ],
+  },
+  {
+    slug: 'utilities',
+    name: 'Vastus Utilities',
+    tag: 'Utilities',
+    tagline: 'Business utilities, without the hassle.',
+    blurb: 'Energy, water and connectivity for your business — compared, switched and managed in one place.',
+    description:
+      'We take the hassle out of business utilities — energy, water, broadband and telecoms. One team to compare the market, handle the switch and manage your contracts, so you can get on with running your business.',
+    logo: '/vastus-utilities.webp',
+    offers: 'utilities',
+    highlights: [
+      'Business energy, water & connectivity',
+      'We compare the whole market for you',
+      'We handle the switch from end to end',
+      'One point of contact for every contract',
     ],
   },
 ]

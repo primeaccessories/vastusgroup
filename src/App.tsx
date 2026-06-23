@@ -42,6 +42,7 @@ export default function App() {
         <Route path="/pay" element={<GroupCompanyPage slug="pay" />} />
         <Route path="/capital" element={<GroupCompanyPage slug="capital" />} />
         <Route path="/technology" element={<GroupCompanyPage slug="technology" />} />
+        <Route path="/utilities" element={<GroupCompanyPage slug="utilities" />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
