@@ -38,12 +38,16 @@ export default function MarketingLayout() {
   }, [])
 
   const isHome = location.pathname === '/'
+  // Product detail pages (/products/<slug>) also open on a dark, full-bleed hero,
+  // so the header sits transparent over it like the home page.
+  const isProductDetail = /^\/products\/.+/.test(location.pathname)
+  const heroDark = isHome || isProductDetail
   // Once the mobile menu opens, the panel below is light (bg-paper) — flip the
   // header to match so the hamburger doesn't sit in a dark strip above a white slab.
-  const darkMode = isHome && !open
+  const darkMode = heroDark && !open
   const headerBg = open
     ? 'bg-paper'
-    : isHome
+    : heroDark
       ? scrolled
         ? 'bg-ink/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.06)]'
         : 'bg-transparent'
@@ -52,7 +56,7 @@ export default function MarketingLayout() {
         : 'bg-paper'
 
   return (
-    <div className={`flex min-h-[100dvh] flex-col ${isHome ? 'bg-ink' : 'bg-paper'}`}>
+    <div className={`flex min-h-[100dvh] flex-col ${heroDark ? 'bg-ink' : 'bg-paper'}`}>
       <header className={`sticky top-0 z-40 transition-colors duration-300 ${headerBg}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <BrandLogo variant={darkMode ? 'dark' : 'light'} />
@@ -149,7 +153,7 @@ export default function MarketingLayout() {
         )}
       </header>
 
-      <main className={`flex-1 ${isHome ? '-mt-[72px] sm:-mt-[80px]' : ''}`}>
+      <main className={`flex-1 ${heroDark ? '-mt-[72px] sm:-mt-[80px]' : ''}`}>
         <Outlet />
       </main>
 

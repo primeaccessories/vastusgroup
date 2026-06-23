@@ -10,72 +10,57 @@ export default function ProductDetailPage() {
   if (!product) return <Navigate to="/products" replace />
 
   const isFinance = product.category === 'finance'
+  const heroBg = isFinance ? '/hero-business.webp' : '/hero-payment.webp'
   const related = PRODUCTS.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 3)
 
   return (
     <>
-      {/* HERO — editorial split: copy left, product image panel right */}
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-20" />
-        <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full opacity-25 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #0b53f5, transparent 70%)' }}
-        />
-        <div className="relative mx-auto max-w-7xl px-5 pt-8 pb-12 sm:px-8 sm:pt-12 sm:pb-16">
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/60 transition hover:text-mint">
+      {/* HERO — dark, full-bleed photo with copy + feature stat cards */}
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-30 bg-cover bg-center" style={{ backgroundImage: `url(${heroBg})` }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 bg-ink/45" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/75 to-ink/40" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute -right-32 -top-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-mint/15 blur-[160px]" />
+
+        <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-12 sm:px-8 sm:pt-32 sm:pb-16">
+          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/70 transition hover:text-mint-bright">
             <ArrowLeft className="h-4 w-4" /> All products
           </Link>
 
-          <div className="mt-8 grid items-center gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-14">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">
-                {isFinance ? 'Business finance' : 'Card payments'}
-              </p>
-              <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl">
-                {product.title}
-              </h1>
-              <p className="mt-4 max-w-xl text-pretty text-xl text-paper/70">{product.tagline}</p>
-              <p className="mt-4 max-w-xl text-pretty text-paper/55">{product.description}</p>
+          <div className="mt-8 max-w-2xl">
+            <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright sm:text-xs">
+              <span className="h-px w-8 bg-mint-bright" />
+              {isFinance ? 'Business finance' : 'Card payments'}
+            </p>
+            <h1 className="mt-5 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl">
+              {product.title}
+            </h1>
+            <p className="mt-5 max-w-xl text-pretty text-lg text-paper/80 sm:text-xl">{product.tagline}</p>
+            <p className="mt-3 max-w-xl text-pretty text-paper/60">{product.description}</p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <LinkButton to="/contact" variant="primary" size="lg">
-                  Enquire about {product.shortTitle.toLowerCase()}
-                  <ArrowUpRight className="h-5 w-5" />
-                </LinkButton>
-                <a
-                  href="tel:03334432645"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 text-base font-semibold text-paper backdrop-blur transition hover:border-mint hover:text-mint"
-                >
-                  <Phone className="h-5 w-5" /> 0333 443 2645
-                </a>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#eef1f2] ring-1 ring-white/10 shadow-[0_40px_90px_-45px_rgba(0,0,0,0.65)]">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-mint/25 blur-3xl"
-                />
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="absolute inset-0 h-full w-full object-contain p-8 sm:p-12"
-                />
-              </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <LinkButton to="/contact" variant="primary" size="lg">
+                Enquire about {product.shortTitle.toLowerCase()}
+                <ArrowUpRight className="h-5 w-5" />
+              </LinkButton>
+              <a
+                href="tel:03334432645"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 text-base font-semibold text-paper backdrop-blur transition hover:border-mint-bright hover:text-mint-bright"
+              >
+                <Phone className="h-5 w-5" /> 0333 443 2645
+              </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* SPEC STRIP — features as a divided row */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-ink/5 ring-1 ring-ink/5 lg:grid-cols-4">
+          {/* feature stat cards */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:max-w-5xl lg:grid-cols-4">
             {product.features.map((f) => (
-              <div key={f} className="bg-paper px-5 py-5 sm:px-7 sm:py-6">
-                <Check className="h-5 w-5 text-mint-deep" strokeWidth={2.5} />
-                <p className="mt-2.5 text-sm font-medium text-ink">{f}</p>
+              <div key={f} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm sm:p-5">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-mint/20 text-mint-bright">
+                  <Check className="h-4 w-4" strokeWidth={2.5} />
+                </span>
+                <p className="mt-3 text-sm font-medium text-paper">{f}</p>
               </div>
             ))}
           </div>
