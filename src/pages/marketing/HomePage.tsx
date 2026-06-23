@@ -6,13 +6,15 @@ import { LinkButton } from '../../components/Button'
 import GlassIcon from '../../components/GlassIcon'
 import { GROUP, TECH_SERVICES } from '../../lib/group'
 
-const MASK_DURATION_MS = 900
-const HERO_TEXT_DELAY_MS = 600
+const MASK_DURATION_MS = 2600
+const HERO_TEXT_DELAY_MS = 1850
 
-// Plays once per browser tab session. A normal refresh keeps the flag, so the
-// intro is skipped and the scroll position is preserved; a fresh tab / new
-// session replays it.
-const MASK_SEEN_KEY = 'vastus-mask-seen'
+// Module-level flag: persists across in-app (SPA) route changes but RESETS on a
+// full page load / refresh. So the splash replays on every fresh visit/refresh,
+// yet is skipped when navigating back to the home route within the app (no
+// jarring re-intro mid-session).
+
+let maskPlayed = false
 
 const SUBLINES = [
   'Payments, finance and technology — one group, working as one team.',
@@ -146,14 +148,13 @@ const SECTORS: { name: string; Icon: LucideIcon }[] = [
 ]
 
 export default function HomePage() {
-  const alreadySeen =
-    typeof window !== 'undefined' && sessionStorage.getItem(MASK_SEEN_KEY) === 'true'
+  const alreadySeen = maskPlayed
 
   const [maskGone, setMaskGone] = useState(alreadySeen)
   useEffect(() => {
     if (maskGone) return
-    // Mark seen immediately so a mid-intro route change + return doesn't replay it.
-    try { sessionStorage.setItem(MASK_SEEN_KEY, 'true') } catch { /* private mode */ }
+    // Mark played immediately so a mid-intro route change + return doesn't replay it.
+    maskPlayed = true
     const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
     return () => clearTimeout(t)
   }, [maskGone])
@@ -250,35 +251,85 @@ export default function HomePage() {
 
   return (
     <>
-      {/* VASTUS LOADING SPLASH — full-screen WHITE sheet with the full Vastus
-          logo centred. Gentle zoom + fade into the hero. Sits above the header
-          for a clean splash. */}
+      {/* VASTUS LOADING SPLASH — a slow, premium intro on a white sheet:
+          a soft brand glow blooms, the wordmark settles in, an accent line
+          draws out beneath it, a calm hold, then the whole sheet lifts away
+          like a curtain to reveal the hero (text already in place). Sits
+          above the header. */}
       <AnimatePresence>
         {!maskGone && (
           <motion.div
             key="hero-vastus-mask"
             aria-hidden="true"
-            initial={{ scale: 1.0, opacity: 1 }}
-            animate={{
-              scale: [1, 6],
-              opacity: [1, 1, 0],
-              transition: {
-                scale: { duration: 0.55, delay: 0.2, ease: [0.5, 0, 0.75, 0] },
-                opacity: { duration: 0.55, delay: 0.2, times: [0, 0.55, 1], ease: 'easeIn' },
-              },
-            }}
-            exit={{ opacity: 0, transition: { duration: 0.05 } }}
-            className="pointer-events-none fixed left-0 top-[-10vh] z-50 h-[120vh] w-screen overflow-hidden will-change-transform"
+            initial={{ y: 0 }}
+            animate={{ y: 0 }}
+            exit={{ y: '-101%', transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
+            className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-white will-change-transform"
           >
-            <div className="absolute inset-0 bg-white" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src="/vastus-logo-full.webp"
-                alt="Vastus"
-                draggable={false}
-                className="w-[min(72vw,440px)] select-none px-6"
+            {/* soft brand glow blooming behind the wordmark */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <motion.div
+                aria-hidden="true"
+                className="h-[58vmin] w-[58vmin] rounded-full bg-mint/15 blur-[130px]"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: [0, 1, 0.72], scale: [0.6, 1, 1.05] }}
+                transition={{ duration: 2.2, ease: 'easeOut', times: [0, 0.55, 1] }}
               />
             </div>
+
+            <div className="relative flex flex-col items-center gap-6 px-6">
+              {/* wordmark — focus-in (blur + scale + fade), then a sheen glint */}
+              <div className="relative w-[min(72vw,440px)]">
+                <motion.img
+                  src="/vastus-logo-full.webp"
+                  alt="Vastus"
+                  draggable={false}
+                  className="w-full select-none"
+                  initial={{ opacity: 0, scale: 0.94, y: 10, filter: 'blur(12px)' }}
+                  animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
+                />
+                {/* sheen glint, clipped to the wordmark silhouette */}
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 overflow-hidden"
+                  style={{
+                    WebkitMaskImage: 'url(/vastus-logo-full.webp)',
+                    maskImage: 'url(/vastus-logo-full.webp)',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1, 1, 0] }}
+                  transition={{ duration: 1.3, delay: 1.15, times: [0, 0.15, 0.85, 1] }}
+                >
+                  <motion.div
+                    className="absolute inset-y-[-25%] left-0 w-1/3 bg-gradient-to-r from-transparent via-white/85 to-transparent blur-[2px]"
+                    style={{ skewX: '-12deg' }}
+                    initial={{ x: '-200%' }}
+                    animate={{ x: '360%' }}
+                    transition={{ duration: 1.2, delay: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                </motion.div>
+              </div>
+
+              {/* accent underline drawing out from the centre */}
+              <motion.span
+                aria-hidden="true"
+                className="block h-px w-44 bg-gradient-to-r from-transparent via-mint to-transparent"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.9, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              />
+            </div>
+
+            {/* brand-blue light riding the curtain's bottom edge as it lifts */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-mint/12 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -290,20 +341,22 @@ export default function HomePage() {
       <div className="flex min-h-[calc(100dvh_+_72px)] flex-col bg-ink sm:min-h-[calc(100dvh_+_80px)]">
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
-        {/* Ambient brand backdrop — replaces the old intro video. */}
+        {/* Hero backdrop — a real contactless-payment photo under a brand-tinted
+            dark wash. The wash is heaviest on the left and along the bottom,
+            where the headline and subline sit, so white text stays crisp while
+            the payment moment shows through on the right. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-20 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]"
+          className="pointer-events-none absolute inset-0 -z-30 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/hero-payment.webp)' }}
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-ink/30" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/55 to-transparent" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-gradient-to-t from-ink to-transparent" />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 right-[-10%] -z-20 h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]"
+          className="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[40rem] w-[40rem] rounded-full bg-mint/15 blur-[160px]"
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-[-25%] left-[-15%] -z-20 h-[40rem] w-[40rem] rounded-full bg-mint-deep/20 blur-[150px]"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/0 via-ink/30 to-ink" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
