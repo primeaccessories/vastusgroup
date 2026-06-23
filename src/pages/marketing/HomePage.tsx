@@ -1,9 +1,10 @@
-import { ArrowDown, ArrowUpRight, Check, Phone, Globe, Smartphone, Code2, Sparkles, UtensilsCrossed, ShoppingBag, ShoppingCart, Scissors, Car, Briefcase, Hammer, Ticket, type LucideIcon } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, UtensilsCrossed, ShoppingBag, ShoppingCart, Scissors, Car, Briefcase, Hammer, Ticket, type LucideIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Button, LinkButton } from '../../components/Button'
+import { LinkButton } from '../../components/Button'
 import GlassIcon from '../../components/GlassIcon'
+import { GROUP, TECH_SERVICES } from '../../lib/group'
 
 const MASK_DURATION_MS = 2600
 const HERO_TEXT_DELAY_MS = 2200
@@ -132,37 +133,6 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
   },
 ]
 
-const GROUP_COMPANIES: { name: string; tag: string; blurb: string; to: string; logo: string }[] = [
-  {
-    name: 'Vastus Pay',
-    tag: 'Payments',
-    blurb: 'Card payments, terminals and merchant services built for UK businesses.',
-    to: '/products',
-    logo: '/vastus-pay.webp',
-  },
-  {
-    name: 'Vastus Capital',
-    tag: 'Finance',
-    blurb: 'Business funding, cash advances and flexible finance to help you grow.',
-    to: '/products/cash-advance',
-    logo: '/vastus-capital.webp',
-  },
-  {
-    name: 'Vastus Technology',
-    tag: 'Technology',
-    blurb: 'Websites, apps and software — digital solutions delivered end to end.',
-    to: '#technology',
-    logo: '/vastus-technology.webp',
-  },
-]
-
-const TECH_SERVICES: { title: string; blurb: string; Icon: LucideIcon }[] = [
-  { title: 'Website Development', blurb: 'High-performance, conversion-focused sites built to modern standards.', Icon: Globe },
-  { title: 'Mobile App Development', blurb: 'Native and cross-platform apps for iOS and Android.', Icon: Smartphone },
-  { title: 'Software & Technology Solutions', blurb: 'Custom software, integrations and automation for your operations.', Icon: Code2 },
-  { title: 'Other Digital Services', blurb: 'Branding, hosting, SEO and the digital essentials to grow online.', Icon: Sparkles },
-]
-
 // TODO(owner): swap these placeholder sectors for the client's final target-sector list.
 const SECTORS: { name: string; Icon: LucideIcon }[] = [
   { name: 'Hospitality', Icon: UtensilsCrossed },
@@ -223,10 +193,6 @@ export default function HomePage() {
     const id = setInterval(() => setSublineIdx((i) => (i + 1) % SUBLINES.length), SUBLINE_ROTATE_MS)
     return () => clearInterval(id)
   }, [])
-
-  const scrollToGroup = () => {
-    document.getElementById('group')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
 
   // Portal tease (mobile) — small scroll-driven parallax: the card and text drift
   // at different speeds as the section passes through the viewport.
@@ -367,16 +333,15 @@ export default function HomePage() {
             </h1>
 
             <div className="mt-10">
-              <Button
-                type="button"
-                onClick={scrollToGroup}
+              <LinkButton
+                to="/group"
                 variant="primary"
                 size="lg"
                 className="w-full !shadow-none sm:w-auto"
               >
                 Explore the Group
-                <ArrowDown className="h-5 w-5" />
-              </Button>
+                <ArrowUpRight className="h-5 w-5" />
+              </LinkButton>
             </div>
           </div>
 
@@ -731,28 +696,23 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-3 sm:gap-6">
-            {GROUP_COMPANIES.map((c) => {
-              const inner = (
-                <>
-                  <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/5">
-                    <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
-                  </div>
-                  <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
-                  <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
-                  <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-mint-bright">
-                    Explore
-                    <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </>
-              )
-              const cardCls =
-                'group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8'
-              return c.to.startsWith('#') ? (
-                <a key={c.name} href={c.to} className={cardCls}>{inner}</a>
-              ) : (
-                <Link key={c.name} to={c.to} className={cardCls}>{inner}</Link>
-              )
-            })}
+            {GROUP.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/${c.slug}`}
+                className="group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8"
+              >
+                <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/5">
+                  <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
+                </div>
+                <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
+                <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-mint-bright">
+                  Explore {c.name}
+                  <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

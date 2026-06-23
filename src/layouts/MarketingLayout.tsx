@@ -7,6 +7,7 @@ import { LinkButton } from '../components/Button'
 import ProductsNavDropdown from '../components/ProductsNavDropdown'
 
 const NAV = [
+  { to: '/group', label: 'The Group' },
   { to: '/team', label: 'Our team' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -211,6 +212,7 @@ export default function MarketingLayout() {
                 Company
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
+                <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>
                 <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
                 <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
                 <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>

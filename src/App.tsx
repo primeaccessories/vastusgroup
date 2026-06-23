@@ -6,6 +6,8 @@ import HomePage from './pages/marketing/HomePage'
 import ProductsPage from './pages/marketing/ProductsPage'
 import ProductDetailPage from './pages/marketing/ProductDetailPage'
 import TeamPage from './pages/marketing/TeamPage'
+import GroupPage from './pages/marketing/GroupPage'
+import GroupCompanyPage from './pages/marketing/GroupCompanyPage'
 import ContactPage from './pages/marketing/ContactPage'
 import PrivacyPolicyPage from './pages/marketing/PrivacyPolicyPage'
 import SignInPage from './pages/auth/SignInPage'
@@ -36,6 +38,10 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:slug" element={<ProductDetailPage />} />
+        <Route path="/group" element={<GroupPage />} />
+        <Route path="/pay" element={<GroupCompanyPage slug="pay" />} />
+        <Route path="/capital" element={<GroupCompanyPage slug="capital" />} />
+        <Route path="/technology" element={<GroupCompanyPage slug="technology" />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
