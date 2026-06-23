@@ -8,7 +8,7 @@ import ProductsNavDropdown from '../components/ProductsNavDropdown'
 
 const NAV = [
   { to: '/group', label: 'The Group' },
-  { to: '/team', label: 'Our team' },
+  { to: '/team', label: 'Meet Vastus' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -180,7 +180,7 @@ export default function MarketingLayout() {
 
             <div>
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                Payments
+                Vastus Pay
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {['payment-terminals', 'virtual-terminal', 'epos-systems', 'ecommerce'].map((s) => (
@@ -198,7 +198,7 @@ export default function MarketingLayout() {
 
             <div>
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                Finance
+                Vastus Capital
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
                 <li><Link to="/products/cash-advance" className="text-paper/80 hover:text-mint-bright">Cash advance</Link></li>
@@ -209,7 +209,7 @@ export default function MarketingLayout() {
 
             <div>
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                Company
+                The Group
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
                 <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>

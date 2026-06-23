@@ -16,7 +16,7 @@ export const TEAM: TeamMember[] = [
     role: 'Founder & CEO',
     founder: true,
     image: '/team/jack-fletcher.webp',
-    bio: 'Jack has built a wealth of knowledge on the merchant services industry, rising quickly through the ranks of his previous employer. His passion for being regarded as an extension of his clients\' business is built into the fabric of Vastus.',
+    bio: 'Jack is the Founder and CEO of Vastus Group. With over a decade of experience in the merchant services and business finance sectors, he has built multiple successful businesses from the ground up through a relentless commitment to excellence, discipline and continuous improvement.\n\nJack believes that personal development is not optional but essential, both in business and in life. This philosophy sits at the heart of Vastus, where growth, accountability and high standards are expected at every level of the organisation.\n\nHis vision for Vastus is simple: to build exceptional companies, develop exceptional people and deliver exceptional outcomes.',
   },
   { name: 'Ellie Masterson', role: 'Head of Pricing', lead: true, image: '/team/ellie-masterson.webp' },
   { name: 'Lauren Wheatley', role: 'Head of Onboarding', lead: true, image: '/team/lauren-wheatley.webp' },

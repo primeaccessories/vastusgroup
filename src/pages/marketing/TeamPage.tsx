@@ -34,14 +34,30 @@ export default function TeamPage() {
           </div>
 
           {/* Founder portraits as the hero visual */}
-          <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+          <div className="grid gap-5">
             {founders.map((m) => (
               <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
-                <Portrait name={m.name} image={m.image} ratio="4/5" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">{m.name}</h3>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
-                  {m.bio && <p className="mt-3 text-pretty text-sm text-ink-muted">{m.bio}</p>}
+                <div className="grid sm:grid-cols-[minmax(0,0.85fr)_1.15fr]">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-b from-mint/45 via-mint/25 to-mint/10 sm:aspect-auto sm:h-full sm:min-h-[22rem]">
+                    {m.image ? (
+                      <img src={m.image} alt={m.name} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
+                    ) : (
+                      <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-bold text-ink/70">
+                        {m.name.split(' ').map((n) => n[0]).join('')}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex flex-col justify-center p-6 sm:p-8">
+                    <h3 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{m.name}</h3>
+                    <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
+                    {m.bio && (
+                      <div className="mt-4 space-y-3 text-pretty text-sm leading-relaxed text-ink-muted sm:text-[15px]">
+                        {m.bio.split('\n\n').map((para, i) => (
+                          <p key={i}>{para}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </GlassCard>
             ))}

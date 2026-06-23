@@ -10,8 +10,8 @@ export default function ProductsPage() {
 
   return (
     <>
-      <ProductSection title="Payments" tagline="Take card payments anywhere you trade." items={payments} />
-      <ProductSection title="Business finance" tagline="Funding options that fit how your business actually works." items={finance} dark />
+      <ProductSection eyebrow="Vastus Pay" title="Payments" tagline="Take card payments anywhere you trade." items={payments} />
+      <ProductSection eyebrow="Vastus Capital" title="Finance" tagline="Funding options that fit how your business actually works." items={finance} />
 
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <GlassCard surface="light" className="bg-gradient-to-br from-mint/25 via-paper to-paper p-10 sm:p-14">
@@ -36,13 +36,14 @@ export default function ProductsPage() {
 }
 
 interface ProductSectionProps {
+  eyebrow: string
   title: string
   tagline: string
   items: typeof PRODUCTS
   dark?: boolean
 }
 
-function ProductSection({ title, tagline, items, dark = false }: ProductSectionProps) {
+function ProductSection({ eyebrow, title, tagline, items, dark = false }: ProductSectionProps) {
   return (
     <section className={dark ? 'bg-ink-soft text-paper' : 'bg-paper'}>
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
@@ -53,7 +54,7 @@ function ProductSection({ title, tagline, items, dark = false }: ProductSectionP
                 dark ? 'text-mint/80' : 'text-mint-deep'
               }`}
             >
-              {dark ? 'Business finance' : 'Card payments'}
+              {eyebrow}
             </p>
             <h2
               className={`mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl ${

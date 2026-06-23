@@ -110,6 +110,13 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
       'Klarna',
       'PayPal',
       'Open Banking',
+      'Visa Electron',
+      'V Pay',
+      'Clearpay',
+      'Curve',
+      'Garmin Pay',
+      'Bancontact',
+      'iDEAL',
     ],
   },
   {
@@ -131,6 +138,13 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
       'Visa Direct',
       'Mastercard Send',
       'Faster Payments',
+      'SoftPOS',
+      'EMV 3DS',
+      'FCA Regulated',
+      'GDPR Compliant',
+      'Mastercard ID Check',
+      'Visa Secure',
+      'QR Payments',
     ],
   },
 ]
@@ -348,7 +362,7 @@ export default function HomePage() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-30 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/hero-payment.webp)' }}
+          style={{ backgroundImage: 'url(/hero-business.webp)' }}
         />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-ink/30" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/55 to-transparent" />
@@ -368,7 +382,7 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-mint-bright sm:text-xs">
               <span className="h-px w-8 bg-mint-bright" />
-              One group · Three companies
+              One group · One mission
             </p>
 
             <h1 className="mt-6 font-display text-balance text-[clamp(2.5rem,7.5vw,6rem)] font-semibold uppercase leading-[0.95] tracking-tight text-paper">
@@ -748,8 +762,8 @@ export default function HomePage() {
                 to={`/${c.slug}`}
                 className="group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8"
               >
-                <div className="flex h-20 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)]">
-                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-9 object-contain" />
+                <div className="flex h-14 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)] sm:h-16">
+                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-8 object-contain sm:max-h-9" />
                 </div>
                 <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
                 <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>

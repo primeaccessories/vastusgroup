@@ -81,8 +81,8 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
       >
         <div className="overflow-hidden rounded-2xl border border-ink/5 bg-paper shadow-[0_20px_60px_-15px_rgba(15,23,42,0.25)] ring-1 ring-ink/5">
           <div className="grid grid-cols-2 gap-1 p-3">
-            <Column label="Payments" items={PAYMENTS} />
-            <Column label="Finance" items={FINANCE} />
+            <Column label="Vastus Pay" items={PAYMENTS} />
+            <Column label="Vastus Capital" items={FINANCE} />
           </div>
 
           <Link
