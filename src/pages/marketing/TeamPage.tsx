@@ -17,7 +17,7 @@ export default function TeamPage() {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 top-1/4 h-[360px] w-[360px] translate-x-1/3 rounded-full bg-mint-deep/10 blur-[130px]"
         />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div className="relative mx-auto grid max-w-7xl items-start gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* Intro */}
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">MEET VASTUS</p>
@@ -33,16 +33,24 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Founder portraits as the hero visual */}
+          {/* Founder — landscape feature card */}
           <div className="grid gap-5">
             {founders.map((m) => (
-              <GlassCard key={m.name} surface="light" className="mx-auto w-full max-w-sm overflow-hidden p-0">
-                <Portrait name={m.name} image={m.image} ratio="4/5" />
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">{m.name}</h3>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
+              <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-b from-mint/40 via-mint/20 to-mint/5">
+                  {m.image ? (
+                    <img src={m.image} alt={m.name} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
+                  ) : (
+                    <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-bold text-ink/70">
+                      {m.name.split(' ').map((n) => n[0]).join('')}
+                    </span>
+                  )}
+                </div>
+                <div className="p-6 sm:p-8">
+                  <h3 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{m.name}</h3>
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
                   {m.bio && (
-                    <div className="mt-3 space-y-2.5 text-pretty text-sm text-ink-muted">
+                    <div className="mt-4 space-y-3 text-pretty text-[15px] leading-relaxed text-ink-muted">
                       {m.bio.split('\n\n').map((para, i) => (
                         <p key={i}>{para}</p>
                       ))}
