@@ -6,8 +6,8 @@ import { LinkButton } from '../../components/Button'
 import GlassIcon from '../../components/GlassIcon'
 import { GROUP, TECH_SERVICES } from '../../lib/group'
 
-const MASK_DURATION_MS = 2600
-const HERO_TEXT_DELAY_MS = 2200
+const MASK_DURATION_MS = 900
+const HERO_TEXT_DELAY_MS = 600
 
 // Plays once per browser tab session. A normal refresh keeps the flag, so the
 // intro is skipped and the scroll position is preserved; a fresh tab / new
@@ -260,11 +260,11 @@ export default function HomePage() {
             aria-hidden="true"
             initial={{ scale: 1.0, opacity: 1 }}
             animate={{
-              scale: [1, 1.7],
+              scale: [1, 6],
               opacity: [1, 1, 0],
               transition: {
-                scale: { duration: 1.6, delay: 0.9, ease: [0.55, 0, 0.2, 1] },
-                opacity: { duration: 1.6, delay: 0.9, times: [0, 0.45, 1], ease: 'easeIn' },
+                scale: { duration: 0.55, delay: 0.2, ease: [0.5, 0, 0.75, 0] },
+                opacity: { duration: 0.55, delay: 0.2, times: [0, 0.55, 1], ease: 'easeIn' },
               },
             }}
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
