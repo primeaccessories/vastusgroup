@@ -250,9 +250,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* VASTUS LOADING SPLASH — full-screen ink sheet with the complete Vastus
-          logo (blue V mark + wordmark) centred. Gentle zoom + fade into the dark
-          hero (ink→ink, so no flash). Sits above the header for a clean splash. */}
+      {/* VASTUS LOADING SPLASH — full-screen WHITE sheet with the full Vastus
+          logo centred. Gentle zoom + fade into the hero. Sits above the header
+          for a clean splash. */}
       <AnimatePresence>
         {!maskGone && (
           <motion.div
@@ -270,23 +270,14 @@ export default function HomePage() {
             exit={{ opacity: 0, transition: { duration: 0.05 } }}
             className="pointer-events-none fixed left-0 top-[-10vh] z-50 h-[120vh] w-screen overflow-hidden will-change-transform"
           >
-            <div className="absolute inset-0 bg-ink" />
+            <div className="absolute inset-0 bg-white" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="flex items-center gap-3 px-6 sm:gap-5">
-                <img
-                  src="/vastus-mark.webp"
-                  alt=""
-                  aria-hidden="true"
-                  draggable={false}
-                  className="h-14 w-14 select-none sm:h-20 sm:w-20"
-                />
-                <img
-                  src="/vastus-logo-dark.webp"
-                  alt="Vastus"
-                  draggable={false}
-                  className="h-8 w-auto select-none sm:h-12"
-                />
-              </div>
+              <img
+                src="/vastus-logo-full.webp"
+                alt="Vastus"
+                draggable={false}
+                className="w-[min(72vw,440px)] select-none px-6"
+              />
             </div>
           </motion.div>
         )}
