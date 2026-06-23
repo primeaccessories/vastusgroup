@@ -38,7 +38,7 @@ export default function TeamPage() {
             {founders.map((m) => (
               <GlassCard key={m.name} surface="light" className="p-6 sm:p-8">
                 <div className="flex items-center gap-5">
-                  <div className="aspect-square w-32 flex-shrink-0 overflow-hidden rounded-2xl bg-gradient-to-b from-mint/40 to-mint/10 ring-1 ring-ink/5 sm:w-36">
+                  <div className="aspect-square w-56 flex-shrink-0 overflow-hidden rounded-2xl bg-gradient-to-b from-mint/40 to-mint/10 ring-1 ring-ink/5 sm:w-64">
                     {m.image ? (
                       <img src={m.image} alt={m.name} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
                     ) : (
