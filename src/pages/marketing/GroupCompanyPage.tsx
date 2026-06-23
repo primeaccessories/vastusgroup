@@ -20,7 +20,8 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
 
   return (
     <>
-      {/* HERO */}
+      {/* HERO — hidden on /capital, which opens straight into "What we offer" */}
+      {company.slug !== 'capital' && (
       <section className="relative overflow-hidden bg-ink text-paper">
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]" />
         <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]" />
@@ -72,11 +73,12 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* PRODUCT OFFERINGS (payments / finance) */}
       {products.length > 0 && (
         <section className="bg-paper">
-          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className={`mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20 ${company.slug === 'capital' ? 'pt-28 sm:pt-36' : 'pt-16 sm:pt-20'}`}>
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">{company.tag}</p>
             <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">What we offer</h2>
             <div className="mt-10 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
