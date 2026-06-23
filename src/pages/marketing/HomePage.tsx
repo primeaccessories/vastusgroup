@@ -91,64 +91,6 @@ const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[
   },
 ]
 
-const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
-  {
-    label: 'Cards & wallets',
-    duration: 52,
-    items: [
-      'VISA',
-      'Mastercard',
-      'American Express',
-      'Maestro',
-      'Discover',
-      'JCB',
-      'UnionPay',
-      'Diners Club',
-      'Apple Pay',
-      'Google Pay',
-      'Samsung Pay',
-      'Klarna',
-      'PayPal',
-      'Open Banking',
-      'Visa Electron',
-      'V Pay',
-      'Clearpay',
-      'Curve',
-      'Garmin Pay',
-      'Bancontact',
-      'iDEAL',
-    ],
-  },
-  {
-    label: 'Standards & infra',
-    duration: 58,
-    reverse: true,
-    items: [
-      'PCI-DSS Level 1',
-      '3D Secure 2',
-      'EMV Chip & PIN',
-      'Contactless NFC',
-      'Tap to Pay',
-      'P2PE',
-      'Tokenisation',
-      'AES-256',
-      'ISO 8583',
-      'ISO 20022',
-      'PSD2 / SCA',
-      'Visa Direct',
-      'Mastercard Send',
-      'Faster Payments',
-      'SoftPOS',
-      'EMV 3DS',
-      'FCA Regulated',
-      'GDPR Compliant',
-      'Mastercard ID Check',
-      'Visa Secure',
-      'QR Payments',
-    ],
-  },
-]
-
 // TODO(owner): swap these placeholder sectors for the client's final target-sector list.
 const SECTORS: { name: string; Icon: LucideIcon }[] = [
   { name: 'Hospitality', Icon: UtensilsCrossed },
@@ -348,7 +290,7 @@ export default function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* HERO + MARQUEE — one viewport-tall landing block. Height compensates for
+      {/* HERO — one viewport-tall landing block. Height compensates for
           the header pull-up (-mt-[72px]/sm:-mt-[80px]) so it fills exactly to the
           viewport bottom on every browser (Safari was ending ~72px short, revealing
           the next section + lifting content). */}
@@ -432,49 +374,6 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* TRUST MARQUEE — anchored to the bottom of the landing block */}
-      <section className="shrink-0 border-y border-white/5 bg-ink py-6 text-paper sm:py-10">
-        <p className="mb-8 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-paper/40 sm:mb-10 sm:text-xs">
-          Cards, wallets &amp; the rails behind them
-        </p>
-        <div className="flex flex-col gap-5 sm:gap-7">
-          {TRUST_ROWS.map((row, i) => (
-            <div key={row.label} className="flex items-center gap-4">
-              <span className="hidden shrink-0 pl-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint/80 sm:block sm:w-40 sm:pl-8">
-                {row.label}
-              </span>
-              <div className="relative flex-1 overflow-hidden">
-                <div
-                  className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-ink to-transparent sm:w-24"
-                  aria-hidden="true"
-                />
-                <div
-                  className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-ink to-transparent sm:w-24"
-                  aria-hidden="true"
-                />
-                <div
-                  className="flex w-max animate-marquee items-center gap-10 whitespace-nowrap sm:gap-14"
-                  style={{
-                    animationDuration: `${row.duration}s`,
-                    animationDirection: row.reverse ? 'reverse' : 'normal',
-                  }}
-                >
-                  {Array.from({ length: 3 }).flatMap((_, dup) =>
-                    row.items.map((brand) => (
-                      <span
-                        key={`${i}-${dup}-${brand}`}
-                        className="font-display text-base font-semibold uppercase tracking-[0.25em] text-paper/40 sm:text-lg"
-                      >
-                        {brand}
-                      </span>
-                    ))
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
       </div>
 
       {/* PORTAL TEASE — cinematic dashboard cluster */}
