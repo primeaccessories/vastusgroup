@@ -69,6 +69,42 @@
     border-color: var(--color-mint);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 4px rgba(11, 83, 245, 0.18);
   }
+
+  /* Premium range slider — Vastus Capital funding calculator */
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-paper-soft);
+    outline: none;
+    cursor: pointer;
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 22px;
+    width: 22px;
+    border-radius: 9999px;
+    background: var(--color-mint);
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 10px rgba(11, 83, 245, 0.45);
+    transition: transform 150ms ease;
+  }
+  .range::-webkit-slider-thumb:hover,
+  .range:active::-webkit-slider-thumb {
+    transform: scale(1.12);
+  }
+  .range::-moz-range-thumb {
+    height: 22px;
+    width: 22px;
+    border: 3px solid #ffffff;
+    border-radius: 9999px;
+    background: var(--color-mint);
+    box-shadow: 0 2px 10px rgba(11, 83, 245, 0.45);
+    cursor: pointer;
+  }
 }
 
 @layer utilities {

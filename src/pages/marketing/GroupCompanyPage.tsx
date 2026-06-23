@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowUpRight, Phone } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Check, Phone } from 'lucide-react'
 import { LinkButton } from '../../components/Button'
 import GlassIcon from '../../components/GlassIcon'
+import GlassCard from '../../components/GlassCard'
+import FundingCalculator from '../../components/FundingCalculator'
 import { groupBySlug, TECH_SERVICES, type GroupSlug } from '../../lib/group'
 import { PRODUCTS } from '../../lib/products'
 
@@ -23,27 +25,50 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]" />
         <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]" />
         <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-16 sm:px-8 sm:pt-36 sm:pb-20">
-          <Link to="/group" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mint-bright transition hover:text-paper">
-            <ArrowLeft className="h-3.5 w-3.5" /> The Vastus Group
-          </Link>
-          <div className="mt-6 flex h-20 w-fit items-center rounded-2xl bg-white px-6 ring-1 ring-white/10">
-            <img src={company.logo} alt={company.name} className="max-h-12 w-auto object-contain" />
-          </div>
-          <h1 className="mt-7 max-w-3xl font-display text-balance text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.02] tracking-tight">
-            {company.tagline}
-          </h1>
-          <p className="mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">{company.description}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <LinkButton to="/contact" variant="primary" size="lg">
-              {company.offers === 'technology' ? 'Start a project' : 'Get a quote'}
-              <ArrowUpRight className="h-5 w-5" />
-            </LinkButton>
-            <a
-              href="tel:03334432645"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint-bright hover:text-mint-bright"
-            >
-              <Phone className="h-5 w-5" /> 0333 443 2645
-            </a>
+          <div className={`grid items-center gap-10 lg:gap-14 ${company.highlights ? 'lg:grid-cols-[1.05fr_0.95fr]' : ''}`}>
+            <div>
+              <Link to="/group" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mint-bright transition hover:text-paper">
+                <ArrowLeft className="h-3.5 w-3.5" /> The Vastus Group
+              </Link>
+              <p className="mt-7 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-paper/55">
+                <span className="h-px w-8 bg-mint-bright" />
+                {company.name} · {company.tag}
+              </p>
+              <h1 className="mt-5 max-w-3xl font-display text-balance text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.02] tracking-tight">
+                {company.tagline}
+              </h1>
+              <p className="mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">{company.description}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <LinkButton to="/contact" variant="primary" size="lg">
+                  {company.offers === 'technology' ? 'Start a project' : 'Get a quote'}
+                  <ArrowUpRight className="h-5 w-5" />
+                </LinkButton>
+                <a
+                  href="tel:03334432645"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/15 px-8 text-base font-semibold text-paper transition hover:border-mint-bright hover:text-mint-bright"
+                >
+                  <Phone className="h-5 w-5" /> 0333 443 2645
+                </a>
+              </div>
+            </div>
+
+            {company.highlights && (
+              <GlassCard surface="dark" className="lg:ml-auto lg:w-full lg:max-w-md">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">
+                  Why {company.name}
+                </p>
+                <ul className="mt-5 space-y-4">
+                  {company.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-mint/20 text-mint-bright">
+                        <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                      </span>
+                      <span className="text-[15px] leading-snug text-paper/85">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            )}
           </div>
         </div>
       </section>
@@ -98,21 +123,8 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
         </section>
       )}
 
-      {/* CAPITAL — funding calculator teaser (coming soon) */}
-      {company.slug === 'capital' && (
-        <section className="bg-paper-soft">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <div className="rounded-3xl border border-dashed border-mint/40 bg-white p-8 text-center sm:p-12">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Coming soon</p>
-              <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Funding calculator</h3>
-              <p className="mx-auto mt-3 max-w-xl text-pretty text-ink-muted">See in seconds how much your business could access — and what repayments might look like. Launching shortly.</p>
-              <div className="mt-6">
-                <LinkButton to="/contact" variant="secondary" size="md">Get a funding quote<ArrowUpRight className="h-4 w-4" /></LinkButton>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* CAPITAL — funding calculator */}
+      {company.slug === 'capital' && <FundingCalculator />}
 
       {/* CLOSING CTA */}
       <section className="bg-paper-soft">

@@ -11,6 +11,7 @@ export interface GroupCompany {
   description: string
   logo: string
   offers: 'payments' | 'finance' | 'technology'
+  highlights?: string[]
 }
 
 export const GROUP: GroupCompany[] = [
@@ -24,6 +25,12 @@ export const GROUP: GroupCompany[] = [
       'Take card, contactless and mobile-wallet payments anywhere you trade — in store, online and on the move. Bespoke pricing, the latest terminals and 105+ e-commerce integrations, all backed by a dedicated UK support team.',
     logo: '/vastus-pay.webp',
     offers: 'payments',
+    highlights: [
+      'Card, contactless & mobile-wallet payments',
+      'The latest card terminals & POS',
+      '105+ e-commerce integrations',
+      'Dedicated UK support team',
+    ],
   },
   {
     slug: 'capital',
@@ -35,6 +42,12 @@ export const GROUP: GroupCompany[] = [
       'Capital when you need it — cash advances, term loans and revenue-based finance. Fast decisions, no hidden fees, and a dedicated relationship manager from first quote to drawdown.',
     logo: '/vastus-capital.webp',
     offers: 'finance',
+    highlights: [
+      'Fast funding decisions',
+      'No hidden fees, ever',
+      'A dedicated relationship manager',
+      'Flexible repayment as you trade',
+    ],
   },
   {
     slug: 'technology',
@@ -46,6 +59,12 @@ export const GROUP: GroupCompany[] = [
       "The digital arm of the group. Websites, mobile apps and custom software, designed and built end to end. Tell us what you're trying to achieve and we'll put the right team on it.",
     logo: '/vastus-technology.webp',
     offers: 'technology',
+    highlights: [
+      'Websites & high-performance web apps',
+      'iOS & Android mobile apps',
+      'Custom software & integrations',
+      'Branding, hosting & SEO',
+    ],
   },
 ]
 
