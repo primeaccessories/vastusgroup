@@ -33,30 +33,32 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Founder — landscape feature card */}
+          {/* Founder — compact profile card */}
           <div className="grid gap-5">
             {founders.map((m) => (
-              <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
-                <div className="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-b from-mint/40 via-mint/20 to-mint/5">
-                  {m.image ? (
-                    <img src={m.image} alt={m.name} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
-                  ) : (
-                    <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-bold text-ink/70">
-                      {m.name.split(' ').map((n) => n[0]).join('')}
-                    </span>
-                  )}
+              <GlassCard key={m.name} surface="light" className="p-6 sm:p-8">
+                <div className="flex items-center gap-5">
+                  <div className="aspect-square w-24 flex-shrink-0 overflow-hidden rounded-2xl bg-gradient-to-b from-mint/40 to-mint/10 ring-1 ring-ink/5 sm:w-28">
+                    {m.image ? (
+                      <img src={m.image} alt={m.name} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
+                    ) : (
+                      <span className="flex h-full w-full items-center justify-center font-display text-2xl font-bold text-ink/70">
+                        {m.name.split(' ').map((n) => n[0]).join('')}
+                      </span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{m.name}</h3>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
+                  </div>
                 </div>
-                <div className="p-6 sm:p-8">
-                  <h3 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{m.name}</h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep sm:text-sm">{m.role}</p>
-                  {m.bio && (
-                    <div className="mt-4 space-y-3 text-pretty text-[15px] leading-relaxed text-ink-muted">
-                      {m.bio.split('\n\n').map((para, i) => (
-                        <p key={i}>{para}</p>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                {m.bio && (
+                  <div className="mt-6 space-y-3 text-pretty text-[15px] leading-relaxed text-ink-muted">
+                    {m.bio.split('\n\n').map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+                )}
               </GlassCard>
             ))}
           </div>
