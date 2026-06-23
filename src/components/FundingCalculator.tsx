@@ -1,37 +1,31 @@
 import { useEffect, useMemo, useState } from 'react'
 import { animate, AnimatePresence, motion, useMotionValue } from 'framer-motion'
-import { ArrowUpRight, Banknote, LineChart, Repeat } from 'lucide-react'
+import { ArrowUpRight, Banknote, Check, LineChart, Repeat } from 'lucide-react'
 import { LinkButton } from './Button'
 
 type Mode = 'cash-advance' | 'term-loan' | 'revenue-based'
 
-/* ──────────────────────────────────────────────────────────────────────────
-   ⚠️ PLACEHOLDER FIGURES — ILLUSTRATIVE ONLY.
-   The multiples / rates below are placeholders so the calculator can render;
-   they are NOT real Vastus Capital terms. Confirm the real numbers with the
-   business and replace these constants BEFORE this page goes live. Every output
-   is disclaimed in the UI as indicative / not a quote.
-   ──────────────────────────────────────────────────────────────────────── */
-const RATES = {
-  cashAdvance: { multiple: 1, factor: 1.15, dailyShare: 0.15 },
-  termLoan: { annualRate: 0.12 },
-  revenueBased: { factor: 1.2, revenueShare: 0.1 },
-}
+/* Funding-amount multiples are grounded in Vastus Capital's real lender criteria:
+   - Card-takings advance  ≈ 1.2–1.5× monthly CARD turnover
+   - Business / term loan   ≈ up to 40% of ANNUAL turnover
+   - Revenue-based finance  ≈ 1.2–1.5× monthly REVENUE
+   We intentionally show the funding AMOUNT only — no repayment-cost / rate / fee
+   figures (there are none to advertise yet) and nothing about lenders or
+   commissions. Every output is indicative and disclaimed as not-a-quote. */
+const CARD_MULT = { low: 1.2, high: 1.5 }
+const TURNOVER_ANNUAL_PCT = 0.4
+const REVENUE_MULT = { low: 1.2, high: 1.5 }
 
 const gbp = (n: number) =>
   new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(
-    Math.max(0, Math.round(n)),
+    Math.max(0, Math.round(n / 100) * 100),
   )
 
 function AnimatedGBP({ value }: { value: number }) {
   const mv = useMotionValue(value)
   const [shown, setShown] = useState(value)
   useEffect(() => {
-    const controls = animate(mv, value, {
-      duration: 0.55,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setShown(v),
-    })
+    const controls = animate(mv, value, { duration: 0.55, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setShown(v) })
     return () => controls.stop()
   }, [value, mv])
   return <>{gbp(shown)}</>
@@ -88,54 +82,52 @@ function Slider({
 
 export default function FundingCalculator() {
   const [mode, setMode] = useState<Mode>('cash-advance')
-  const [turnover, setTurnover] = useState(15000)
-  const [loanAmount, setLoanAmount] = useState(50000)
-  const [termMonths, setTermMonths] = useState(12)
-  const [rbAmount, setRbAmount] = useState(50000)
-  const [revenue, setRevenue] = useState(30000)
+  const [cardTurnover, setCardTurnover] = useState(15000)
+  const [monthlyTurnover, setMonthlyTurnover] = useState(30000)
+  const [monthlyRevenue, setMonthlyRevenue] = useState(30000)
 
   const result = useMemo(() => {
     if (mode === 'cash-advance') {
-      const advance = turnover * RATES.cashAdvance.multiple
-      const total = advance * RATES.cashAdvance.factor
       return {
-        headline: { label: 'Indicative advance', value: advance },
-        stats: [
-          { label: 'Est. total repayable', value: gbp(total) },
-          { label: 'Daily card share', value: `${Math.round(RATES.cashAdvance.dailyShare * 100)}%` },
-          { label: 'Fixed term', value: 'None' },
-        ],
-        note: 'Repaid automatically as a small share of your daily card takings — no fixed term, no APR.',
+        high: cardTurnover * CARD_MULT.high,
+        basis: `Typical offers ${gbp(cardTurnover * CARD_MULT.low)} – ${gbp(cardTurnover * CARD_MULT.high)}`,
+        points: ['Repaid as a small share of your daily card takings', 'No fixed monthly payments, no APR'],
+        slider: {
+          label: 'Average monthly card turnover',
+          value: cardTurnover,
+          set: setCardTurnover,
+          min: 2000,
+          max: 150000,
+        },
       }
     }
     if (mode === 'term-loan') {
-      const total = loanAmount * (1 + RATES.termLoan.annualRate * (termMonths / 12))
-      const monthly = total / termMonths
       return {
-        headline: { label: 'Indicative monthly repayment', value: monthly },
-        stats: [
-          { label: 'You receive', value: gbp(loanAmount) },
-          { label: 'Total repayable', value: gbp(total) },
-          { label: 'Over', value: `${termMonths} months` },
-        ],
-        note: `Illustrative ${Math.round(
-          RATES.termLoan.annualRate * 100,
-        )}% representative annual rate. Fixed, predictable monthly repayments.`,
+        high: monthlyTurnover * 12 * TURNOVER_ANNUAL_PCT,
+        basis: 'Based on up to 40% of your annual turnover',
+        points: ['Fixed, predictable monthly repayments', 'Choose a term that suits your cashflow'],
+        slider: {
+          label: 'Average monthly turnover',
+          value: monthlyTurnover,
+          set: setMonthlyTurnover,
+          min: 3000,
+          max: 200000,
+        },
       }
     }
-    const total = rbAmount * RATES.revenueBased.factor
-    const monthlyContribution = revenue * RATES.revenueBased.revenueShare
-    const months = Math.min(60, Math.max(1, Math.ceil(total / Math.max(1, monthlyContribution))))
     return {
-      headline: { label: 'Funding amount', value: rbAmount },
-      stats: [
-        { label: 'Total repayable', value: gbp(total) },
-        { label: 'Est. repayment', value: `~${months} months` },
-        { label: 'Monthly share', value: `${Math.round(RATES.revenueBased.revenueShare * 100)}% of revenue` },
-      ],
-      note: 'Repay as a flat share of monthly revenue — more when you’re busy, less when you’re quiet.',
+      high: monthlyRevenue * REVENUE_MULT.high,
+      basis: `Typical offers ${gbp(monthlyRevenue * REVENUE_MULT.low)} – ${gbp(monthlyRevenue * REVENUE_MULT.high)}`,
+      points: ['Repayments flex with your monthly revenue', '100% of your equity retained'],
+      slider: {
+        label: 'Average monthly revenue',
+        value: monthlyRevenue,
+        set: setMonthlyRevenue,
+        min: 5000,
+        max: 200000,
+      },
     }
-  }, [mode, turnover, loanAmount, termMonths, rbAmount, revenue])
+  }, [mode, cardTurnover, monthlyTurnover, monthlyRevenue])
 
   return (
     <section className="bg-paper-soft">
@@ -146,7 +138,7 @@ export default function FundingCalculator() {
             See what your business could access
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-pretty text-ink-muted">
-            Pick a funding type and drag the sliders for an instant, indicative illustration — no credit check, no
+            Pick a funding type and drag the slider for an instant, indicative estimate — no credit check, no
             commitment.
           </p>
         </div>
@@ -183,7 +175,7 @@ export default function FundingCalculator() {
           </div>
 
           <div className="grid lg:grid-cols-[1fr_0.85fr]">
-            {/* controls */}
+            {/* control */}
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -192,63 +184,16 @@ export default function FundingCalculator() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-8"
                 >
-                  {mode === 'cash-advance' && (
-                    <Slider
-                      label="Average monthly card turnover"
-                      value={turnover}
-                      min={2000}
-                      max={150000}
-                      step={1000}
-                      onChange={setTurnover}
-                      format={gbp}
-                    />
-                  )}
-                  {mode === 'term-loan' && (
-                    <>
-                      <Slider
-                        label="How much do you need?"
-                        value={loanAmount}
-                        min={5000}
-                        max={250000}
-                        step={1000}
-                        onChange={setLoanAmount}
-                        format={gbp}
-                      />
-                      <Slider
-                        label="Over what term?"
-                        value={termMonths}
-                        min={3}
-                        max={36}
-                        step={1}
-                        onChange={setTermMonths}
-                        format={(v) => `${v} months`}
-                      />
-                    </>
-                  )}
-                  {mode === 'revenue-based' && (
-                    <>
-                      <Slider
-                        label="How much do you need?"
-                        value={rbAmount}
-                        min={5000}
-                        max={250000}
-                        step={1000}
-                        onChange={setRbAmount}
-                        format={gbp}
-                      />
-                      <Slider
-                        label="Average monthly revenue"
-                        value={revenue}
-                        min={5000}
-                        max={250000}
-                        step={1000}
-                        onChange={setRevenue}
-                        format={gbp}
-                      />
-                    </>
-                  )}
+                  <Slider
+                    label={result.slider.label}
+                    value={result.slider.value}
+                    min={result.slider.min}
+                    max={result.slider.max}
+                    step={1000}
+                    onChange={result.slider.set}
+                    format={gbp}
+                  />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -261,20 +206,22 @@ export default function FundingCalculator() {
               />
               <div className="relative">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mint-bright">
-                  {result.headline.label}
+                  You could access up to
                 </p>
                 <p className="mt-2 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-                  <AnimatedGBP value={result.headline.value} />
+                  <AnimatedGBP value={result.high} />
                 </p>
-                <dl className="mt-7 space-y-3 border-t border-white/10 pt-6">
-                  {result.stats.map((s) => (
-                    <div key={s.label} className="flex items-center justify-between gap-4">
-                      <dt className="text-sm text-paper/60">{s.label}</dt>
-                      <dd className="font-display text-sm font-semibold sm:text-[15px]">{s.value}</dd>
-                    </div>
+                <p className="mt-2 text-[13px] text-paper/55">{result.basis}</p>
+                <ul className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                  {result.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5">
+                      <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-md bg-mint/20 text-mint-bright">
+                        <Check className="h-3 w-3" strokeWidth={2.5} />
+                      </span>
+                      <span className="text-[13px] leading-snug text-paper/80">{p}</span>
+                    </li>
                   ))}
-                </dl>
-                <p className="mt-6 text-[13px] leading-relaxed text-paper/70">{result.note}</p>
+                </ul>
                 <div className="mt-7">
                   <LinkButton to="/contact" variant="primary" size="lg" className="w-full">
                     Get my funding offer <ArrowUpRight className="h-5 w-5" />
@@ -286,9 +233,9 @@ export default function FundingCalculator() {
         </div>
 
         <p className="mx-auto mt-5 max-w-3xl text-center text-[12px] leading-relaxed text-ink-fade">
-          Figures shown are indicative illustrations only and do not constitute an offer, quote or financial advice.
-          Actual funding amounts, rates and terms depend on your application and are subject to status, affordability
-          and approval.
+          Funding amounts shown are indicative estimates only and do not constitute an offer, quote or financial
+          advice. The actual amount available depends on your application and is subject to status, affordability and
+          approval.
         </p>
       </div>
     </section>
