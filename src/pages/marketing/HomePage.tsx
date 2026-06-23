@@ -33,64 +33,6 @@ const PORTAL_FEATURES = [
   'Manage your team users',
 ]
 
-const PAGES_GRID: { title: string; excerpt: string; image: string; to: string }[] = [
-  {
-    title: 'Terminals',
-    excerpt:
-      'Solutions that are efficient and cost-effective. The latest payment technology — we guarantee you can always take a payment.',
-    image: '/pages-grid/terminals.jpg',
-    to: '/products/payment-terminals',
-  },
-  {
-    title: 'Term Loans',
-    excerpt:
-      'Looking for flexible financing to grow your business? Competitive term loans designed to meet your unique needs.',
-    image: '/pages-grid/ukmoney.png',
-    to: '/products/term-loans',
-  },
-  {
-    title: 'Revenue-Based Loans',
-    excerpt:
-      'Looking for flexible financing to grow your business? Competitive revenue-based loans designed to meet your business.',
-    image: '/pages-grid/ukmoney.png',
-    to: '/products/revenue-based-loans',
-  },
-  {
-    title: 'Our Team',
-    excerpt: 'Meet the people behind Vastus — solutions that are efficient, and a team you can actually reach.',
-    image: '/pages-grid/team.jpg',
-    to: '/team',
-  },
-  {
-    title: 'E-POS Systems',
-    excerpt:
-      'Bespoke solutions designed to meet business needs. Electronic point of sale systems — choose what fits.',
-    image: '/pages-grid/epos.jpg',
-    to: '/products/epos-systems',
-  },
-  {
-    title: 'E-Commerce Payment Solutions',
-    excerpt:
-      'Offering solutions to accept online payments securely. 105+ partners and integrations — WooCommerce, Magento, WIX and more.',
-    image: '/pages-grid/ecommerce.jpg',
-    to: '/products/ecommerce',
-  },
-  {
-    title: 'Contact Us',
-    excerpt:
-      'Solutions that are efficient and cost-effective. Talk to a member of the Vastus team about your business.',
-    image: '/pages-grid/contact.jpg',
-    to: '/contact',
-  },
-  {
-    title: 'Cash Advance',
-    excerpt:
-      'Flexible finance for businesses accepting card payments. Pay it back as a percentage of every transaction.',
-    image: '/pages-grid/cash-advance.png',
-    to: '/products/cash-advance',
-  },
-]
-
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
     label: 'Cards & wallets',
@@ -224,44 +166,6 @@ export default function HomePage() {
   // Floating cards drift further + in opposite directions for a slick layered parallax.
   const portalFloat1Y = useTransform(portalSmooth, [0, 1], [110, -110])
   const portalFloat2Y = useTransform(portalSmooth, [0, 1], [-80, 90])
-
-  // Explore section — scroll-driven stack: each card scales down + blurs as the
-  // next card rises to cover it for a smooth, cinematic transition.
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-  useEffect(() => {
-    const PIN = 96 // matches sticky top-24 (6rem)
-    let raf = 0
-    const update = () => {
-      raf = 0
-      const els = cardRefs.current
-      for (let i = 0; i < els.length; i++) {
-        const inner = els[i]
-        if (!inner) continue
-        const next = els[i + 1]
-        let progress = 0
-        if (next) {
-          const slot = inner.getBoundingClientRect().height
-          const gap = next.getBoundingClientRect().top - PIN
-          progress = Math.min(Math.max(1 - gap / slot, 0), 1)
-        }
-        const scale = 1 - progress * 0.2
-        const blur = progress * 5
-        const lift = -progress * 28
-        inner.style.transform = `translateY(${lift}px) scale(${scale})`
-        inner.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none'
-        inner.style.opacity = `${1 - progress * 0.35}`
-      }
-    }
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [])
 
   return (
     <>
@@ -755,7 +659,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6">
             {GROUP.map((c) => (
               <Link
                 key={c.slug}
@@ -858,51 +762,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PAGES GRID — sticky-stack scroll, refined card-stack transition */}
-      <section className="bg-paper-soft">
-        <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8 sm:pt-24">
-          <div className="pb-10 sm:pb-12">
-            {PAGES_GRID.map((p, i) => (
-              <article key={p.title} className="sticky top-24 mb-10">
-                <div
-                  ref={(el) => { cardRefs.current[i] = el }}
-                  style={{ zIndex: i, willChange: 'transform, filter, opacity', transition: 'transform 0.12s linear, filter 0.12s linear, opacity 0.12s linear' }}
-                  className="relative origin-top"
-                >
-                  <Link
-                    to={p.to}
-                    className="group relative block h-[220px] overflow-hidden rounded-2xl ring-1 ring-ink/10 shadow-[0_24px_60px_-30px_rgba(15,23,30,0.45)] sm:h-[320px] lg:h-[440px]"
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/15" />
-                    <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-                      <h3 className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-5xl lg:text-6xl">
-                        {p.title}
-                      </h3>
-                      <p className="mt-3 max-w-2xl text-pretty text-sm text-paper/80 sm:mt-4 sm:text-base lg:text-lg">
-                        {p.excerpt}
-                      </p>
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint sm:mt-6">
-                        Read more
-                        <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      </span>
-                    </div>
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA STRIP */}
       <section className="bg-paper-soft">
-        <div className="mx-auto max-w-7xl px-5 pt-2 pb-12 sm:px-8 sm:pt-4 sm:pb-16">
+        <div className="mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-8 sm:pt-24 sm:pb-16">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-paper-soft via-paper to-paper p-10 ring-1 ring-ink/5 sm:p-14 lg:p-20">
             <div
               aria-hidden="true"

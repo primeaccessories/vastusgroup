@@ -32,7 +32,7 @@ export default function GroupPage() {
       {/* GROUP COMPANIES */}
       <section className="bg-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2">
             {GROUP.map((c) => (
               <Link
                 key={c.slug}
