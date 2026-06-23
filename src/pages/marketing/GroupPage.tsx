@@ -39,8 +39,8 @@ export default function GroupPage() {
                 to={`/${c.slug}`}
                 className="group flex h-full flex-col rounded-3xl bg-white p-7 ring-1 ring-ink/[0.06] shadow-[0_24px_60px_-36px_rgba(10,18,38,0.5)] transition duration-300 hover:-translate-y-1 hover:ring-mint/40 sm:p-8"
               >
-                <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-paper-soft px-6 ring-1 ring-ink/5">
-                  <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
+                <div className="flex h-20 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)]">
+                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-9 object-contain" />
                 </div>
                 <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-deep">{c.tag}</p>
                 <p className="mt-3 flex-1 text-pretty text-ink-muted">{c.blurb}</p>

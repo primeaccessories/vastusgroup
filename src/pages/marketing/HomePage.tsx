@@ -362,8 +362,9 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={textIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-36 pb-8 sm:px-8 sm:pt-44 sm:pb-10 lg:pt-52"
+          className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-28 pb-8 sm:px-8 sm:pt-32 sm:pb-10 lg:pt-36"
         >
+          <div className="flex flex-1 flex-col justify-center">
           <div className="max-w-4xl">
             <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-mint-bright sm:text-xs">
               <span className="h-px w-8 bg-mint-bright" />
@@ -388,8 +389,9 @@ export default function HomePage() {
               </LinkButton>
             </div>
           </div>
+          </div>
 
-          <div className="mt-auto flex items-end justify-start pt-12 sm:justify-end sm:pt-16">
+          <div className="flex items-end justify-start pt-10 sm:justify-end sm:pt-16">
             <div className="flex w-full max-w-md items-end gap-4 sm:gap-6">
               <div className="relative min-h-[5rem] flex-1 sm:min-h-[4rem]">
                 <AnimatePresence mode="wait">
@@ -746,8 +748,8 @@ export default function HomePage() {
                 to={`/${c.slug}`}
                 className="group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8"
               >
-                <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/5">
-                  <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
+                <div className="flex h-20 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)]">
+                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-9 object-contain" />
                 </div>
                 <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
                 <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
