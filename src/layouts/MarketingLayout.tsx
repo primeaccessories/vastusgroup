@@ -12,6 +12,51 @@ const NAV = [
   { to: '/contact', label: 'Contact' },
 ]
 
+// Footer division columns — one per Vastus division, each heading links to its
+// landing page, with a handful of headline services beneath.
+const FOOTER_DIVISIONS = [
+  {
+    name: 'Vastus Pay',
+    href: '/pay',
+    links: [
+      { to: '/services/payment-terminals', label: 'Payment terminals' },
+      { to: '/services/virtual-terminal', label: 'Virtual terminal' },
+      { to: '/services/epos-systems', label: 'E-POS systems' },
+      { to: '/services/ecommerce', label: 'E-commerce' },
+    ],
+  },
+  {
+    name: 'Vastus Capital',
+    href: '/capital',
+    links: [
+      { to: '/services/cash-advance', label: 'Cash advance' },
+      { to: '/services/term-loans', label: 'Term loans' },
+      { to: '/services/revenue-based-loans', label: 'Revenue-based finance' },
+      { to: '/services/asset-finance', label: 'Asset finance' },
+    ],
+  },
+  {
+    name: 'Vastus Utilities',
+    href: '/utilities',
+    links: [
+      { to: '/services/gas-electricity', label: 'Gas & electricity' },
+      { to: '/services/water', label: 'Water' },
+      { to: '/services/telecoms', label: 'Telecoms' },
+      { to: '/services/broadband', label: 'Broadband' },
+    ],
+  },
+  {
+    name: 'Vastus Technology',
+    href: '/technology',
+    links: [
+      { to: '/services/website-development', label: 'Web development' },
+      { to: '/services/software-development', label: 'Software' },
+      { to: '/services/ai-solutions', label: 'AI solutions' },
+      { to: '/services/it-support-managed-services', label: 'IT support' },
+    ],
+  },
+]
+
 export default function MarketingLayout() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -159,11 +204,11 @@ export default function MarketingLayout() {
 
       <footer className="bg-ink text-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_3fr]">
             <div>
               <BrandLogo variant="dark" />
               <p className="mt-6 max-w-sm text-pretty text-paper/70">
-                Best-in-class card payments and business finance for UK businesses. Based in Blackpool, trusted across the country.
+                One group, four divisions — card payments, business finance, utilities and technology for UK businesses. Based in Blackpool, trusted across the country.
               </p>
               <div className="mt-6 flex flex-col gap-3 text-sm text-paper/70">
                 <a href="tel:03334432645" className="inline-flex items-center gap-3 hover:text-mint-bright">
@@ -182,45 +227,38 @@ export default function MarketingLayout() {
               </div>
             </div>
 
-            <div>
-              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                Vastus Pay
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {['payment-terminals', 'virtual-terminal', 'epos-systems', 'ecommerce'].map((s) => (
-                  <li key={s}>
-                    <Link to={`/services/${s}`} className="text-paper/80 hover:text-mint-bright">
-                      {s === 'payment-terminals' && 'Payment terminals'}
-                      {s === 'virtual-terminal' && 'Virtual terminal'}
-                      {s === 'epos-systems' && 'E-POS systems'}
-                      {s === 'ecommerce' && 'E-commerce'}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 xl:grid-cols-5">
+              {FOOTER_DIVISIONS.map((div) => (
+                <div key={div.href}>
+                  <Link
+                    to={div.href}
+                    className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50 transition-colors hover:text-mint-bright"
+                  >
+                    {div.name}
+                  </Link>
+                  <ul className="mt-4 space-y-2.5 text-sm">
+                    {div.links.map((l) => (
+                      <li key={l.to}>
+                        <Link to={l.to} className="text-paper/80 hover:text-mint-bright">
+                          {l.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
-            <div>
-              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                Vastus Capital
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                <li><Link to="/services/cash-advance" className="text-paper/80 hover:text-mint-bright">Cash advance</Link></li>
-                <li><Link to="/services/term-loans" className="text-paper/80 hover:text-mint-bright">Term loans</Link></li>
-                <li><Link to="/services/revenue-based-loans" className="text-paper/80 hover:text-mint-bright">Revenue-based finance</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                The Group
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>
-                <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
-                <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
-                <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
-              </ul>
+              <div>
+                <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
+                  The Group
+                </h4>
+                <ul className="mt-4 space-y-2.5 text-sm">
+                  <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>
+                  <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
+                  <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
+                  <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
+                </ul>
+              </div>
             </div>
           </div>
 
