@@ -264,7 +264,7 @@ export default function MarketingLayout() {
             </div>
           </div>
 
-          <div className="mt-16 border-t border-white/10 pt-8">
+          <div className="mt-16 pt-8">
             <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:text-left">
               <p className="text-xs text-paper/50">
                 © {new Date().getFullYear()} Vastus Group Ltd. Registered in England &amp; Wales. Authorised payment institution.
