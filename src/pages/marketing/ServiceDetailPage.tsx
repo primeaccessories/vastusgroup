@@ -248,6 +248,45 @@ function SectionBlock({ section, alt }: { section: ServiceSection; alt: boolean 
     )
   }
 
+  if (section.kind === 'steps') {
+    return (
+      <section className={bg}>
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
+          <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
+          <ol className="mt-7 grid gap-4 sm:gap-5 md:grid-cols-3">
+            {section.items.map((item, idx) => (
+              <li
+                key={item.title}
+                className="rounded-2xl bg-paper p-6 ring-1 ring-ink/8 shadow-[0_18px_40px_-30px_rgba(15,23,30,0.4)]"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-mint/15 font-display text-base font-semibold text-mint-deep">
+                  {idx + 1}
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink">{item.title}</h3>
+                <p className="mt-2 text-pretty text-sm text-ink-muted">{item.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
+  if (section.kind === 'terms') {
+    return (
+      <section className="bg-paper">
+        <div className="mx-auto max-w-7xl px-5 py-11 sm:px-8 sm:py-14">
+          <div className="max-w-3xl rounded-2xl border border-ink/10 bg-paper-soft px-6 py-5 sm:px-8 sm:py-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-ink-fade">
+              {section.heading ?? 'Terms apply'}
+            </p>
+            <p className="mt-3 text-pretty text-sm leading-relaxed text-ink-muted">{section.body}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   // faq
   return (
     <section className={bg}>

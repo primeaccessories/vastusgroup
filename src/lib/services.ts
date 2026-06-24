@@ -1,6 +1,6 @@
 import {
   // pay
-  CreditCard, MonitorSmartphone, Monitor, Link2, QrCode, ShoppingCart, ShieldCheck,
+  CreditCard, MonitorSmartphone, Monitor, Link2, QrCode, ShoppingCart, ShieldCheck, ArrowLeftRight,
   // capital
   Banknote, FileText, TrendingUp, HandCoins, Truck, Receipt, Building2, Construction,
   // utilities
@@ -10,6 +10,7 @@ import {
   Database, LifeBuoy, Store, Megaphone, Rocket, PenTool,
   type LucideIcon,
 } from 'lucide-react'
+import { SERVICE_DETAILS } from './serviceDetails'
 
 export type ServiceCategory = 'pay' | 'capital' | 'utilities' | 'technology'
 
@@ -19,6 +20,8 @@ export type ServiceSection =
   | { kind: 'list'; eyebrow?: string; heading: string; items: string[] }
   | { kind: 'stats'; eyebrow?: string; heading: string; items: { value: string; label: string }[] }
   | { kind: 'faq'; eyebrow?: string; heading: string; items: { q: string; a: string }[] }
+  | { kind: 'steps'; eyebrow?: string; heading: string; items: { title: string; desc: string }[] }
+  | { kind: 'terms'; eyebrow?: string; heading?: string; body: string }
 
 export interface Service {
   slug: string
@@ -39,6 +42,50 @@ export const hasDetail = (s: Service) => Array.isArray(s.sections) && s.sections
 
 export const SERVICES: Service[] = [
   // ── VASTUS PAY ──────────────────────────────────────────────────────────
+  {
+    slug: 'switch-and-save',
+    title: 'Switch & Save',
+    shortTitle: 'switching',
+    category: 'pay',
+    tagline: "Tied into a card payments contract? When you switch to Vastus, we'll help cover the cost of leaving.",
+    Icon: ArrowLeftRight,
+    description:
+      "Don't let an early termination fee stand in your way. We'll reimburse the exit fee from your existing agreement — up to £100 for every year you sign up with Vastus. No eligibility criteria, open to every merchant who switches.",
+    features: ['Up to £100 per contract year', 'No eligibility criteria', 'Open to every merchant', 'Paid by BACS'],
+    sections: [
+      {
+        kind: 'prose',
+        eyebrow: 'The offer',
+        heading: "Switch to Vastus and we'll cover your exit costs",
+        body: "Tied into a card payments contract you want to leave? Don't let an early termination fee stand in your way. When you move your card payments to Vastus, we'll help cover the cost of leaving your current provider. It's our way of making the switch as smooth — and as cost-free — as possible.",
+      },
+      {
+        kind: 'cards',
+        eyebrow: 'How it works',
+        heading: 'The longer you commit, the more we cover',
+        items: [
+          { title: 'Up to £100 per year', desc: "We'll reimburse the termination fee from your existing agreement, up to £100 for each year you sign up with us." },
+          { title: 'It scales with your term', desc: "Sign a 1-year contract and we'll cover up to £100. Sign for 2 years and that rises to £200, for 3 years up to £300 — and so on." },
+          { title: 'No eligibility criteria', desc: 'There are no hoops to jump through. The offer is open to every merchant who switches their card payments to Vastus.' },
+        ],
+      },
+      {
+        kind: 'steps',
+        eyebrow: 'How to claim',
+        heading: 'Three simple steps',
+        items: [
+          { title: 'Sign up with Vastus', desc: 'Move your card payments to Vastus and choose your contract length.' },
+          { title: 'Send us your proof', desc: "Send proof of the termination fee charged by your previous provider — such as your final bill or termination notice. You'll need to raise this within 6 months of signing with Vastus." },
+          { title: 'Get reimbursed', desc: "Once you've been transacting with Vastus for 90 days, we'll pay your reimbursement by BACS directly to your business bank account." },
+        ],
+      },
+      {
+        kind: 'terms',
+        heading: 'Terms apply',
+        body: 'Reimbursement is capped at £100 per year of your Vastus contract term and cannot exceed the actual termination fee you were charged. Proof of the fee must be submitted within 6 months of signing. Payment is made by BACS to your registered business bank account after 90 days of active transacting with Vastus.',
+      },
+    ],
+  },
   {
     slug: 'payment-terminals',
     title: 'Payment Terminals',
@@ -591,6 +638,17 @@ export const SERVICES: Service[] = [
     Icon: PenTool,
   },
 ]
+
+// Merge auto-generated detail-page content into the stub services.
+// Services that already define inline `sections` are left untouched.
+for (const s of SERVICES) {
+  const detail = SERVICE_DETAILS[s.slug]
+  if (detail && !hasDetail(s)) {
+    s.description = detail.description
+    s.features = detail.features
+    s.sections = detail.sections
+  }
+}
 
 export const serviceBySlug = (slug?: string) => SERVICES.find((s) => s.slug === slug)
 
