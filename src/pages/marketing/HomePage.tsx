@@ -386,6 +386,45 @@ export default function HomePage() {
       </section>
       </div>
 
+      {/* GROUP STRUCTURE — the Vastus companies */}
+      <section id="group" className="relative overflow-hidden bg-ink text-paper">
+        <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-mint/20 blur-[150px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="inline-flex items-center justify-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">
+              <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
+            </p>
+            <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
+              One group. <span className="text-mint-bright">One mission.</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
+              Payments, finance, technology and utilities under one roof — joined-up solutions to help your business move faster.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6">
+            {GROUP.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/${c.slug}`}
+                className="group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8"
+              >
+                <div className="flex h-14 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)] sm:h-16">
+                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-8 object-contain sm:max-h-9" />
+                </div>
+                <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
+                <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-mint-bright">
+                  Explore {c.name}
+                  <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PORTAL TEASE — cinematic dashboard cluster */}
       <section className="relative overflow-hidden bg-gradient-to-b from-paper via-paper to-paper-soft text-ink">
         <div
@@ -650,45 +689,6 @@ export default function HomePage() {
                 </LinkButton>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* GROUP STRUCTURE — the Vastus companies */}
-      <section id="group" className="relative overflow-hidden bg-ink text-paper">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-mint/20 blur-[150px]" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="inline-flex items-center justify-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">
-              <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
-            </p>
-            <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
-              One group. <span className="text-mint-bright">One mission.</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
-              Payments, finance, technology and utilities under one roof — joined-up solutions to help your business move faster.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6">
-            {GROUP.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/${c.slug}`}
-                className="group flex h-full flex-col items-start rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06] hover:ring-mint/40 sm:p-8"
-              >
-                <div className="flex h-14 w-full items-center justify-center rounded-2xl bg-white px-6 ring-1 ring-ink/[0.06] shadow-[0_10px_30px_-18px_rgba(15,23,30,0.35)] sm:h-16">
-                  <img src={c.logo} alt={c.name} loading="lazy" className="w-full max-h-8 object-contain sm:max-h-9" />
-                </div>
-                <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-mint-bright">{c.tag}</p>
-                <p className="mt-3 text-pretty text-sm text-paper/70 sm:text-base">{c.blurb}</p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-mint-bright">
-                  Explore {c.name}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
