@@ -25,12 +25,22 @@
     text-rendering: optimizeLegibility;
     /* Footer is always dark; match the bottom overscroll/rubber-band area so no white shows below it. */
     background: var(--color-ink);
+    /* Lock horizontal panning. Decorative blobs, the parallax cluster and the
+       brand marquees momentarily reach past the viewport on mobile, letting the
+       page slide left/right. Setting overflow-x on the ROOT propagates to the
+       viewport (and html itself computes to visible), so the sticky header and
+       vertical scrolling keep working. hidden (not clip) is used because
+       Chromium only propagates hidden — not clip — to the viewport. */
+    overflow-x: hidden;
   }
   body {
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01";
+    overflow-x: clip;
+    /* No horizontal rubber-band / swipe-pan on touch devices. */
+    overscroll-behavior-x: none;
   }
   ::selection {
     background: var(--color-mint);
