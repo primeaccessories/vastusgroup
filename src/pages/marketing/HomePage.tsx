@@ -18,6 +18,7 @@ const HERO_TEXT_DELAY_MS = 1850
 let maskPlayed = false
 
 const SUBLINES = [
+  "Switch to Vastus and we'll cover your exit costs — up to £100 for every year you switch.",
   'Payments, finance, technology and utilities — one group, working as one team.',
   'Card processing, business funding and digital solutions under one roof.',
   'Joined-up thinking for businesses that refuse to settle for ordinary.',
