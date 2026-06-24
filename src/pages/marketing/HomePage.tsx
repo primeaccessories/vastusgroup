@@ -36,7 +36,7 @@ const PORTAL_FEATURES = [
 const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: string[] }[] = [
   {
     label: 'Cards & wallets',
-    duration: 52,
+    duration: 84,
     items: [
       'VISA',
       'Mastercard',
@@ -63,7 +63,7 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
   },
   {
     label: 'Standards & infra',
-    duration: 58,
+    duration: 92,
     reverse: true,
     items: [
       'PCI-DSS Level 1',
