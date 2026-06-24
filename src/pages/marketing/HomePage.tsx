@@ -162,11 +162,15 @@ export default function HomePage() {
   // Smooth the raw scroll value through a spring so the parallax glides instead of
   // tracking every jittery scroll tick (the laggy feel, esp. on mobile).
   const portalSmooth = useSpring(portalProgress, { stiffness: 70, damping: 22, mass: 0.25 })
-  const portalCardY = useTransform(portalSmooth, [0, 1], [50, -50])
-  const portalTextY = useTransform(portalSmooth, [0, 1], [24, -24])
+  // mobile parallax
+  const portalCardY = useTransform(portalSmooth, [0, 1], [80, -80])
+  const portalTextY = useTransform(portalSmooth, [0, 1], [44, -44])
   // Floating cards drift further + in opposite directions for a slick layered parallax.
-  const portalFloat1Y = useTransform(portalSmooth, [0, 1], [110, -110])
-  const portalFloat2Y = useTransform(portalSmooth, [0, 1], [-80, 90])
+  const portalFloat1Y = useTransform(portalSmooth, [0, 1], [160, -160])
+  const portalFloat2Y = useTransform(portalSmooth, [0, 1], [-130, 140])
+  // desktop parallax — dashboard cluster drifts up while the copy counter-drifts
+  const portalDeskClusterY = useTransform(portalSmooth, [0, 1], [120, -120])
+  const portalDeskCopyY = useTransform(portalSmooth, [0, 1], [-44, 44])
 
   return (
     <>
@@ -397,9 +401,9 @@ export default function HomePage() {
           className="pointer-events-none absolute -bottom-40 left-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint-deep/15 blur-[140px]"
         />
 
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
+        <div ref={portalRef} className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
           {/* MOBILE / TABLET — clean stack */}
-          <div ref={portalRef} className="flex flex-col items-center lg:hidden">
+          <div className="flex flex-col items-center lg:hidden">
             <motion.div style={{ y: portalCardY }} className="w-full max-w-[480px] will-change-transform">
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -430,7 +434,7 @@ export default function HomePage() {
                     transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <motion.div
-                      animate={{ y: [0, -8, 0] }}
+                      animate={{ y: [0, -15, 0] }}
                       transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
                       className="w-40 rounded-2xl bg-paper p-3.5 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 sm:w-48"
                     >
@@ -460,7 +464,7 @@ export default function HomePage() {
                     transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <motion.div
-                      animate={{ y: [0, 6, 0] }}
+                      animate={{ y: [0, 13, 0] }}
                       transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
                       className="rounded-2xl bg-paper px-3.5 py-2.5 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10"
                     >
@@ -512,7 +516,7 @@ export default function HomePage() {
           {/* DESKTOP — cinematic split */}
           <div className="hidden lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 xl:gap-24">
             {/* LEFT — floating dashboard cluster */}
-            <div className="relative h-[620px] xl:h-[680px]">
+            <motion.div style={{ y: portalDeskClusterY }} className="relative h-[620px] will-change-transform xl:h-[680px]">
               <motion.div
                 initial={{ opacity: 0, y: 30, rotateY: -22 }}
                 whileInView={{ opacity: 1, y: 0, rotateY: -8 }}
@@ -543,7 +547,7 @@ export default function HomePage() {
                 className="absolute right-0 top-6 z-20"
               >
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
+                  animate={{ y: [0, -18, 0] }}
                   transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
                   className="w-64 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
@@ -572,7 +576,7 @@ export default function HomePage() {
                 className="absolute right-2 bottom-10 z-20"
               >
                 <motion.div
-                  animate={{ y: [0, 8, 0] }}
+                  animate={{ y: [0, 16, 0] }}
                   transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
                   className="w-60 rounded-2xl bg-paper p-4 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
@@ -594,7 +598,7 @@ export default function HomePage() {
                 className="absolute right-20 top-1/2 z-20 -translate-y-1/2"
               >
                 <motion.div
-                  animate={{ y: [0, -6, 0] }}
+                  animate={{ y: [0, -14, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
                   className="rounded-2xl bg-paper px-4 py-3 text-ink shadow-[0_24px_60px_-20px_rgba(15,23,30,0.35),0_8px_20px_-8px_rgba(11,83,245,0.3)] ring-1 ring-ink/10 backdrop-blur"
                 >
@@ -604,10 +608,17 @@ export default function HomePage() {
                   </div>
                 </motion.div>
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* RIGHT — copy */}
-            <div>
+            <motion.div
+              style={{ y: portalDeskCopyY }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: '-120px' }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="will-change-transform"
+            >
               <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-mint-deep">
                 <span className="h-px w-8 bg-mint-deep" />
                 Customer portal
@@ -638,7 +649,7 @@ export default function HomePage() {
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
