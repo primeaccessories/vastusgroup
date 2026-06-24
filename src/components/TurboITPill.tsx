@@ -13,13 +13,13 @@ export default function TurboITPill({ className = '' }: Props) {
       href={`https://turboit.uk/?${utm.toString()}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group inline-flex items-center gap-1.5 ${className}`}
+      className={`group inline-flex items-center gap-2 ${className}`}
     >
-      <span className="text-[0.6rem] font-medium uppercase tracking-[0.22em] text-paper/50">
+      <span className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-paper/50">
         By
       </span>
       <span
-        className="text-sm font-extrabold tracking-tight normal-case"
+        className="text-base font-extrabold tracking-tight normal-case"
         style={{
           backgroundImage:
             'linear-gradient(90deg, #a78bfa 0%, #00b0f0 25%, #22d3ee 50%, #00b0f0 75%, #a78bfa 100%)',
@@ -34,7 +34,7 @@ export default function TurboITPill({ className = '' }: Props) {
       </span>
       <span
         aria-hidden="true"
-        className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-[#00b0f0]/40 bg-[#00b0f0]/10 text-[#00b0f0] transition-all duration-300 group-hover:border-[#00b0f0]/70 group-hover:bg-[#00b0f0]/20 group-hover:shadow-[0_0_12px_rgba(0,176,240,0.6)]"
+        className="inline-flex h-[1.15rem] w-[1.15rem] items-center justify-center rounded-full border border-[#00b0f0]/40 bg-[#00b0f0]/10 text-[#00b0f0] transition-all duration-300 group-hover:border-[#00b0f0]/70 group-hover:bg-[#00b0f0]/20 group-hover:shadow-[0_0_12px_rgba(0,176,240,0.6)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export default function TurboITPill({ className = '' }: Props) {
           strokeWidth={2.5}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-2.5 w-2.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
         >
           <path d="M7 17L17 7" />
           <path d="M7 7h10v10" />
