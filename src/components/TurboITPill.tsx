@@ -1,3 +1,5 @@
+import { Zap } from 'lucide-react'
+
 interface Props {
   className?: string
 }
@@ -13,9 +15,12 @@ export default function TurboITPill({ className = '' }: Props) {
       href={`https://turboit.uk/?${utm.toString()}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-paper/70 transition hover:border-mint/40 hover:bg-mint/10 hover:text-paper ${className}`}
+      className={`group inline-flex min-h-11 items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3.5 py-1.5 text-xs font-medium text-paper/80 transition-all duration-300 hover:border-mint-bright/60 hover:bg-mint/15 hover:text-paper hover:shadow-[0_0_18px_-2px_rgba(11,83,245,0.55)] ${className}`}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+      <Zap
+        className="h-3.5 w-3.5 text-mint-bright drop-shadow-[0_0_5px_rgba(77,131,255,0.55)] transition-all duration-300 group-hover:drop-shadow-[0_0_9px_rgba(77,131,255,0.95)]"
+        aria-hidden="true"
+      />
       Site by <span className="font-semibold text-paper">Turbo IT</span>
     </a>
   )
