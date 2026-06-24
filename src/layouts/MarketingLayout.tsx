@@ -16,7 +16,7 @@ const NAV = [
 // landing page, with a handful of headline services beneath.
 const FOOTER_DIVISIONS = [
   {
-    name: 'Vastus Pay',
+    heading: 'Pay',
     href: '/pay',
     links: [
       { to: '/services/payment-terminals', label: 'Payment terminals' },
@@ -26,17 +26,17 @@ const FOOTER_DIVISIONS = [
     ],
   },
   {
-    name: 'Vastus Capital',
+    heading: 'Capital',
     href: '/capital',
     links: [
       { to: '/services/cash-advance', label: 'Cash advance' },
       { to: '/services/term-loans', label: 'Term loans' },
-      { to: '/services/revenue-based-loans', label: 'Revenue-based finance' },
+      { to: '/services/revenue-based-loans', label: 'Revenue finance' },
       { to: '/services/asset-finance', label: 'Asset finance' },
     ],
   },
   {
-    name: 'Vastus Utilities',
+    heading: 'Utilities',
     href: '/utilities',
     links: [
       { to: '/services/gas-electricity', label: 'Gas & electricity' },
@@ -46,7 +46,7 @@ const FOOTER_DIVISIONS = [
     ],
   },
   {
-    name: 'Vastus Technology',
+    heading: 'Technology',
     href: '/technology',
     links: [
       { to: '/services/website-development', label: 'Web development' },
@@ -204,61 +204,63 @@ export default function MarketingLayout() {
 
       <footer className="bg-ink text-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.3fr_3fr]">
+          {/* Brand + contact */}
+          <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.6fr_1fr] lg:items-start lg:gap-16">
             <div>
               <BrandLogo variant="dark" />
-              <p className="mt-6 max-w-sm text-pretty text-paper/70">
+              <p className="mt-6 max-w-md text-pretty text-paper/70">
                 One group, four divisions — card payments, business finance, utilities and technology for UK businesses. Based in Blackpool, trusted across the country.
               </p>
-              <div className="mt-6 flex flex-col gap-3 text-sm text-paper/70">
-                <a href="tel:03334432645" className="inline-flex items-center gap-3 hover:text-mint-bright">
-                  <Phone className="h-4 w-4" /> 0333 443 2645
-                </a>
-                <a href="mailto:info@vastusgroup.com" className="inline-flex items-center gap-3 hover:text-mint-bright">
-                  <Mail className="h-4 w-4" /> info@vastusgroup.com
-                </a>
-                <span className="inline-flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                  <span>
-                    Unit 11 Croft Court, Plumpton Close,<br />
-                    Blackpool, Lancashire, FY4 5PR
-                  </span>
-                </span>
-              </div>
             </div>
+            <div className="flex flex-col gap-3 text-sm text-paper/70">
+              <a href="tel:03334432645" className="inline-flex items-center gap-3 hover:text-mint-bright">
+                <Phone className="h-4 w-4 flex-shrink-0" /> 0333 443 2645
+              </a>
+              <a href="mailto:info@vastusgroup.com" className="inline-flex items-center gap-3 hover:text-mint-bright">
+                <Mail className="h-4 w-4 flex-shrink-0" /> info@vastusgroup.com
+              </a>
+              <span className="inline-flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                <span>
+                  Unit 11 Croft Court, Plumpton Close,<br />
+                  Blackpool, Lancashire, FY4 5PR
+                </span>
+              </span>
+            </div>
+          </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 xl:grid-cols-5">
-              {FOOTER_DIVISIONS.map((div) => (
-                <div key={div.href}>
-                  <Link
-                    to={div.href}
-                    className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50 transition-colors hover:text-mint-bright"
-                  >
-                    {div.name}
-                  </Link>
-                  <ul className="mt-4 space-y-2.5 text-sm">
-                    {div.links.map((l) => (
-                      <li key={l.to}>
-                        <Link to={l.to} className="text-paper/80 hover:text-mint-bright">
-                          {l.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              <div>
-                <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
-                  The Group
-                </h4>
+          {/* Division columns */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 pt-12 sm:grid-cols-3 lg:grid-cols-5">
+            {FOOTER_DIVISIONS.map((div) => (
+              <div key={div.href}>
+                <Link
+                  to={div.href}
+                  className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50 transition-colors hover:text-mint-bright"
+                >
+                  {div.heading}
+                </Link>
                 <ul className="mt-4 space-y-2.5 text-sm">
-                  <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>
-                  <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
-                  <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
-                  <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
+                  {div.links.map((l) => (
+                    <li key={l.to}>
+                      <Link to={l.to} className="text-paper/80 hover:text-mint-bright">
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
+            ))}
+
+            <div>
+              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-paper/50">
+                The Group
+              </h4>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                <li><Link to="/group" className="text-paper/80 hover:text-mint-bright">The Group</Link></li>
+                <li><Link to="/team" className="text-paper/80 hover:text-mint-bright">Our team</Link></li>
+                <li><Link to="/contact" className="text-paper/80 hover:text-mint-bright">Contact</Link></li>
+                <li><Link to="/sign-in" className="text-paper/80 hover:text-mint-bright">Customer portal</Link></li>
+              </ul>
             </div>
           </div>
 
