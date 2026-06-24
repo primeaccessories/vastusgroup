@@ -1,5 +1,3 @@
-import { Zap } from 'lucide-react'
-
 interface Props {
   className?: string
 }
@@ -15,13 +13,43 @@ export default function TurboITPill({ className = '' }: Props) {
       href={`https://turboit.uk/?${utm.toString()}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group inline-flex min-h-11 items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3.5 py-1.5 text-xs font-medium text-paper/80 transition-all duration-300 hover:border-mint-bright/60 hover:bg-mint/15 hover:text-paper hover:shadow-[0_0_18px_-2px_rgba(11,83,245,0.55)] ${className}`}
+      className={`group inline-flex items-center gap-1.5 ${className}`}
     >
-      <Zap
-        className="h-3.5 w-3.5 text-mint-bright drop-shadow-[0_0_5px_rgba(77,131,255,0.55)] transition-all duration-300 group-hover:drop-shadow-[0_0_9px_rgba(77,131,255,0.95)]"
+      <span className="text-[0.6rem] font-medium uppercase tracking-[0.22em] text-paper/50">
+        By
+      </span>
+      <span
+        className="text-sm font-extrabold tracking-tight normal-case"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, #a78bfa 0%, #00b0f0 25%, #22d3ee 50%, #00b0f0 75%, #a78bfa 100%)',
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          animation: 'turbo-gradient-swoop 4s linear infinite',
+        }}
+      >
+        Turbo IT
+      </span>
+      <span
         aria-hidden="true"
-      />
-      Site by <span className="font-semibold text-paper">Turbo IT</span>
+        className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-[#00b0f0]/40 bg-[#00b0f0]/10 text-[#00b0f0] transition-all duration-300 group-hover:border-[#00b0f0]/70 group-hover:bg-[#00b0f0]/20 group-hover:shadow-[0_0_12px_rgba(0,176,240,0.6)]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-2.5 w-2.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        >
+          <path d="M7 17L17 7" />
+          <path d="M7 7h10v10" />
+        </svg>
+      </span>
     </a>
   )
 }
