@@ -1,10 +1,10 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import MarketingLayout from './layouts/MarketingLayout'
 import PortalLayout from './layouts/PortalLayout'
 import AdminLayout from './layouts/AdminLayout'
 import HomePage from './pages/marketing/HomePage'
-import ProductsPage from './pages/marketing/ProductsPage'
-import ProductDetailPage from './pages/marketing/ProductDetailPage'
+import ServicesPage from './pages/marketing/ServicesPage'
+import ServiceDetailPage from './pages/marketing/ServiceDetailPage'
 import TeamPage from './pages/marketing/TeamPage'
 import GroupPage from './pages/marketing/GroupPage'
 import GroupCompanyPage from './pages/marketing/GroupCompanyPage'
@@ -36,8 +36,11 @@ export default function App() {
     <Routes>
       <Route element={<MarketingLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/:slug" element={<ProductDetailPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:slug" element={<ServiceDetailPage />} />
+        {/* Legacy /products → /services. Edge 301s in public/_redirects preserve the slug; these are the in-app safety net. */}
+        <Route path="/products" element={<Navigate to="/services" replace />} />
+        <Route path="/products/*" element={<Navigate to="/services" replace />} />
         <Route path="/group" element={<GroupPage />} />
         <Route path="/pay" element={<GroupCompanyPage slug="pay" />} />
         <Route path="/capital" element={<GroupCompanyPage slug="capital" />} />

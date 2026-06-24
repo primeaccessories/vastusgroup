@@ -4,7 +4,7 @@ import { Menu, X, ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
 import BrandLogo from '../components/BrandLogo'
 import TurboITPill from '../components/TurboITPill'
 import { LinkButton } from '../components/Button'
-import ProductsNavDropdown from '../components/ProductsNavDropdown'
+import ServicesNavDropdown from '../components/ServicesNavDropdown'
 
 const NAV = [
   { to: '/group', label: 'The Group' },
@@ -38,10 +38,10 @@ export default function MarketingLayout() {
   }, [])
 
   const isHome = location.pathname === '/'
-  // Product detail pages (/products/<slug>) also open on a dark, full-bleed hero,
+  // Service detail pages (/services/<slug>) also open on a dark, full-bleed hero,
   // so the header sits transparent over it like the home page.
-  const isProductDetail = /^\/products\/.+/.test(location.pathname)
-  const heroDark = isHome || isProductDetail
+  const isServiceDetail = /^\/services\/.+/.test(location.pathname)
+  const heroDark = isHome || isServiceDetail
   // Once the mobile menu opens, the panel below is light (bg-paper) — flip the
   // header to match so the hamburger doesn't sit in a dark strip above a white slab.
   const darkMode = heroDark && !open
@@ -62,7 +62,7 @@ export default function MarketingLayout() {
           <BrandLogo variant={darkMode ? 'dark' : 'light'} />
 
           <nav className="hidden items-center gap-1 lg:flex">
-            <ProductsNavDropdown darkMode={darkMode} />
+            <ServicesNavDropdown darkMode={darkMode} />
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
@@ -117,14 +117,14 @@ export default function MarketingLayout() {
           <div className="border-t border-ink/5 bg-paper lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
               <NavLink
-                to="/products"
+                to="/services"
                 className={({ isActive }) =>
                   `rounded-xl px-4 py-3 text-base font-medium ${
                     isActive ? 'bg-ink text-paper' : 'text-ink hover:bg-ink/5'
                   }`
                 }
               >
-                Products
+                Services
               </NavLink>
               {NAV.map((item) => (
                 <NavLink
@@ -189,7 +189,7 @@ export default function MarketingLayout() {
               <ul className="mt-4 space-y-2.5 text-sm">
                 {['payment-terminals', 'virtual-terminal', 'epos-systems', 'ecommerce'].map((s) => (
                   <li key={s}>
-                    <Link to={`/products/${s}`} className="text-paper/80 hover:text-mint-bright">
+                    <Link to={`/services/${s}`} className="text-paper/80 hover:text-mint-bright">
                       {s === 'payment-terminals' && 'Payment terminals'}
                       {s === 'virtual-terminal' && 'Virtual terminal'}
                       {s === 'epos-systems' && 'E-POS systems'}
@@ -205,9 +205,9 @@ export default function MarketingLayout() {
                 Vastus Capital
               </h4>
               <ul className="mt-4 space-y-2.5 text-sm">
-                <li><Link to="/products/cash-advance" className="text-paper/80 hover:text-mint-bright">Cash advance</Link></li>
-                <li><Link to="/products/term-loans" className="text-paper/80 hover:text-mint-bright">Term loans</Link></li>
-                <li><Link to="/products/revenue-based-loans" className="text-paper/80 hover:text-mint-bright">Revenue-based loans</Link></li>
+                <li><Link to="/services/cash-advance" className="text-paper/80 hover:text-mint-bright">Cash advance</Link></li>
+                <li><Link to="/services/term-loans" className="text-paper/80 hover:text-mint-bright">Term loans</Link></li>
+                <li><Link to="/services/revenue-based-loans" className="text-paper/80 hover:text-mint-bright">Revenue-based finance</Link></li>
               </ul>
             </div>
 

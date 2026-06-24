@@ -1,47 +1,59 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowUpRight, Check, Phone } from 'lucide-react'
-import { productBySlug, PRODUCTS, type ProductSection } from '../../lib/products'
+import { serviceBySlug, SERVICES, hasDetail, type ServiceCategory, type ServiceSection } from '../../lib/services'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 
-export default function ProductDetailPage() {
-  const { slug } = useParams()
-  const product = productBySlug(slug)
-  if (!product) return <Navigate to="/products" replace />
+const CATEGORY_META: Record<ServiceCategory, { label: string; hero: string; related: string }> = {
+  pay: { label: 'Card payments', hero: '/hero-payment.webp', related: 'More ways to take payments' },
+  capital: { label: 'Business finance', hero: '/hero-business.webp', related: 'More ways to get funded' },
+  utilities: { label: 'Business utilities', hero: '/hero-business.webp', related: 'More Vastus Utilities' },
+  technology: { label: 'Digital & technology', hero: '/hero-payment.webp', related: 'More Vastus Technology' },
+}
 
-  const isFinance = product.category === 'finance'
-  const heroBg = isFinance ? '/hero-business.webp' : '/hero-payment.webp'
-  const related = PRODUCTS.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 3)
+export default function ServiceDetailPage() {
+  const { slug } = useParams()
+  const service = serviceBySlug(slug)
+  if (!service || !hasDetail(service)) return <Navigate to="/services" replace />
+
+  const meta = CATEGORY_META[service.category]
+  const features = service.features ?? []
+  const sections = service.sections ?? []
+  const related = SERVICES.filter(
+    (s) => s.slug !== service.slug && s.category === service.category && hasDetail(s),
+  ).slice(0, 3)
 
   return (
     <>
       {/* HERO — dark, full-bleed photo with copy + feature stat cards */}
       <section className="relative isolate overflow-hidden bg-ink text-paper">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-30 bg-cover bg-center" style={{ backgroundImage: `url(${heroBg})` }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-30 bg-cover bg-center" style={{ backgroundImage: `url(${meta.hero})` }} />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 bg-ink/45" />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/75 to-ink/40" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink to-transparent" />
         <div aria-hidden className="pointer-events-none absolute -right-32 -top-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-mint/15 blur-[160px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-12 sm:px-8 sm:pt-32 sm:pb-16">
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-paper/70 transition hover:text-mint-bright">
-            <ArrowLeft className="h-4 w-4" /> All products
+          <Link to="/services" className="inline-flex items-center gap-2 text-sm text-paper/70 transition hover:text-mint-bright">
+            <ArrowLeft className="h-4 w-4" /> All services
           </Link>
 
           <div className="mt-8 max-w-2xl">
             <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright sm:text-xs">
               <span className="h-px w-8 bg-mint-bright" />
-              {isFinance ? 'Business finance' : 'Card payments'}
+              {meta.label}
             </p>
             <h1 className="mt-5 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl">
-              {product.title}
+              {service.title}
             </h1>
-            <p className="mt-5 max-w-xl text-pretty text-lg text-paper/80 sm:text-xl">{product.tagline}</p>
-            <p className="mt-3 max-w-xl text-pretty text-paper/60">{product.description}</p>
+            <p className="mt-5 max-w-xl text-pretty text-lg text-paper/80 sm:text-xl">{service.tagline}</p>
+            {service.description && (
+              <p className="mt-3 max-w-xl text-pretty text-paper/60">{service.description}</p>
+            )}
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <LinkButton to="/contact" variant="primary" size="lg">
-                Enquire about {product.shortTitle.toLowerCase()}
+                Enquire about {service.shortTitle.toLowerCase()}
                 <ArrowUpRight className="h-5 w-5" />
               </LinkButton>
               <a
@@ -54,21 +66,23 @@ export default function ProductDetailPage() {
           </div>
 
           {/* feature stat cards */}
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:max-w-5xl lg:grid-cols-4">
-            {product.features.map((f) => (
-              <div key={f} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm sm:p-5">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-mint/20 text-mint-bright">
-                  <Check className="h-4 w-4" strokeWidth={2.5} />
-                </span>
-                <p className="mt-3 text-sm font-medium text-paper">{f}</p>
-              </div>
-            ))}
-          </div>
+          {features.length > 0 && (
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:max-w-5xl lg:grid-cols-4">
+              {features.map((f) => (
+                <div key={f} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm sm:p-5">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-mint/20 text-mint-bright">
+                    <Check className="h-4 w-4" strokeWidth={2.5} />
+                  </span>
+                  <p className="mt-3 text-sm font-medium text-paper">{f}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* RICH SECTIONS — full product content */}
-      {product.sections.map((section, i) => (
+      {/* RICH SECTIONS — full service content */}
+      {sections.map((section, i) => (
         <SectionBlock key={i} section={section} alt={i % 2 === 1} />
       ))}
 
@@ -105,23 +119,29 @@ export default function ProductDetailPage() {
         <section className="bg-paper-soft">
           <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              {isFinance ? 'More ways to get funded' : 'More ways to take payments'}
+              {meta.related}
             </h2>
             <div className="mt-7 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
-                <Link key={p.slug} to={`/products/${p.slug}`} className="group contents">
+              {related.map((s) => (
+                <Link key={s.slug} to={`/services/${s.slug}`} className="group contents">
                   <GlassCard surface="light" interactive className="flex flex-col overflow-hidden p-0">
                     <div className="relative aspect-[5/4] overflow-hidden bg-gradient-to-b from-white to-[#f4f6f7]">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-contain p-8 transition-transform duration-500 group-hover:scale-[1.06]"
-                      />
+                      {s.image ? (
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-contain p-8 transition-transform duration-500 group-hover:scale-[1.06]"
+                        />
+                      ) : (
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          <s.Icon className="h-16 w-16 text-mint" strokeWidth={1.5} />
+                        </span>
+                      )}
                     </div>
                     <div className="flex flex-1 flex-col p-6 sm:p-7">
-                      <h3 className="font-display text-lg font-semibold tracking-tight text-ink">{p.title}</h3>
-                      <p className="mt-2 text-sm text-ink-muted">{p.tagline}</p>
+                      <h3 className="font-display text-lg font-semibold tracking-tight text-ink">{s.title}</h3>
+                      <p className="mt-2 text-sm text-ink-muted">{s.tagline}</p>
                       <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-mint-deep">
                         Learn more
                         <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -149,7 +169,7 @@ function SectionHeader({ eyebrow, heading }: { eyebrow?: string; heading: string
   )
 }
 
-function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean }) {
+function SectionBlock({ section, alt }: { section: ServiceSection; alt: boolean }) {
   const bg = alt ? 'bg-paper-soft' : 'bg-paper'
 
   if (section.kind === 'prose') {

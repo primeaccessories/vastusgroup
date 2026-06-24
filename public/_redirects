@@ -1,1 +1,5 @@
+# Legacy products → services (keep above the SPA fallback; first match wins)
+/products           /services            301
+/products/*         /services/:splat     301
+
 /*    /index.html   200

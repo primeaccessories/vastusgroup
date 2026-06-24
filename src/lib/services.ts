@@ -1,31 +1,51 @@
-export type ProductCategory = 'payments' | 'finance'
+import {
+  // pay
+  CreditCard, MonitorSmartphone, Monitor, Link2, QrCode, ShoppingCart, ShieldCheck,
+  // capital
+  Banknote, FileText, TrendingUp, HandCoins, Truck, Receipt, Building2, Construction,
+  // utilities
+  Zap, Recycle, Droplet, RadioTower, Wifi, PhoneCall,
+  // technology
+  Globe, Smartphone, Code2, BrainCircuit, Workflow, Users, Lock, Cloud, PieChart,
+  Database, LifeBuoy, Store, Megaphone, Rocket, PenTool,
+  type LucideIcon,
+} from 'lucide-react'
 
-export type ProductSection =
+export type ServiceCategory = 'pay' | 'capital' | 'utilities' | 'technology'
+
+export type ServiceSection =
   | { kind: 'prose'; eyebrow?: string; heading: string; body: string }
   | { kind: 'cards'; eyebrow?: string; heading: string; items: { title: string; desc: string }[] }
   | { kind: 'list'; eyebrow?: string; heading: string; items: string[] }
   | { kind: 'stats'; eyebrow?: string; heading: string; items: { value: string; label: string }[] }
   | { kind: 'faq'; eyebrow?: string; heading: string; items: { q: string; a: string }[] }
 
-export interface Product {
+export interface Service {
   slug: string
   title: string
   shortTitle: string
-  category: ProductCategory
+  category: ServiceCategory
   tagline: string
-  description: string
-  features: string[]
-  image: string
-  sections: ProductSection[]
+  Icon: LucideIcon
+  /** Detail-page content. Present only on the services with a dedicated page. */
+  description?: string
+  features?: string[]
+  image?: string
+  sections?: ServiceSection[]
 }
 
-export const PRODUCTS: Product[] = [
+/** True when a service has a dedicated /services/<slug> detail page. */
+export const hasDetail = (s: Service) => Array.isArray(s.sections) && s.sections.length > 0
+
+export const SERVICES: Service[] = [
+  // ── VASTUS PAY ──────────────────────────────────────────────────────────
   {
     slug: 'payment-terminals',
     title: 'Payment Terminals',
     shortTitle: 'Terminals',
-    category: 'payments',
+    category: 'pay',
     tagline: 'The latest payment technology — efficient and cost-effective.',
+    Icon: CreditCard,
     description:
       'Take card, contactless and mobile wallet payments anywhere you trade. Desktop, Wi-Fi and fully-mobile GPRS terminals — bespoke pricing, set up by you, supported by a UK team.',
     features: ['Built-in GPRS SIM card', 'All-day battery life', 'Easy plug-and-pay setup', 'Fast thermal printer'],
@@ -67,10 +87,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'virtual-terminal',
-    title: 'Virtual Terminal',
+    title: 'Virtual Terminals',
     shortTitle: 'Virtual Terminal',
-    category: 'payments',
+    category: 'pay',
     tagline: 'Turn any internet-connected device into a payment terminal.',
+    Icon: MonitorSmartphone,
     description:
       'Securely take card payments from any browser — for phone orders, subscriptions, e-commerce or professional services. No hardware required.',
     features: ['MOTO & phone orders', 'Subscription billing', 'Robust encryption', 'Works on any device'],
@@ -116,10 +137,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'epos-systems',
-    title: 'E-POS Systems',
+    title: 'EPOS Systems',
     shortTitle: 'E-POS',
-    category: 'payments',
+    category: 'pay',
     tagline: 'Bespoke point-of-sale, designed around how you trade.',
+    Icon: Monitor,
     description:
       'Cloud-based EPOS for retail and hospitality — stock control, staff scheduling, table service, online ordering and integrated payments in one tidy system.',
     features: ['Cloud-based management', 'Stock & staff control', 'Online / QR / app orders', 'Integrated payments'],
@@ -170,11 +192,28 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
+    slug: 'pay-by-link',
+    title: 'Pay by Link',
+    shortTitle: 'Pay by Link',
+    category: 'pay',
+    tagline: 'Send a secure payment link and get paid in seconds.',
+    Icon: Link2,
+  },
+  {
+    slug: 'qr-payments',
+    title: 'QR Payments',
+    shortTitle: 'QR Payments',
+    category: 'pay',
+    tagline: 'Let customers scan and pay from their own phone.',
+    Icon: QrCode,
+  },
+  {
     slug: 'ecommerce',
-    title: 'E-Commerce Payment Solutions',
+    title: 'Ecommerce Payments',
     shortTitle: 'E-Commerce',
-    category: 'payments',
+    category: 'pay',
     tagline: 'Accept online payments securely.',
+    Icon: ShoppingCart,
     description:
       'Over 105 strategic partners and integrations — WooCommerce, PrestaShop, Opayo, WIX, Magento, WordPress. Slot us into your existing site, or take our MID-only service to cut transaction fees.',
     features: ['WooCommerce / Magento', 'Shopify / WIX / WordPress', 'MID-only option', 'Hosted & embedded'],
@@ -205,11 +244,22 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
+    slug: 'secure-payments',
+    title: 'Secure Payments',
+    shortTitle: 'Secure Payments',
+    category: 'pay',
+    tagline: 'PCI-compliant processing with fraud protection built in.',
+    Icon: ShieldCheck,
+  },
+
+  // ── VASTUS CAPITAL ──────────────────────────────────────────────────────
+  {
     slug: 'cash-advance',
     title: 'Cash Advance',
     shortTitle: 'Cash Advance',
-    category: 'finance',
+    category: 'capital',
     tagline: 'Flexible finance for businesses accepting card payments.',
+    Icon: Banknote,
     description:
       'Secure up to 240% of your monthly card turnover, paid back as a percentage of each transaction. No APR. No fixed term. Pay it back as you earn.',
     features: ['Up to 240% of monthly turnover', '90% approval rate', 'No APR or hidden fees', 'No fixed term'],
@@ -251,8 +301,9 @@ export const PRODUCTS: Product[] = [
     slug: 'term-loans',
     title: 'Term Loans',
     shortTitle: 'Term Loans',
-    category: 'finance',
+    category: 'capital',
     tagline: 'Competitive term loans, designed to meet your unique needs.',
+    Icon: FileText,
     description:
       'A lump sum of capital with fixed monthly repayments and competitive rates. For equipment, expansion, hiring, refurbishment or debt consolidation.',
     features: ['Competitive interest rates', 'Quick & easy application', 'No hidden fees', 'Flexible loan amounts'],
@@ -289,10 +340,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'revenue-based-loans',
-    title: 'Revenue-Based Loans',
+    title: 'Revenue-Based Finance',
     shortTitle: 'Revenue Loans',
-    category: 'finance',
+    category: 'capital',
     tagline: 'Loans that flex with your monthly revenue.',
+    Icon: TrendingUp,
     description:
       'Modern financing where repayments adjust to your income — affordable in quieter months, faster when business is good. Keep 100% ownership.',
     features: ['% of monthly revenue', 'No fixed monthly cost', '100% ownership retained', 'Quick capital access'],
@@ -326,7 +378,221 @@ export const PRODUCTS: Product[] = [
       },
     ],
   },
+  {
+    slug: 'business-loans',
+    title: 'Business Loans',
+    shortTitle: 'Business Loans',
+    category: 'capital',
+    tagline: 'Straightforward funding to cover costs or invest in growth.',
+    Icon: HandCoins,
+  },
+  {
+    slug: 'asset-finance',
+    title: 'Asset Finance',
+    shortTitle: 'Asset Finance',
+    category: 'capital',
+    tagline: 'Spread the cost of vehicles, equipment and machinery.',
+    Icon: Truck,
+  },
+  {
+    slug: 'invoice-finance',
+    title: 'Invoice Finance',
+    shortTitle: 'Invoice Finance',
+    category: 'capital',
+    tagline: 'Unlock the cash tied up in your unpaid invoices.',
+    Icon: Receipt,
+  },
+  {
+    slug: 'commercial-mortgages',
+    title: 'Commercial Mortgages',
+    shortTitle: 'Commercial Mortgages',
+    category: 'capital',
+    tagline: 'Finance to buy, refinance or develop business premises.',
+    Icon: Building2,
+  },
+  {
+    slug: 'development-finance',
+    title: 'Development Finance',
+    shortTitle: 'Development Finance',
+    category: 'capital',
+    tagline: 'Short-term funding for property and construction projects.',
+    Icon: Construction,
+  },
+
+  // ── VASTUS UTILITIES ────────────────────────────────────────────────────
+  {
+    slug: 'gas-electricity',
+    title: 'Gas & Electricity',
+    shortTitle: 'Gas & Electricity',
+    category: 'utilities',
+    tagline: 'Compare and switch to better business energy rates.',
+    Icon: Zap,
+  },
+  {
+    slug: 'business-waste',
+    title: 'Business Waste',
+    shortTitle: 'Business Waste',
+    category: 'utilities',
+    tagline: 'Reliable, compliant waste collection and recycling.',
+    Icon: Recycle,
+  },
+  {
+    slug: 'water',
+    title: 'Water',
+    shortTitle: 'Water',
+    category: 'utilities',
+    tagline: 'Lower your water bills with a better business supplier.',
+    Icon: Droplet,
+  },
+  {
+    slug: 'telecoms',
+    title: 'Telecoms',
+    shortTitle: 'Telecoms',
+    category: 'utilities',
+    tagline: 'Mobile and landline plans built for business.',
+    Icon: RadioTower,
+  },
+  {
+    slug: 'broadband',
+    title: 'Broadband',
+    shortTitle: 'Broadband',
+    category: 'utilities',
+    tagline: 'Fast, dependable connectivity wherever you trade.',
+    Icon: Wifi,
+  },
+  {
+    slug: 'voip-phone-systems',
+    title: 'VoIP & Phone Systems',
+    shortTitle: 'VoIP & Phones',
+    category: 'utilities',
+    tagline: 'Modern cloud phone systems that scale with you.',
+    Icon: PhoneCall,
+  },
+
+  // ── VASTUS TECHNOLOGY ───────────────────────────────────────────────────
+  {
+    slug: 'website-development',
+    title: 'Website Development',
+    shortTitle: 'Websites',
+    category: 'technology',
+    tagline: 'High-performance, conversion-focused sites built to modern standards.',
+    Icon: Globe,
+  },
+  {
+    slug: 'mobile-app-development',
+    title: 'Mobile App Development',
+    shortTitle: 'Mobile Apps',
+    category: 'technology',
+    tagline: 'Native and cross-platform apps for iOS and Android.',
+    Icon: Smartphone,
+  },
+  {
+    slug: 'software-development',
+    title: 'Software Development',
+    shortTitle: 'Software',
+    category: 'technology',
+    tagline: 'Custom software, integrations and automation for your operations.',
+    Icon: Code2,
+  },
+  {
+    slug: 'ai-solutions',
+    title: 'AI Solutions',
+    shortTitle: 'AI Solutions',
+    category: 'technology',
+    tagline: 'Put AI to work — assistants, insights and smart automation.',
+    Icon: BrainCircuit,
+  },
+  {
+    slug: 'automation-solutions',
+    title: 'Automation Solutions',
+    shortTitle: 'Automation',
+    category: 'technology',
+    tagline: 'Streamline workflows and remove manual, repetitive tasks.',
+    Icon: Workflow,
+  },
+  {
+    slug: 'crm-solutions',
+    title: 'CRM Solutions',
+    shortTitle: 'CRM',
+    category: 'technology',
+    tagline: 'Manage customers, pipeline and relationships in one place.',
+    Icon: Users,
+  },
+  {
+    slug: 'cyber-security',
+    title: 'Cyber Security',
+    shortTitle: 'Cyber Security',
+    category: 'technology',
+    tagline: 'Protect your business with layered, modern security.',
+    Icon: Lock,
+  },
+  {
+    slug: 'cloud-solutions',
+    title: 'Cloud Solutions',
+    shortTitle: 'Cloud',
+    category: 'technology',
+    tagline: 'Migrate, host and scale on reliable cloud infrastructure.',
+    Icon: Cloud,
+  },
+  {
+    slug: 'business-intelligence',
+    title: 'Business Intelligence',
+    shortTitle: 'BI',
+    category: 'technology',
+    tagline: 'Turn your data into dashboards and decisions.',
+    Icon: PieChart,
+  },
+  {
+    slug: 'data-solutions',
+    title: 'Data Solutions',
+    shortTitle: 'Data',
+    category: 'technology',
+    tagline: 'Storage, pipelines and analytics built around your data.',
+    Icon: Database,
+  },
+  {
+    slug: 'it-support-managed-services',
+    title: 'IT Support & Managed Services',
+    shortTitle: 'IT Support',
+    category: 'technology',
+    tagline: 'Proactive IT support that keeps you running.',
+    Icon: LifeBuoy,
+  },
+  {
+    slug: 'ecommerce-solutions',
+    title: 'Ecommerce Solutions',
+    shortTitle: 'Ecommerce',
+    category: 'technology',
+    tagline: 'Online stores built to sell and easy to manage.',
+    Icon: Store,
+  },
+  {
+    slug: 'digital-marketing',
+    title: 'Digital Marketing',
+    shortTitle: 'Marketing',
+    category: 'technology',
+    tagline: 'SEO, paid media and content that grows your pipeline.',
+    Icon: Megaphone,
+  },
+  {
+    slug: 'digital-transformation',
+    title: 'Digital Transformation',
+    shortTitle: 'Transformation',
+    category: 'technology',
+    tagline: 'Modernise your operations end to end.',
+    Icon: Rocket,
+  },
+  {
+    slug: 'other-digital-services',
+    title: 'Other Digital Services',
+    shortTitle: 'Other Digital',
+    category: 'technology',
+    tagline: 'Branding, hosting, SEO and the digital essentials to grow online.',
+    Icon: PenTool,
+  },
 ]
 
-export const productBySlug = (slug?: string) =>
-  PRODUCTS.find((p) => p.slug === slug)
+export const serviceBySlug = (slug?: string) => SERVICES.find((s) => s.slug === slug)
+
+export const servicesByCategory = (category: ServiceCategory) =>
+  SERVICES.filter((s) => s.category === category)
