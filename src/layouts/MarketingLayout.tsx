@@ -274,7 +274,7 @@ export default function MarketingLayout() {
               </Link>
             </div>
             {/* Turbo IT attribution — centred on its own row at the very bottom. */}
-            <div className="mt-8 flex justify-center">
+            <div className="mt-4 flex justify-center">
               <TurboITPill />
             </div>
           </div>
