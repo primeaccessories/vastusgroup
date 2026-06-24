@@ -5,7 +5,7 @@ import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 
 const CATEGORY_META: Record<ServiceCategory, { label: string; hero: string; related: string }> = {
-  pay: { label: 'Card payments', hero: '/hero-payment.webp', related: 'More ways to take payments' },
+  pay: { label: 'Card payments', hero: '/hero-payments.webp', related: 'More ways to take payments' },
   capital: { label: 'Business finance', hero: '/hero-business.webp', related: 'More ways to get funded' },
   utilities: { label: 'Business utilities', hero: '/hero-business.webp', related: 'More Vastus Utilities' },
   technology: { label: 'Digital & technology', hero: '/hero-payment.webp', related: 'More Vastus Technology' },
