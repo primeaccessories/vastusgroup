@@ -1,4 +1,5 @@
 import { ArrowUpRight, Check } from 'lucide-react'
+import HeroBackdrop from '../../components/HeroBackdrop'
 import { Link } from 'react-router-dom'
 import { LinkButton } from '../../components/Button'
 import { GROUP } from '../../lib/group'
@@ -13,9 +14,8 @@ export default function GroupPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]" />
-        <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]" />
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <HeroBackdrop image="/hero-business.webp" />
         <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-16 sm:px-8 sm:pt-36 sm:pb-20">
           <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-mint-bright sm:text-xs">
             <span className="h-px w-8 bg-mint-bright" /> The Vastus Group

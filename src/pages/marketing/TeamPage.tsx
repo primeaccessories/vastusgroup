@@ -1,5 +1,6 @@
 import GlassCard from '../../components/GlassCard'
 import { TEAM } from '../../lib/team'
+import HeroBackdrop from '../../components/HeroBackdrop'
 
 export default function TeamPage() {
   const founders = TEAM.filter((m) => m.founder)
@@ -8,28 +9,21 @@ export default function TeamPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-paper-soft text-ink">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-20 top-0 h-[460px] w-[460px] rounded-full bg-mint/25 blur-[130px]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-1/4 h-[360px] w-[360px] translate-x-1/3 rounded-full bg-mint-deep/10 blur-[130px]"
-        />
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <HeroBackdrop image="/hero-business.webp" />
         <div className="relative mx-auto grid max-w-7xl items-start gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* Intro */}
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">MEET VASTUS</p>
-            <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl">
-              A team that <span className="text-mint-deep">genuinely cares</span> about your business.
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">MEET VASTUS</p>
+            <h1 className="mt-4 font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-paper sm:text-6xl">
+              A team that <span className="text-mint-bright">genuinely cares</span> about your business.
             </h1>
-            <p className="mt-5 max-w-md text-pretty text-lg text-ink-muted">
+            <p className="mt-5 max-w-md text-pretty text-lg text-paper/70">
               We're a Blackpool-based team with a simple belief: care about the people you work with. Here are the faces you'll actually deal with.
             </p>
             <div className="mt-7 inline-flex items-center gap-3">
-              <span className="h-px w-8 bg-mint-deep" />
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The founder</p>
+              <span className="h-px w-8 bg-mint-bright" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-bright">The founder</p>
             </div>
           </div>
 

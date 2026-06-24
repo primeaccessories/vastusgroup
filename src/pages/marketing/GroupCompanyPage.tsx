@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import HeroBackdrop from '../../components/HeroBackdrop'
 import { ArrowLeft, ArrowUpRight, Check, Phone } from 'lucide-react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
@@ -18,9 +19,8 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
     <>
       {/* HERO — hidden on /capital, which opens straight into "What we offer" */}
       {company.slug !== 'capital' && (
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_15%,transparent_65%)]" />
-        <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] h-[44rem] w-[44rem] rounded-full bg-mint/25 blur-[150px]" />
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <HeroBackdrop image={company.slug === 'pay' ? '/hero-payments.webp' : company.slug === 'technology' ? '/hero-payment.webp' : '/hero-business.webp'} />
         <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-16 sm:px-8 sm:pt-36 sm:pb-20">
           <div className={`grid items-center gap-10 lg:gap-14 ${company.highlights ? 'lg:grid-cols-[1.05fr_0.95fr]' : ''}`}>
             <div>

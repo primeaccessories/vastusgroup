@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import HeroBackdrop from '../../components/HeroBackdrop'
 import {
   ArrowUpRight,
   Phone,
@@ -53,25 +54,16 @@ export default function ContactPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-32 -right-40 h-[520px] w-[520px] rounded-full opacity-50 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #0b53f5 0%, transparent 70%)' }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-24 h-[360px] w-[360px] rounded-full opacity-30 blur-3xl"
-          style={{ background: 'radial-gradient(closest-side, #0a3fd0 0%, transparent 70%)' }}
-        />
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <HeroBackdrop image="/hero-payment.webp" />
 
         <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
           <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:items-end">
             <div>
-              <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+              <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-paper sm:text-6xl lg:text-7xl">
                 Get a quote.
               </h1>
-              <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted sm:text-xl">
+              <p className="mt-6 max-w-2xl text-pretty text-lg text-paper/70 sm:text-xl">
                 Fill the form below and someone from the team will call you back — usually the same day, never longer than one working day.
               </p>
             </div>
