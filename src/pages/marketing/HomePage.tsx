@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'fra
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 import GlassIcon from '../../components/GlassIcon'
+import SwitchSaveBanner from '../../components/SwitchSaveBanner'
 import { GROUP, TECH_SERVICES } from '../../lib/group'
 
 const MASK_DURATION_MS = 2600
@@ -380,6 +381,9 @@ export default function HomePage() {
         </div>
       </section>
       </div>
+
+      {/* SWITCH & SAVE PROMO — exit-cost offer */}
+      <SwitchSaveBanner />
 
       {/* PORTAL TEASE — cinematic dashboard cluster */}
       <section className="relative overflow-hidden bg-gradient-to-b from-paper via-paper to-paper-soft text-ink">
