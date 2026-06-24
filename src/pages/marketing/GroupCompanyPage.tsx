@@ -26,8 +26,8 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
               <Link to="/group" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mint-bright transition hover:text-paper">
                 <ArrowLeft className="h-3.5 w-3.5" /> The Vastus Group
               </Link>
-              <p className="mt-7 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-paper/55">
-                <span className="h-px w-8 bg-mint-bright" />
+              <p className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-paper/55">
+                <span className="h-px w-8 flex-none bg-mint-bright" />
                 {company.name} · {company.tag}
               </p>
               <h1 className="mt-5 max-w-3xl font-display text-balance text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.02] tracking-tight">
