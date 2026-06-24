@@ -203,7 +203,7 @@ export default function MarketingLayout() {
       </main>
 
       <footer className="bg-ink text-paper">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 pt-16 pb-6 sm:px-8 lg:pt-24 lg:pb-8">
           {/* Brand + contact */}
           <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.6fr_1fr] lg:items-start lg:gap-16">
             <div>
