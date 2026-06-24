@@ -4,6 +4,7 @@ import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import FundingCalculator from '../../components/FundingCalculator'
 import ServiceGrid from '../../components/ServiceGrid'
+import SwitchSaveBanner from '../../components/SwitchSaveBanner'
 import { groupBySlug, type GroupSlug } from '../../lib/group'
 import { servicesByCategory } from '../../lib/services'
 
@@ -69,6 +70,9 @@ export default function GroupCompanyPage({ slug }: { slug: GroupSlug }) {
         </div>
       </section>
       )}
+
+      {/* SWITCH & SAVE PROMO — Vastus Pay only */}
+      {company.slug === 'pay' && <SwitchSaveBanner />}
 
       {/* SERVICE OFFERINGS */}
       {services.length > 0 && (
