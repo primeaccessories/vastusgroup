@@ -5,6 +5,7 @@ import BrandLogo from '../components/BrandLogo'
 import TurboITPill from '../components/TurboITPill'
 import { LinkButton } from '../components/Button'
 import ServicesNavDropdown from '../components/ServicesNavDropdown'
+import AnnouncementBar from '../components/AnnouncementBar'
 
 const NAV = [
   { to: '/group', label: 'The Group' },
@@ -102,6 +103,7 @@ export default function MarketingLayout() {
 
   return (
     <div className={`flex min-h-[100dvh] flex-col ${heroDark ? 'bg-ink' : 'bg-paper'}`}>
+      <AnnouncementBar />
       <header className={`sticky top-0 z-40 transition-colors duration-300 ${headerBg}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <BrandLogo variant={darkMode ? 'dark' : 'light'} />
