@@ -291,7 +291,7 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-mint-bright sm:text-xs">
               <span className="h-px w-8 bg-mint-bright" />
-              One group · One mission
+              One group · One mission · Multiple solutions
             </p>
 
             <h1 className="mt-6 font-display text-balance text-[clamp(2.5rem,7.5vw,6rem)] font-semibold uppercase leading-[0.95] tracking-tight text-paper">
@@ -396,7 +396,7 @@ export default function HomePage() {
               <span className="h-px w-8 bg-mint-bright" /> The Vastus Group <span className="h-px w-8 bg-mint-bright" />
             </p>
             <h2 className="mt-5 font-display text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-tight">
-              One group. <span className="text-mint-bright">One mission.</span>
+              One group. One mission. <span className="text-mint-bright">Multiple solutions.</span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-paper/70 sm:text-lg">
               Payments, finance, technology and utilities under one roof — joined-up solutions to help your business move faster.
